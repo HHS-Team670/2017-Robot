@@ -1,38 +1,50 @@
 package org.usfirst.frc.team670.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team670.robot.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
-    
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
+	
+	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
+	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
+	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
+	
+	private Button button1 = new JoystickButton(arcButtons, 1);
+	private Button button2 = new JoystickButton(arcButtons, 2);
+	private Button button3 = new JoystickButton(arcButtons, 3);
+	private Button button4 = new JoystickButton(arcButtons, 4);
+	private Button button5 = new JoystickButton(arcButtons, 5);
+	private Button button6 = new JoystickButton(arcButtons, 6);
+	private Button button7 = new JoystickButton(arcButtons, 7);
+	private Button button8 = new JoystickButton(arcButtons, 8);
+	private Button button9 = new JoystickButton(arcButtons, 9);
+	private Button button10 = new JoystickButton(arcButtons, 10);
+	
+	/*private Button cancel = new JoystickButton(operatorStick, 1);
+	private Button startPosDriveModeButt = new JoystickButton(rightDriveStick, 3);
+	private Button endPosDriveModeButt = new JoystickButton(rightDriveStick, 2);
+	private Button startPosDriveButt = new JoystickButton(rightDriveStick, 1);*/
+	
+	public OI(){
+		//startPosDriveButt.whenPressed(new PositionDrive(true));
+		//startPosDriveButt.whenReleased(new PositionDrive(false));
+		}
+	
+	public Joystick getleftStick(){
+		return leftDriveStick;
+	}
+	
+	public Joystick getrightStick(){
+		return rightDriveStick;
+	}
+	
+	public Joystick getOperatorStick(){
+		return operatorStick;
+	}
+	
+	public Joystick getArcButtons(){
+		return arcButtons;
+	}
 }
-

@@ -1,12 +1,19 @@
-
 package org.usfirst.frc.team670.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team670.robot.commands.ExampleCommand;
-import org.usfirst.frc.team670.robot.subsystems.ExampleSubsystem;
+
+import org.usfirst.frc.team670.robot.commands.DriveDistance;
+import org.usfirst.frc.team670.robot.subsystems.DriveBase;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ImageType;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,8 +26,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static int session;
+	public static Image frame;
+	
 	public static OI oi;
+	public static DriveBase driveBase = new DriveBase();
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -32,9 +42,16 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
+        
+        chooser.addDefault("Default Auto", new DriveDistance(10));
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        
+        //Camera code definitions
+        frame = NIVision.imaqCreateImage(ImageType.IMAGE_RGB, 0);
+		//The camera name (ex "cam0") can be found through the roborio web interface
+		session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
     }
 	
 	/**
@@ -81,6 +98,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+		//CaptureImage();
         Scheduler.getInstance().run();
     }
 
@@ -96,6 +114,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+		CaptureImage();
         Scheduler.getInstance().run();
     }
     
@@ -105,4 +124,13 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+    
+    public void CaptureImage(){
+		NIVision.IMAQdxStartAcquisition(session);
+		//NIVision.Rect rect = new NIVision.Rect(y, x, height, width);
+		NIVision.IMAQdxGrab(session, frame, 1);
+		//NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_INVERT, ShapeMode.SHAPE_RECT, 0.0f);	
+		CameraServer.getInstance().setImage(frame);
+		Timer.delay(0.005);
+	}
 }
