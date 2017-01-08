@@ -1,12 +1,16 @@
 package org.usfirst.frc.team670.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import java.awt.Color;
+
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 
@@ -24,10 +28,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
 public class Robot extends IterativeRobot {
 
 	public static int session;
 	public static Image frame;
+	private static boolean isFlipped = false;
 	
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
@@ -44,21 +50,16 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         
         chooser.addDefault("Default Auto", new DriveDistance(10));
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        chooser.addObject("Do Nothing", new CancelCommand());
         SmartDashboard.putData("Auto mode", chooser);
         
         //Camera code definitions
         frame = NIVision.imaqCreateImage(ImageType.IMAGE_RGB, 0);
 		//The camera name (ex "cam0") can be found through the roborio web interface
-		session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        NIVision.IMAQdxConfigureGrab(session);
+        session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		NIVision.IMAQdxConfigureGrab(session);
     }
 	
-	/**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-     */
     public void disabledInit(){
 
     }
@@ -98,7 +99,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-		//CaptureImage();
+		CaptureImage();
         Scheduler.getInstance().run();
     }
 
@@ -126,11 +127,40 @@ public class Robot extends IterativeRobot {
     }
     
     public void CaptureImage(){
+    	showMatchTime();
+    	
+    	//Flipping controls
+    	/*if(!isFlipped)
+    	{
+        	session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+            SmartDashboard.putString("Drive Status", "FORWARD");
+    	}
+    	else
+    	{
+            SmartDashboard.putString("Drive Status", "REVERSE");
+    		session = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+    	}*/
+
+		NIVision.IMAQdxConfigureGrab(session);
 		NIVision.IMAQdxStartAcquisition(session);
-		//NIVision.Rect rect = new NIVision.Rect(y, x, height, width);
 		NIVision.IMAQdxGrab(session, frame, 1);
-		//NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_INVERT, ShapeMode.SHAPE_RECT, 0.0f);	
 		CameraServer.getInstance().setImage(frame);
 		Timer.delay(0.005);
 	}
+    
+    public static void setFlipped(boolean x)
+    {
+    	isFlipped = x;
+    }
+    
+    public static boolean getFlipped()
+    {
+    	return isFlipped;
+    }
+    
+    public void showMatchTime()
+    {
+    	double time = DriverStation.getInstance().getMatchTime();
+    	SmartDashboard.putString("TIME LEFT:", time + " Seconds");
+    }
 }

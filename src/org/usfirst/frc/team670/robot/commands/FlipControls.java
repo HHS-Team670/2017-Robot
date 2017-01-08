@@ -4,10 +4,14 @@ import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveWithJoystick extends Command {
+/**
+ *
+ */
+public class FlipControls extends Command {
 
-    public DriveWithJoystick() {
-    	requires(Robot.driveBase);
+    public FlipControls() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -16,10 +20,10 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!Robot.getFlipped())
-    		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
-    	else
-    		Robot.driveBase.drive(-Robot.oi.getrightStick().getY(), Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getX());
+    	if(Robot.getFlipped())
+    		Robot.setFlipped(false);
+    	else if(!Robot.getFlipped())
+    		Robot.setFlipped(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +33,6 @@ public class DriveWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

@@ -9,11 +9,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
 
+	//Motor controllers
 	public CANTalon leftTalon1;
 	public CANTalon leftTalon2;
 	public CANTalon rightTalon1;
 	public CANTalon rightTalon2;
 	public CANTalon omniWheel;
+	
+	//Wheel/PID Variables
+	public static final double radiusInInches = 10;
+	public static final double diameterInInches = radiusInInches * 2;
+	public static final double circumferenceInInches = diameterInInches * Math.PI;
+	//public static final double inchesPerTick = circumferenceInInches / 360;
 
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
@@ -105,7 +112,8 @@ public class DriveBase extends Subsystem {
 	
 	public void tankDriveDistance(double inches) 
 	{
-	
+		double numOfRotations = inches/circumferenceInInches;
+		
 	}
 
 	public void pivot(double degrees) 

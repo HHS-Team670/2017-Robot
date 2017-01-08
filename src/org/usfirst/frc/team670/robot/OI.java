@@ -1,5 +1,7 @@
 package org.usfirst.frc.team670.robot;
 
+import org.usfirst.frc.team670.robot.commands.FlipControls;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -20,7 +22,7 @@ public class OI {
 	private Button button7 = new JoystickButton(arcButtons, 7);
 	private Button button8 = new JoystickButton(arcButtons, 8);
 	private Button button9 = new JoystickButton(arcButtons, 9);
-	private Button button10 = new JoystickButton(arcButtons, 10);
+	private Button flipControls = new JoystickButton(arcButtons, 10);
 	
 	/*private Button cancel = new JoystickButton(operatorStick, 1);
 	private Button startPosDriveModeButt = new JoystickButton(rightDriveStick, 3);
@@ -28,8 +30,7 @@ public class OI {
 	private Button startPosDriveButt = new JoystickButton(rightDriveStick, 1);*/
 	
 	public OI(){
-		//startPosDriveButt.whenPressed(new PositionDrive(true));
-		//startPosDriveButt.whenReleased(new PositionDrive(false));
+		flipControls.whenPressed(new FlipControls());
 		}
 	
 	public Joystick getleftStick(){
