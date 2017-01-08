@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Image frame;
 	private static boolean isFlipped = false;
 	
+	public static DataExchanger de;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 
@@ -46,6 +47,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	de = new DataExchanger("HHSvision");
 		oi = new OI();
         chooser = new SendableChooser();
         
@@ -127,7 +129,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void CaptureImage(){
-    	showMatchTime();
+    	SmartDashboard.putString("TIME LEFT:", getMatchTime() + " Seconds");
     	
     	//Flipping controls
     	/*if(!isFlipped)
@@ -158,9 +160,10 @@ public class Robot extends IterativeRobot {
     	return isFlipped;
     }
     
-    public void showMatchTime()
+    public double getMatchTime()
     {
-    	double time = DriverStation.getInstance().getMatchTime();
-    	SmartDashboard.putString("TIME LEFT:", time + " Seconds");
+    	return DriverStation.getInstance().getMatchTime();
     }
+    
+    
 }

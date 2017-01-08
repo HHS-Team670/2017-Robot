@@ -114,6 +114,22 @@ public class DriveBase extends Subsystem {
 	{
 		double numOfRotations = inches/circumferenceInInches;
 		
+		double p = .8;
+		double i = .001;
+		double d = 0;
+		
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		rightTalon1.setPID(p, i, d); //Set the PID constants (p, i, d)
+		rightTalon1.enableControl(); //Enable PID control on the talon
+		
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		leftTalon1.setPID(p, i, d); //Set the PID constants (p, i, d)
+		leftTalon1.enableControl(); //Enable PID control on the talon
+		
+		leftTalon1.set(5000);
+		rightTalon1.set(5000);
 	}
 
 	public void pivot(double degrees) 
