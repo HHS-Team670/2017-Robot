@@ -1,15 +1,13 @@
 package org.usfirst.frc.team670.robot.commands;
 
-import org.usfirst.frc.team670.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class FlipControls extends Command {
+public class AutoDeliverGear extends Command {
 
-    public FlipControls() {
+    public AutoDeliverGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,11 +18,6 @@ public class FlipControls extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.getFlipped())
-    		Robot.setFlipped(false);
-    	else if(!Robot.getFlipped())
-    		Robot.setFlipped(true);
-    	Robot.camera.switchCamera();
     }
 
     // Make this return true when this Command no longer needs to run execute()

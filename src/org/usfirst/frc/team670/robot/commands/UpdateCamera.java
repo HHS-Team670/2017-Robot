@@ -1,30 +1,27 @@
 package org.usfirst.frc.team670.robot.commands;
 
-import org.usfirst.frc.team670.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team670.robot.Robot;
 /**
  *
  */
-public class FlipControls extends Command {
+public class UpdateCamera extends Command {
 
-    public FlipControls() {
+	
+    public UpdateCamera() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.getFlipped())
-    		Robot.setFlipped(false);
-    	else if(!Robot.getFlipped())
-    		Robot.setFlipped(true);
-    	Robot.camera.switchCamera();
+    	Robot.camera.getImage();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,5 +36,6 @@ public class FlipControls extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
