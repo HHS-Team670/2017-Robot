@@ -1,6 +1,5 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import org.usfirst.frc.team670.robot.ImageTool;
 import org.usfirst.frc.team670.robot.commands.UpdateCamera;
 
 import com.ni.vision.NIVision;
@@ -87,15 +86,14 @@ public class Camera extends Subsystem {
 	 */
 	public void getImage() {
 		if (currentCamera != BAD_CAMERA) {
-			Runnable processor = new Runnable() {
-	            public void run() {
+		//	Runnable processor = new Runnable() {
+	         //   public void run() {
 					NIVision.IMAQdxGrab(currentCamera, frame, 1);
-					frame = ImageTool.processImage(frame);
 					server.setImage(frame);
 	            	}
-	            };
-	            new Thread(processor).start(); 
-		}
+	          //  };
+	          //  new Thread(processor).start(); 
+		//}
 	}
 	
     public void initDefaultCommand() {

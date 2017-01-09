@@ -14,7 +14,7 @@ public class DriveBase extends Subsystem {
 	public CANTalon leftTalon2;
 	public CANTalon rightTalon1;
 	public CANTalon rightTalon2;
-	public CANTalon omniWheel;
+	//public CANTalon omniWheel;
 	
 	//Wheel/PID Variables
 	public static final double radiusInInches = 10;
@@ -27,7 +27,7 @@ public class DriveBase extends Subsystem {
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
 		rightTalon1 = new CANTalon(RobotMap.rightMotor1);
 		rightTalon2 = new CANTalon(RobotMap.rightMotor2);
-		omniWheel = new CANTalon(RobotMap.omniWheel);
+	//	omniWheel = new CANTalon(RobotMap.omniWheel);
 
 		leftTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
 		leftTalon2.set(RobotMap.leftMotor1);
@@ -45,7 +45,7 @@ public class DriveBase extends Subsystem {
 
 		leftTalon1.set(left);
 		rightTalon1.set(right);
-		omniWheel.set(omni);
+	//	omniWheel.set(omni);
 	}
 	
 	public void tankDrive(double left, double right) 
@@ -59,7 +59,7 @@ public class DriveBase extends Subsystem {
 	
 	public void omniWheelDrive(double omni)
 	{
-		omniWheel.set(omni);
+	//	omniWheel.set(omni);
 	}
 
 	public void resetRightEncoder() {
@@ -71,7 +71,7 @@ public class DriveBase extends Subsystem {
 	}
 	
 	public void resetOmniEncoder() {
-		omniWheel.setEncPosition(0);
+	//	omniWheel.setEncPosition(0);
 	}
 
 	public void posDriveLeft(double left) 
