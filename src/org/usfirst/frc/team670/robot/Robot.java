@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
@@ -24,12 +26,10 @@ public class Robot extends IterativeRobot {
 
 	private static boolean isFlipped = false;
 	
-	public static DataExchanger de = new DataExchanger();
-	public static Camera camera = new Camera();
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
-	public static String data = null;
-	
+	public static Camera camera = new Camera();
+
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -85,7 +85,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	data = de.getData();
     	TimeLeft();
         Scheduler.getInstance().run();
     }
@@ -102,7 +101,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	data = de.getData();
     	TimeLeft();
         Scheduler.getInstance().run();
     }
@@ -116,7 +114,6 @@ public class Robot extends IterativeRobot {
     
     public void TimeLeft(){
     	SmartDashboard.putString("TIME LEFT:", getMatchTime() + " Seconds");
-    	SmartDashboard.putString("DATA:", data);
 	}
     
     public static void setFlipped(boolean x)
