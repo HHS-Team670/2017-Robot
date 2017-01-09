@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 
 	private static boolean isFlipped = false;
 	
-	public static Camera camera;
+	public static Camera camera = new Camera();
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 
@@ -36,7 +36,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	camera = new Camera();
 		oi = new OI();
         chooser = new SendableChooser();
         

@@ -21,7 +21,6 @@ public class Camera extends Subsystem {
 	private int currentCamera;
 	private boolean frontCam;
 	private static final int BAD_CAMERA = -1;
-	private static int x, y, width, height;
 	
 	public Camera() {
 		try {

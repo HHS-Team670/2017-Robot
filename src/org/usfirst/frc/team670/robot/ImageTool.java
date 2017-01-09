@@ -35,7 +35,6 @@ public class ImageTool {
 	static Scores scores = new Scores();
 	
 	public static Image processImage(Image frame){
-		//Threshold the image looking for green (retroreflective target color)
 		NIVision.imaqColorThreshold(binaryFrame, frame, 255, NIVision.ColorMode.HSV, TARGET_HUE_RANGE, TARGET_SAT_RANGE, TARGET_VAL_RANGE);
 		int numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
 		float areaMin = (float)AREA_MINIMUM;
@@ -44,7 +43,6 @@ public class ImageTool {
 		numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
 		if(numParticles > 0)
 		{
-			//Measure particles and sort by particle size
 			Vector<ParticleReport> particles = new Vector<ParticleReport>();
 			int topWidthIndex = 0;
 			for(int particleIndex = 0; particleIndex < numParticles; particleIndex++)
