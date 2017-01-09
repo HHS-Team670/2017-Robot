@@ -24,10 +24,12 @@ public class Robot extends IterativeRobot {
 
 	private static boolean isFlipped = false;
 	
+	public static DataExchanger de = new DataExchanger();
 	public static Camera camera = new Camera();
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
-
+	public static String data = null;
+	
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -83,6 +85,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+    	data = de.getData();
     	TimeLeft();
         Scheduler.getInstance().run();
     }
@@ -99,6 +102,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	data = de.getData();
     	TimeLeft();
         Scheduler.getInstance().run();
     }
@@ -112,6 +116,7 @@ public class Robot extends IterativeRobot {
     
     public void TimeLeft(){
     	SmartDashboard.putString("TIME LEFT:", getMatchTime() + " Seconds");
+    	SmartDashboard.putString("DATA:", data);
 	}
     
     public static void setFlipped(boolean x)
