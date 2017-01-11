@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
+import org.usfirst.frc.team670.robot.subsystems.Dumper;
+import org.usfirst.frc.team670.robot.subsystems.Grappler;
+import org.usfirst.frc.team670.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -29,7 +32,10 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
-
+	public static Intake intake = new Intake();
+	public static Dumper dumper = new Dumper();
+	public static Grappler grappler = new Grappler();
+	
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -41,8 +47,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         
-        chooser.addDefault("Default Auto", new DriveDistance(10));
-        chooser.addObject("Do Nothing", new CancelCommand());
+        chooser.addDefault("Do Nothing", new CancelCommand());
+        
         SmartDashboard.putData("Auto mode", chooser);
     }
 	
