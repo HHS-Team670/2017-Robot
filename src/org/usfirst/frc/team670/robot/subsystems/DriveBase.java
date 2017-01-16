@@ -17,7 +17,7 @@ public class DriveBase extends Subsystem {
 	public CANTalon omniWheel;
 	
 	//Wheel/PID Variables
-	public static final double radiusInInches = 10;
+	public static final double radiusInInches = 3;
 	public static final double diameterInInches = radiusInInches * 2;
 	public static final double circumferenceInInches = diameterInInches * Math.PI;
 	public static final double inchesPerTick = circumferenceInInches / 360;
@@ -112,7 +112,8 @@ public class DriveBase extends Subsystem {
 	
 	public void tankDriveDistance(double inches) 
 	{
-		double numOfRotations = inches/circumferenceInInches;
+		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
+
 		
 		double p = .8;
 		double i = .001;
@@ -128,8 +129,8 @@ public class DriveBase extends Subsystem {
 		leftTalon1.setPID(p, i, d); //Set the PID constants (p, i, d)
 		leftTalon1.enableControl(); //Enable PID control on the talon
 		
-		leftTalon1.set(5000);
-		rightTalon1.set(5000);
+		leftTalon1.set(numTicks);
+		rightTalon1.set(numTicks);
 	}
 
 	public void pivot(double degrees) 

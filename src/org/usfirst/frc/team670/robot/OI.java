@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.AutoDump;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -36,6 +37,7 @@ public class OI {
 		flipControls.whenPressed(new FlipControls());
 		runDump.whenPressed(new AutoDump(100));
 		runDump.whenReleased(new AutoDump(0));
+		button9.whenReleased(new CancelCommand());
 		}
 	
 	public Joystick getleftStick(){

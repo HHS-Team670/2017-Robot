@@ -5,9 +5,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+
+import java.io.IOException;
 
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.CenterGear;
+import org.usfirst.frc.team670.robot.server.NetworkTablesServer;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Dumper;
@@ -29,6 +32,7 @@ public class Robot extends IterativeRobot {
 
 	private static boolean isFlipped = false;
 	
+	public static NetworkTablesServer ns;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
@@ -44,12 +48,17 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	ns = new NetworkTablesServer();
 		oi = new OI();
         chooser = new SendableChooser();
         
         chooser.addDefault("Do Nothing", new CancelCommand());
+        chooser.addObject("Center Gear", new CenterGear());
         
         SmartDashboard.putData("Auto mode", chooser);
+        
+        //Connect with co-processor
+        //defineConnection();
     }
 	
     public void disabledInit(){
@@ -110,7 +119,7 @@ public class Robot extends IterativeRobot {
     	TimeLeft();
         Scheduler.getInstance().run();
     }
-    
+ 
     /**
      * This function is called periodically during test mode
      */
@@ -135,6 +144,24 @@ public class Robot extends IterativeRobot {
     public double getMatchTime()
     {
     	return DriverStation.getInstance().getMatchTime();
+    }
+    
+  /*  public void defineConnection()
+    {
+    	Thread connect = new Thread(){
+    		public void run(){
+		    	try{
+		    		a.connect();
+		    	}catch(IOException e){}
+    		}
+    	};
+    	
+    	connect.start();
+    }*/
+    
+    public static String getData()
+    {
+    	return ns.getData();
     }
     
     
