@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import java.io.IOException;
 
+import org.usfirst.frc.team670.robot.commands.AutoGearVision;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.CenterGear;
 import org.usfirst.frc.team670.robot.server.NetworkTablesServer;
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         
-        chooser.addDefault("Do Nothing", new CancelCommand());
+        chooser.addDefault("Do Nothing", new AutoGearVision());
         chooser.addObject("Center Gear", new CenterGear());
         
         SmartDashboard.putData("Auto mode", chooser);
@@ -116,6 +117,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        SmartDashboard.putString("Movement", getData());
     	TimeLeft();
         Scheduler.getInstance().run();
     }

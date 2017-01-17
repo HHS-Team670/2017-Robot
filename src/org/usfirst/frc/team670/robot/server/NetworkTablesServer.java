@@ -14,6 +14,6 @@ public class NetworkTablesServer {
 	
 	public String getData()
 	{
-		return table.getString("data", null);
+		return table.getString("data", "unavailable");
 	}
 }

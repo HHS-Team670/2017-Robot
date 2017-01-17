@@ -28,6 +28,10 @@ public class AutoGearVision extends Command {
     		Robot.driveBase.drive(0, 0, -0.5);
     	else if(move.equals("left"))
     		Robot.driveBase.drive(0, 0, 0.5);
+    	else if(move.equals("pivot_left"))
+    		Robot.driveBase.pivot(5);
+    	else if(move.equals("pivot_right"))
+    		Robot.driveBase.pivot(-5);
     	else
     		Robot.driveBase.drive(0, 0, 0);
     }
