@@ -16,7 +16,7 @@ public class Dumper extends Subsystem {
 	CANTalon dumperMotor = new CANTalon(RobotMap.dumperMotor);
 
     public void initDefaultCommand() {
-        setDefaultCommand(new AutoDump(0));
+        //setDefaultCommand(new AutoDump(0));
     }
     
     public void runDumper(double value) {

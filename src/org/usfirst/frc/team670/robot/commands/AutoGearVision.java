@@ -20,14 +20,15 @@ public class AutoGearVision extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	String move = Robot.getData();
+    	double speed = 0.5;
     	if(move.equals("forward"))
-    		Robot.driveBase.drive(1, 1, 0);
+    		Robot.driveBase.drive(speed, speed, 0);
     	else if(move.equals("back"))
-    		Robot.driveBase.drive(-1, -1, 0);
+    		Robot.driveBase.drive(-speed, -speed, 0);
     	else if(move.equals("right"))
-    		Robot.driveBase.drive(0, 0, -0.5);
+    		Robot.driveBase.drive(0, 0, -speed);
     	else if(move.equals("left"))
-    		Robot.driveBase.drive(0, 0, 0.5);
+    		Robot.driveBase.drive(0, 0, speed);
     	else if(move.equals("pivot_left"))
     		Robot.driveBase.pivot(5);
     	else if(move.equals("pivot_right"))

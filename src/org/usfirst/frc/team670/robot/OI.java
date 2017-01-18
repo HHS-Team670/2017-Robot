@@ -16,7 +16,7 @@ public class OI {
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
-	private Button button1 = new JoystickButton(arcButtons, 1);
+	private Button cancel = new JoystickButton(arcButtons, 1);
 	private Button button2 = new JoystickButton(arcButtons, 2);
 	private Button button3 = new JoystickButton(arcButtons, 3);
 	private Button button4 = new JoystickButton(arcButtons, 4);
@@ -25,19 +25,25 @@ public class OI {
 	private Button button7 = new JoystickButton(arcButtons, 7);
 	private Button button8 = new JoystickButton(arcButtons, 8);
 	private Button button9 = new JoystickButton(arcButtons, 9);
-	private Button flipControls = new JoystickButton(arcButtons, 10);
 	
-	private Button runDump = new JoystickButton(operatorStick, 1);
+	private Button runDumper = new JoystickButton(operatorStick, 1);
+	
+	private Button flipControls = new JoystickButton(leftDriveStick, 1);
 	/*private Button cancel = new JoystickButton(operatorStick, 1);
 	private Button startPosDriveModeButt = new JoystickButton(rightDriveStick, 3);
 	private Button endPosDriveModeButt = new JoystickButton(rightDriveStick, 2);
 	private Button startPosDriveButt = new JoystickButton(rightDriveStick, 1);*/
 	
 	public OI(){
+		//Flipping controls and camera
 		flipControls.whenPressed(new FlipControls());
-		runDump.whenPressed(new AutoDump(100));
-		runDump.whenReleased(new AutoDump(0));
-		button9.whenReleased(new CancelCommand());
+		
+		//Run the dumper for the low goal
+		runDumper.whenPressed(new AutoDump(100));
+		runDumper.whenReleased(new AutoDump(0));
+		
+		
+		cancel.whenReleased(new CancelCommand());
 		}
 	
 	public Joystick getleftStick(){

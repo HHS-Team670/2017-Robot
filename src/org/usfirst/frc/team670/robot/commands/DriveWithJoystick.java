@@ -17,9 +17,9 @@ public class DriveWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(!Robot.getFlipped())
-    		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
+    		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     	else
-    		Robot.driveBase.drive(-Robot.oi.getrightStick().getY(), Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getX());
+    		Robot.driveBase.drive(-Robot.oi.getrightStick().getY(), -Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
