@@ -16,4 +16,8 @@ public class NetworkTablesServer {
 	{
 		return table.getString("data", "unavailable");
 	}
+
+	public boolean isConnected() {
+		return table.isConnected();
+	}
 }

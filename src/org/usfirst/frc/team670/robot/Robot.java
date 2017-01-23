@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import java.io.IOException;
 
 import org.usfirst.frc.team670.robot.commands.AutoGearVision;
+import org.usfirst.frc.team670.robot.commands.BaselineAuto;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.CenterGear;
 import org.usfirst.frc.team670.robot.server.NetworkTablesServer;
@@ -53,8 +54,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         
-        chooser.addDefault("Do Nothing", new AutoGearVision());
-        chooser.addObject("Center Gear", new CenterGear());
+        chooser.addDefault("Do Nothing", new CancelCommand());
+        chooser.addObject("Baseline Auto (5pts)", new BaselineAuto());
+        chooser.addObject("Center Gear W/O vision (60pts)", new CenterGear());
+        //chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
+        //chooser.addObject("Left Gear ~ Vision (60pts)", new LeftGear_Vision());
+        //chooser.addObject("Right Gear ~ Vision (60pts)", new RightGear_Vision());
+        
+        //Auto gear with vision left, right center
         
         SmartDashboard.putData("Auto mode", chooser);
         
@@ -163,7 +170,10 @@ public class Robot extends IterativeRobot {
     
     public static String getData()
     {
-    	return ns.getData();
+    	if(ns.isConnected())
+    		return ns.getData();
+    	else
+    		return "connection_failed";
     }
     
     

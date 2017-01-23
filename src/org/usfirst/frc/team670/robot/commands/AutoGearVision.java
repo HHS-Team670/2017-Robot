@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.commands;
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -33,8 +34,9 @@ public class AutoGearVision extends Command {
     		Robot.driveBase.pivot(5);
     	else if(move.equals("pivot_right"))
     		Robot.driveBase.pivot(-5);
-    	else
+    	else if(move.equals("cancel"))
     		Robot.driveBase.drive(0, 0, 0);
+    	SmartDashboard.putString("Co-Processor Status:", move);
     }
 
     // Make this return true when this Command no longer needs to run execute()
