@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.AutoDump;
-import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.RunDumper;
+import org.usfirst.frc.team670.robot.commands.DoNothing;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -39,11 +39,11 @@ public class OI {
 		flipControls.whenPressed(new FlipControls());
 		
 		//Run the dumper for the low goal
-		runDumper.whenPressed(new AutoDump(100));
-		runDumper.whenReleased(new AutoDump(0));
+		runDumper.whenPressed(new RunDumper(100));
+		runDumper.whenReleased(new RunDumper(0));
 		
 		
-		cancel.whenReleased(new CancelCommand());
+		cancel.whenReleased(new DoNothing());
 		}
 	
 	public Joystick getleftStick(){

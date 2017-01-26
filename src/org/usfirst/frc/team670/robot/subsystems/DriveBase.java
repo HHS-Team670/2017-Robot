@@ -46,8 +46,8 @@ public class DriveBase extends Subsystem {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(left);
-		rightTalon1.set(-right);
+		leftTalon1.set(-left);
+		rightTalon1.set(right);
 		omniWheel.set(omni);
 	}
 	
@@ -56,8 +56,8 @@ public class DriveBase extends Subsystem {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(left);
-		rightTalon1.set(-right);
+		leftTalon1.set(-left);
+		rightTalon1.set(right);
 	}
 	
 	public void omniWheelDrive(double omni)
@@ -85,7 +85,7 @@ public class DriveBase extends Subsystem {
 
 		leftTalon1.setPID(P,I,D);
 
-		leftTalon1.set(2520 * left * 0.5);
+		leftTalon1.set(-2520 * left * 0.5);
 	}
 
 	public void posDriveRight(double right) 
@@ -129,7 +129,7 @@ public class DriveBase extends Subsystem {
 		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		leftTalon1.enableControl(); //Enable PID control on the talon
 		
-		leftTalon1.set(numTicks);
+		leftTalon1.set(-numTicks);
 		rightTalon1.set(numTicks);
 	}
 
@@ -154,7 +154,7 @@ public class DriveBase extends Subsystem {
 		leftTalon1.setPID(p, i, d);
 		rightTalon1.setPID(p, i, d);
 
-		leftTalon1.set(numTicks);
-		rightTalon1.set(-numTicks);
+		leftTalon1.set(-numTicks);
+		rightTalon1.set(numTicks);
 	}
 }

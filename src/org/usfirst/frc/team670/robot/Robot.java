@@ -6,14 +6,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import java.io.IOException;
 
-import org.usfirst.frc.team670.robot.commands.AutoGearVision;
+import org.usfirst.frc.team670.robot.commands.GearAlignmentAuto;
 import org.usfirst.frc.team670.robot.commands.BaselineAuto;
-import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.DoNothing;
 import org.usfirst.frc.team670.robot.commands.CenterGear;
+import org.usfirst.frc.team670.robot.commands.CenterGear_Vision;
 import org.usfirst.frc.team670.robot.server.NetworkTablesServer;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
+import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Dumper;
 import org.usfirst.frc.team670.robot.subsystems.Grappler;
@@ -21,14 +22,6 @@ import org.usfirst.frc.team670.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
 
 public class Robot extends IterativeRobot {
 
@@ -38,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
+	public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
 	public static Dumper dumper = new Dumper();
 	public static Grappler grappler = new Grappler();
@@ -54,10 +48,10 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         
-        chooser.addDefault("Do Nothing", new CancelCommand());
+        chooser.addDefault("Do Nothing", new DoNothing());
         chooser.addObject("Baseline Auto (5pts)", new BaselineAuto());
         chooser.addObject("Center Gear W/O vision (60pts)", new CenterGear());
-        //chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
+        chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
         //chooser.addObject("Left Gear ~ Vision (60pts)", new LeftGear_Vision());
         //chooser.addObject("Right Gear ~ Vision (60pts)", new RightGear_Vision());
         
@@ -154,19 +148,6 @@ public class Robot extends IterativeRobot {
     {
     	return DriverStation.getInstance().getMatchTime();
     }
-    
-  /*  public void defineConnection()
-    {
-    	Thread connect = new Thread(){
-    		public void run(){
-		    	try{
-		    		a.connect();
-		    	}catch(IOException e){}
-    		}
-    	};
-    	
-    	connect.start();
-    }*/
     
     public static String getData()
     {

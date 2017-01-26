@@ -7,12 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoDump extends Command {
+public class DriveDistance extends Command {
 
-	private double value;
-    public AutoDump(double value) {
-    	requires(Robot.dumper);
-    	this.value = value;
+	private double inches = 0;
+	
+    public DriveDistance(double inches) {
+    	this.inches = inches;
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +23,7 @@ public class AutoDump extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.dumper.runDumper(value);
+    	Robot.driveBase.tankDriveDistance(inches);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,7 +33,7 @@ public class AutoDump extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.dumper.runDumper(0);
+    	Robot.driveBase.tankDriveDistance(0);
     }
 
     // Called when another command which requires one or more of the same

@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class AutoGearVision extends Command {
+public class GearAlignmentAuto extends Command {
 
-    public AutoGearVision() {
+    public GearAlignmentAuto() {
         requires(Robot.driveBase);
     }
 
@@ -21,7 +21,10 @@ public class AutoGearVision extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	String move = Robot.getData();
+    	
     	double speed = 0.5;
+    	double angle = 5;
+    	
     	if(move.equals("forward"))
     		Robot.driveBase.drive(speed, speed, 0);
     	else if(move.equals("back"))
@@ -31,11 +34,12 @@ public class AutoGearVision extends Command {
     	else if(move.equals("left"))
     		Robot.driveBase.drive(0, 0, speed);
     	else if(move.equals("pivot_left"))
-    		Robot.driveBase.pivot(5);
+    		Robot.driveBase.pivot(angle);
     	else if(move.equals("pivot_right"))
-    		Robot.driveBase.pivot(-5);
+    		Robot.driveBase.pivot(-angle);
     	else if(move.equals("cancel"))
     		Robot.driveBase.drive(0, 0, 0);
+    	
     	SmartDashboard.putString("Co-Processor Status:", move);
     }
 
@@ -46,6 +50,7 @@ public class AutoGearVision extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
