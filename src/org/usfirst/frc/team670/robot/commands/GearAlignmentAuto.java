@@ -29,15 +29,15 @@ public class GearAlignmentAuto extends Command {
     		Robot.driveBase.drive(speed, speed, 0);
     	else if(move.equals("back"))
     		Robot.driveBase.drive(-speed, -speed, 0);
-    	else if(move.equals("right"))
+    	else if(move.equals("moveRight"))
     		Robot.driveBase.drive(0, 0, -speed);
-    	else if(move.equals("left"))
+    	else if(move.equals("moveLeft"))
     		Robot.driveBase.drive(0, 0, speed);
     	else if(move.equals("pivot_left"))
     		Robot.driveBase.pivot(angle);
     	else if(move.equals("pivot_right"))
     		Robot.driveBase.pivot(-angle);
-    	else if(move.equals("cancel"))
+    	else
     		Robot.driveBase.drive(0, 0, 0);
     	
     	SmartDashboard.putString("Co-Processor Status:", move);

@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Do Nothing", new DoNothing());
         chooser.addObject("Baseline Auto (5pts)", new BaselineAuto());
         chooser.addObject("Center Gear W/O vision (60pts)", new CenterGear());
-        chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
+        chooser.addObject("Center Gear ~ Vision (60pts)", new GearAlignmentAuto());
         //chooser.addObject("Left Gear ~ Vision (60pts)", new LeftGear_Vision());
         //chooser.addObject("Right Gear ~ Vision (60pts)", new RightGear_Vision());
         
