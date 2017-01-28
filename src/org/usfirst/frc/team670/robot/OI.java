@@ -2,9 +2,10 @@ package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.RunDumper;
 import org.usfirst.frc.team670.robot.commands.runOmniDrive;
-import org.usfirst.frc.team670.robot.commands.DoNothing;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team670.robot.commands.FlipCamera;
+import org.usfirst.frc.team670.robot.commands.PlaceGear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -18,27 +19,30 @@ public class OI {
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
+	//Operator Buttons
 	private Button runDumper = new JoystickButton(operatorStick, 1);
+	private Button placeGear = new JoystickButton(operatorStick, 3);
+	private Button cancelCommand = new JoystickButton(operatorStick, 5);
 	
-	private Button flipControls = new JoystickButton(leftDriveStick, 1);
-	
+	//Driver Controls
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);
 
-	/*private Button cancel = new JoystickButton(operatorStick, 1);
-	private Button startPosDriveModeButt = new JoystickButton(rightDriveStick, 3);
-	private Button endPosDriveModeButt = new JoystickButton(rightDriveStick, 2);
-	private Button startPosDriveButt = new JoystickButton(rightDriveStick, 1);*/
+	//Arcade buttons
+	private Button flipControls = new JoystickButton(arcButtons, 1);	
 	
 	public OI(){
 		
 		runOmniDrive.whenPressed(new runOmniDrive(true));
 		runOmniDrive.whenReleased(new runOmniDrive(false));
-		//Flipping controls and camera
+
+		placeGear.whenPressed(new PlaceGear(0));
+		
 		flipControls.whenPressed(new FlipCamera());
 		
-		//Run the dumper for the low goal
 		runDumper.whenPressed(new RunDumper(100));
 		runDumper.whenReleased(new RunDumper(0));
+		
+		cancelCommand.whenPressed(new CancelCommand());
 		}
 	
 	public Joystick getleftStick(){

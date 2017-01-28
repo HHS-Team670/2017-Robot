@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.BaselineAuto;
-import org.usfirst.frc.team670.robot.commands.DoNothing;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.LeftGear_Vision;
 import org.usfirst.frc.team670.robot.commands.RightGear_Vision;
 import org.usfirst.frc.team670.robot.commands.CenterGear;
@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
-	public static DistanceSensor distanceSensor = new DistanceSensor();
+	//public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
 	public static Dumper dumper = new Dumper();
 	public static Grappler grappler = new Grappler();
@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         
         chooser.addDefault("Align with gear (TESTING)", new AlignWithGear());
-        chooser.addObject("Do Nothing (0 pts)", new DoNothing());
+        chooser.addObject("Do Nothing (0 pts)", new CancelCommand());
         chooser.addObject("Baseline Auto (5pts)", new BaselineAuto());
         chooser.addObject("Center Gear W/O vision (60pts)", new CenterGear());
         chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
