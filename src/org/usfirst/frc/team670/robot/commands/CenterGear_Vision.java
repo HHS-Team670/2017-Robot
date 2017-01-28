@@ -12,7 +12,10 @@ public class CenterGear_Vision extends CommandGroup {
     public  CenterGear_Vision() {
     	requires(Robot.driveBase);
     	
+    	//Drive forward to the area in front of the gear
     	addSequential(new DriveDistance(6*12 + 6));
-    	addSequential(new GearAlignmentAuto());
+    	//Align the robot in front of the gear
+    	addSequential(new PlaceGear(12));
+    	//Drive forward and place the gear
     }
 }

@@ -7,11 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FlipControls extends Command {
+public class FlipCamera extends Command {
 
-    public FlipControls() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public FlipCamera() {
+        requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
@@ -20,10 +19,6 @@ public class FlipControls extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.getFlipped())
-    		Robot.setFlipped(false);
-    	else if(!Robot.getFlipped())
-    		Robot.setFlipped(true);
     	Robot.camera.switchCamera();
     }
 

@@ -6,10 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-
-import org.usfirst.frc.team670.robot.commands.GearAlignmentAuto;
+import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.BaselineAuto;
 import org.usfirst.frc.team670.robot.commands.DoNothing;
+import org.usfirst.frc.team670.robot.commands.LeftGear_Vision;
+import org.usfirst.frc.team670.robot.commands.RightGear_Vision;
 import org.usfirst.frc.team670.robot.commands.CenterGear;
 import org.usfirst.frc.team670.robot.commands.CenterGear_Vision;
 import org.usfirst.frc.team670.robot.server.NetworkTablesServer;
@@ -48,15 +49,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         
-        chooser.addDefault("Do Nothing", new DoNothing());
+        chooser.addDefault("Align with gear (TESTING)", new AlignWithGear());
+        chooser.addObject("Do Nothing (0 pts)", new DoNothing());
         chooser.addObject("Baseline Auto (5pts)", new BaselineAuto());
         chooser.addObject("Center Gear W/O vision (60pts)", new CenterGear());
-        chooser.addObject("Center Gear ~ Vision (60pts)", new GearAlignmentAuto());
-        //chooser.addObject("Left Gear ~ Vision (60pts)", new LeftGear_Vision());
-        //chooser.addObject("Right Gear ~ Vision (60pts)", new RightGear_Vision());
-        
-        //Auto gear with vision left, right center
-        
+        chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
+        chooser.addObject("Left Gear ~ Vision (60pts)", new LeftGear_Vision());
+        chooser.addObject("Right Gear ~ Vision (60pts)", new RightGear_Vision());
+                
         SmartDashboard.putData("Auto mode", chooser);
         
         //Connect with co-processor
@@ -118,7 +118,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        SmartDashboard.putString("Movement", getData());
     	TimeLeft();
         Scheduler.getInstance().run();
     }
@@ -131,7 +130,9 @@ public class Robot extends IterativeRobot {
     }
     
     public void TimeLeft(){
-    	SmartDashboard.putString("TIME LEFT:", getMatchTime() + " Seconds");
+    	SmartDashboard.putString("TIME LEFT:", DriverStation.getInstance().getMatchTime() + " Seconds");
+    	SmartDashboard.putBoolean("Omni-Drive-Running?", driveBase.isOmniDriving());
+        SmartDashboard.putString("Movement", getData());
 	}
     
     public static void setFlipped(boolean x)
@@ -144,18 +145,11 @@ public class Robot extends IterativeRobot {
     	return isFlipped;
     }
     
-    public double getMatchTime()
-    {
-    	return DriverStation.getInstance().getMatchTime();
-    }
-    
     public static String getData()
     {
     	if(ns.isConnected())
     		return ns.getData();
     	else
     		return "connection_failed";
-    }
-    
-    
+    }    
 }

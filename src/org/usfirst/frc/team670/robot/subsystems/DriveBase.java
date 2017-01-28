@@ -24,6 +24,9 @@ public class DriveBase extends Subsystem {
 	public static final double P = 0.8, I = 0.001, D = 0;
 	//Pivot radius in inches
 	public static final double pivotRadius = 16;
+	
+	//Drive only with omniwheel
+	private static boolean isOmniDrive = false;
 
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
@@ -147,14 +150,24 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightTalon1.setEncPosition(0);
 	
-		double p = 0.8;
-		double i = 0.0025;
-		double d = 0;
+		double p = P;
+		double i = I;
+		double d = D;
 
 		leftTalon1.setPID(p, i, d);
 		rightTalon1.setPID(p, i, d);
 
 		leftTalon1.set(-numTicks);
 		rightTalon1.set(numTicks);
+	}
+	
+	public boolean isOmniDriving()
+	{
+		return isOmniDrive;
+	}
+	
+	public void setOmniDrive(boolean drive)
+	{
+		isOmniDrive = drive;
 	}
 }

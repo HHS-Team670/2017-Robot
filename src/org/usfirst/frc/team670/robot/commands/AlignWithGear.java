@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class GearAlignmentAuto extends Command {
+public class AlignWithGear extends Command {
 
-    public GearAlignmentAuto() {
+    public AlignWithGear() {
         requires(Robot.driveBase);
     }
 
@@ -25,11 +25,11 @@ public class GearAlignmentAuto extends Command {
     	double speed = 0.5;
     	double angle = 5;
     	
-    	if(move.equals("forward"))
+    	/*if(move.equals("forward"))
     		Robot.driveBase.drive(speed, speed, 0);
     	else if(move.equals("back"))
-    		Robot.driveBase.drive(-speed, -speed, 0);
-    	else if(move.equals("moveRight"))
+    		Robot.driveBase.drive(-speed, -speed, 0);*/
+    	if(move.equals("moveRight"))
     		Robot.driveBase.drive(0, 0, -speed);
     	else if(move.equals("moveLeft"))
     		Robot.driveBase.drive(0, 0, speed);
@@ -37,6 +37,8 @@ public class GearAlignmentAuto extends Command {
     		Robot.driveBase.pivot(angle);
     	else if(move.equals("pivot_right"))
     		Robot.driveBase.pivot(-angle);
+    	else if(move.equals("centered"))
+    		this.cancel();
     	else
     		Robot.driveBase.drive(0, 0, 0);
     	
