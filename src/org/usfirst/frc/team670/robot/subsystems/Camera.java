@@ -39,10 +39,10 @@ public class Camera extends Subsystem {
 		
 		// Set the default camera here, skipping to the secondary camera if needed.
 		// Also set the frontCam boolean (front = claw side = true)
-		if (cameraFront != BAD_CAMERA)
-			currentCamera = cameraFront;
-		else if (cameraBack != BAD_CAMERA)
+		if (cameraBack != BAD_CAMERA)
 			currentCamera = cameraBack;
+		else if (cameraFront != BAD_CAMERA)
+			currentCamera = cameraFront;
 		else
 			currentCamera = BAD_CAMERA;
 				
@@ -64,36 +64,19 @@ public class Camera extends Subsystem {
 	
 	/* Private method used to avoid duplicating the code in two places */
 	private void switchToCamera(int newCam) {
-		// Don't do anything if the desired camera wasn't found
-		if (newCam != BAD_CAMERA) {
-			// Stop any camera that's running right now
-			if (currentCamera != BAD_CAMERA)
-				NIVision.IMAQdxStopAcquisition(currentCamera);
+			NIVision.IMAQdxStopAcquisition(currentCamera);
 			NIVision.IMAQdxConfigureGrab(newCam);
 			NIVision.IMAQdxStartAcquisition(newCam);
 			currentCamera = newCam;
 			frontCam = (newCam == cameraFront);
-			// Get an initial image and display it.
-			// We need to run getImage() regularly elsewhere in the code
-			// in order to get a continuous feed. See the default command below.
 			getImage();
-		}
 	}
 	
-	/* Grab a new image from the current camera, putting it into the frame.
-	 * Then set that as the current frame in the camera server.
-	 * If we don't have a working camera, just skip the whole process.
-	 */
 	public void getImage() {
 		if (currentCamera != BAD_CAMERA) {
-		//	Runnable processor = new Runnable() {
-	         //   public void run() {
 					NIVision.IMAQdxGrab(currentCamera, frame, 1);
 					server.setImage(frame);
-	            	}
-	          //  };
-	          //  new Thread(processor).start(); 
-		//}
+		}
 	}
 	
 	
