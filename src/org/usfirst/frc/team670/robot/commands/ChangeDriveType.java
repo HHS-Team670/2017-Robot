@@ -7,10 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FlipCamera extends Command {
+public class ChangeDriveType extends Command {
 
-    public FlipCamera() {
-        requires(Robot.camera);
+	private boolean drive;
+	
+    public ChangeDriveType(boolean drive) {
+    	this.drive = drive;
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +21,8 @@ public class FlipCamera extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.camera.switchCamera();
+    	Robot.driveBase.setOmniDrive(drive);
+    	this.cancel();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,6 +32,7 @@ public class FlipCamera extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	//Robot.driveBase.setOmniDrive(drive);
     }
 
     // Called when another command which requires one or more of the same

@@ -1,27 +1,28 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.autonomous;
+
+import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team670.robot.Robot;
 /**
  *
  */
-public class UpdateCamera extends Command {
+public class Pivot extends Command {
 
+	private double angle;
 	
-    public UpdateCamera() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.camera);
+    public Pivot(double angle) {
+        requires(Robot.driveBase);
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.camera.getImage();
+    	Robot.driveBase.pivot(angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,11 +32,11 @@ public class UpdateCamera extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

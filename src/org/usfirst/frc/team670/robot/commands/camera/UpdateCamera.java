@@ -1,29 +1,27 @@
-package org.usfirst.frc.team670.robot.commands;
-
-import org.usfirst.frc.team670.robot.Robot;
+package org.usfirst.frc.team670.robot.commands.camera;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team670.robot.Robot;
 /**
  *
  */
-public class DriveDistance extends Command {
+public class UpdateCamera extends Command {
 
-	private double inches = 0;
 	
-    public DriveDistance(double inches) {
-    	this.inches = inches;
+    public UpdateCamera() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.driveBase);
+        requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.tankDriveDistance(inches);
+    	Robot.camera.getImage();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,11 +31,11 @@ public class DriveDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

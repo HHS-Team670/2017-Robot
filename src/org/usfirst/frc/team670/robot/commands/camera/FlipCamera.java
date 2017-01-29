@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.camera;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,13 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Pivot extends Command {
+public class FlipCamera extends Command {
 
-	private double angle;
-	
-    public Pivot(double angle) {
-        requires(Robot.driveBase);
-        this.angle = angle;
+    public FlipCamera() {
+        requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +19,7 @@ public class Pivot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.pivot(angle);
+    	Robot.camera.switchCam();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +29,6 @@ public class Pivot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,9 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CenterGear extends Command {
+public class DriveDistance extends Command {
 
-    public CenterGear() {
+	private double inches = 0;
+	
+    public DriveDistance(double inches) {
+    	this.inches = inches;
+        // Use requires() here to declare subsystem dependencies
         requires(Robot.driveBase);
     }
 
@@ -19,8 +23,7 @@ public class CenterGear extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Drive 7 feet forward
-    	Robot.driveBase.tankDriveDistance(7.5*12);
+    	Robot.driveBase.tankDriveDistance(inches);
     }
 
     // Make this return true when this Command no longer needs to run execute()

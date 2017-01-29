@@ -1,10 +1,10 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.RunDumper;
-import org.usfirst.frc.team670.robot.commands.runOmniDrive;
+import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
+import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team670.robot.commands.FlipCamera;
 import org.usfirst.frc.team670.robot.commands.PlaceGear;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -32,8 +32,8 @@ public class OI {
 	
 	public OI(){
 		
-		runOmniDrive.whenPressed(new runOmniDrive(true));
-		runOmniDrive.whenReleased(new runOmniDrive(false));
+		runOmniDrive.whenPressed(new ChangeDriveType(true));
+		runOmniDrive.whenReleased(new ChangeDriveType(false));
 
 		placeGear.whenPressed(new PlaceGear(0));
 		

@@ -7,19 +7,20 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
-import org.usfirst.frc.team670.robot.commands.BaselineAuto;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.LeftGear_Vision;
-import org.usfirst.frc.team670.robot.commands.RightGear_Vision;
-import org.usfirst.frc.team670.robot.commands.CenterGear;
-import org.usfirst.frc.team670.robot.commands.CenterGear_Vision;
-import org.usfirst.frc.team670.robot.server.NetworkTablesServer;
+import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
+import org.usfirst.frc.team670.robot.commands.autonomous.AutoDoNothing;
+import org.usfirst.frc.team670.robot.commands.autonomous.AutoCenterGear;
+import org.usfirst.frc.team670.robot.commands.autonomous.AutoCenterGear_Vision;
+import org.usfirst.frc.team670.robot.commands.autonomous.AutoLeftGear_Vision;
+import org.usfirst.frc.team670.robot.commands.autonomous.AutoRightGear_Vision;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Dumper;
 import org.usfirst.frc.team670.robot.subsystems.Grappler;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
+import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -50,17 +51,14 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         
         chooser.addDefault("Align with gear (TESTING)", new AlignWithGear());
-        chooser.addObject("Do Nothing (0 pts)", new CancelCommand());
-        chooser.addObject("Baseline Auto (5pts)", new BaselineAuto());
-        chooser.addObject("Center Gear W/O vision (60pts)", new CenterGear());
-        chooser.addObject("Center Gear ~ Vision (60pts)", new CenterGear_Vision());
-        chooser.addObject("Left Gear ~ Vision (60pts)", new LeftGear_Vision());
-        chooser.addObject("Right Gear ~ Vision (60pts)", new RightGear_Vision());
+        chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
+        chooser.addObject("Baseline Auto (5pts)", new AutoBaseline());
+        chooser.addObject("Center Gear W/O vision (60pts)", new AutoCenterGear());
+        chooser.addObject("Center Gear ~ Vision (60pts)", new AutoCenterGear_Vision());
+        chooser.addObject("Left Gear ~ Vision (60pts)", new AutoLeftGear_Vision());
+        chooser.addObject("Right Gear ~ Vision (60pts)", new AutoRightGear_Vision());
                 
         SmartDashboard.putData("Auto mode", chooser);
-        
-        //Connect with co-processor
-        //defineConnection();
     }
 	
     public void disabledInit(){

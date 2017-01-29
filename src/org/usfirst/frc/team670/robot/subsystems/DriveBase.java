@@ -14,7 +14,7 @@ public class DriveBase extends Subsystem {
 	public CANTalon leftTalon2;
 	public CANTalon rightTalon1;
 	public CANTalon rightTalon2;
-	public CANTalon omniWheel;
+	public CANTalon omniTalon;
 	
 	//Wheel/PID Variables
 	public static final double radiusInInches = 3;
@@ -33,7 +33,7 @@ public class DriveBase extends Subsystem {
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
 		rightTalon1 = new CANTalon(RobotMap.rightMotor1);
 		rightTalon2 = new CANTalon(RobotMap.rightMotor2);
-		omniWheel = new CANTalon(RobotMap.omniWheel);
+		omniTalon = new CANTalon(RobotMap.omniWheel);
 
 		leftTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
 		leftTalon2.set(RobotMap.leftMotor1);
@@ -51,7 +51,7 @@ public class DriveBase extends Subsystem {
 
 		leftTalon1.set(-left);
 		rightTalon1.set(right);
-		omniWheel.set(omni);
+		omniTalon.set(omni);
 	}
 	
 	public void tankDrive(double left, double right) 
@@ -63,9 +63,11 @@ public class DriveBase extends Subsystem {
 		rightTalon1.set(right);
 	}
 	
-	public void omniWheelDrive(double omni)
+	public void omniDrive(double omni)
 	{
-		omniWheel.set(omni);
+		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+
+		omniTalon.set(omni);
 	}
 
 	public void resetRightEncoder() {
@@ -77,7 +79,7 @@ public class DriveBase extends Subsystem {
 	}
 	
 	public void resetOmniEncoder() {
-	//	omniWheel.setEncPosition(0);
+		omniTalon.setEncPosition(0);
 	}
 
 	public void posDriveLeft(double left) 
@@ -107,15 +109,11 @@ public class DriveBase extends Subsystem {
 	{
 		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
 
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
-		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		rightTalon1.enableControl(); //Enable PID control on the talon
-		
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
-		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		leftTalon1.enableControl(); //Enable PID control on the talon
+		omniTalon.changeControlMode(CANTalon.TalonControlMode.Position);
+		omniTalon.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		omniTalon.setPID(P,I,D); //Set the PID constants (p, i, d)
+		omniTalon.enableControl(); //Enable PID control on the talon
+		omniTalon.set(numTicks);
 	}
 	
 	public void tankDriveDistance(double inches) 
