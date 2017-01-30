@@ -1,7 +1,6 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.PID_Methods;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,9 +17,9 @@ public class DriveWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.driveBase.isOmniDriving())
-    		Robot.driveBase.omniDrive(PID_Methods.victor_linearize(Robot.oi.getrightStick().getX()));
+    		Robot.driveBase.omniDrive((Robot.oi.getrightStick().getX()));
     	else if(!Robot.driveBase.isOmniDriving())
-    		Robot.driveBase.tankDrive(PID_Methods.victor_linearize(Robot.oi.getleftStick().getY()), PID_Methods.victor_linearize(Robot.oi.getrightStick().getY()));
+    		Robot.driveBase.tankDrive((Robot.oi.getleftStick().getY()), (Robot.oi.getrightStick().getY()));
     	else
     		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     }
