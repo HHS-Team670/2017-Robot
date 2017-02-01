@@ -38,7 +38,7 @@ public class AlignWithGear extends Command {
     	else if(move.equals("pivot_right"))
     		Robot.driveBase.pivot(-angle);
     	else if(move.equals("centered"))
-    		this.cancel();
+    		System.out.println("ALIGNED");//None
     	else
     		Robot.driveBase.drive(0, 0, 0);
     	
