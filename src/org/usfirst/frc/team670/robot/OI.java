@@ -26,9 +26,9 @@ public class OI {
 	
 	//Driver Controls
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);
+	private Button flipCamera = new JoystickButton(rightDriveStick, 4);	
 
 	//Arcade buttons
-	private Button flipControls = new JoystickButton(arcButtons, 1);	
 	
 	public OI(){
 		
@@ -37,9 +37,9 @@ public class OI {
 
 		placeGear.whenPressed(new PlaceGear(0));
 		
-		flipControls.whenPressed(new FlipCamera());
+		flipCamera.whenPressed(new FlipCamera());
 		
-		runDumper.whenPressed(new RunDumper(100));
+		runDumper.whenPressed(new RunDumper(1.0));
 		runDumper.whenReleased(new RunDumper(0));
 		
 		cancelCommand.whenPressed(new CancelCommand());

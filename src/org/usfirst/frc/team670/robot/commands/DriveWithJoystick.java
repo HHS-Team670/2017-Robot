@@ -17,9 +17,9 @@ public class DriveWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.driveBase.isOmniDriving())
-    		Robot.driveBase.omniDrive((Robot.oi.getrightStick().getX()));
+    		Robot.driveBase.drive(0,0,(Robot.oi.getrightStick().getX()));
     	else if(!Robot.driveBase.isOmniDriving())
-    		Robot.driveBase.tankDrive((Robot.oi.getleftStick().getY()), (Robot.oi.getrightStick().getY()));
+    		Robot.driveBase.drive((Robot.oi.getleftStick().getY()), (Robot.oi.getrightStick().getY()), 0);
     	else
     		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     }

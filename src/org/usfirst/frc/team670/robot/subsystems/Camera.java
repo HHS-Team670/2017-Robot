@@ -83,8 +83,10 @@ public class Camera extends Subsystem {
 			// Stop any camera that's running right now
 			if (currentCamera != BAD_CAMERA)
 				NIVision.IMAQdxStopAcquisition(currentCamera);
+			
 			NIVision.IMAQdxConfigureGrab(newCam);
 			NIVision.IMAQdxStartAcquisition(newCam);
+			
 			currentCamera = newCam;
 			isFrontCam = (newCam == frontCamera);
 			// Get an initial image and display it.
