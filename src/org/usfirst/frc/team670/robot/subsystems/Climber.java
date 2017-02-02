@@ -9,9 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Grappler extends Subsystem {
+public class Climber extends Subsystem {
 	
 	CANTalon grapplerMotor = new CANTalon(RobotMap.grapplerMotor);
+	public boolean shouldRunClimber = false;
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -20,8 +21,12 @@ public class Grappler extends Subsystem {
         setDefaultCommand(new Climb());
     }
     
-    public void runGrappler(double value){
+    public void runClimber(double value){
     	grapplerMotor.set(value);
     }
+
+	public void setClimbMode(boolean b) {
+		shouldRunClimber = b;
+	}
 }
 

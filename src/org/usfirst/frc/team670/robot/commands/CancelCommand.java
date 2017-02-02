@@ -12,7 +12,7 @@ public class CancelCommand extends Command {
     public CancelCommand() {
         requires(Robot.driveBase);
         requires(Robot.dumper);
-        requires(Robot.grappler);
+        requires(Robot.climber);
         requires(Robot.intake);
     }
 

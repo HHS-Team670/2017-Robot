@@ -17,7 +17,7 @@ import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Dumper;
-import org.usfirst.frc.team670.robot.subsystems.Grappler;
+import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
 
@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	//public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
 	public static Dumper dumper = new Dumper();
-	public static Grappler grappler = new Grappler();
+	public static Climber climber = new Climber();
 	
     Command autonomousCommand;
     SendableChooser chooser;
@@ -127,26 +127,16 @@ public class Robot extends IterativeRobot {
     }
     
     public void TimeLeft(){
-    	SmartDashboard.putString("TIME LEFT:", DriverStation.getInstance().getMatchTime() + " Seconds");
-    	SmartDashboard.putBoolean("Omni-Drive-Running?", driveBase.isOmniDriving());
-        SmartDashboard.putString("Movement", getData());
+    	SmartDashboard.putString("Time Remaining:", DriverStation.getInstance().getMatchTime() + " Seconds");
+    	
+    	String omni = (driveBase.isOmniDriving())?("On"):("Off");
+    	SmartDashboard.putString("Omni-Drive", omni);
+    	
+    	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
+    	String xAxis = "Intake";
+    	SmartDashboard.putString("Operator X-Axis", xAxis);
+    	SmartDashboard.putString("Operator Y-Axis", yAxis);
+    	
+        SmartDashboard.putString("Gear Movement", ns.getData());
 	}
-    
-    public static void setFlipped(boolean x)
-    {
-    	isFlipped = x;
-    }
-    
-    public static boolean getFlipped()
-    {
-    	return isFlipped;
-    }
-    
-    public static String getData()
-    {
-    	if(ns.isConnected())
-    		return ns.getData();
-    	else
-    		return "connection_failed";
-    }    
 }

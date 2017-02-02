@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous;
+package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,13 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoDoNothing extends Command {
+public class ToggleClimber extends Command {
 
-    public AutoDoNothing() {
-        requires(Robot.driveBase);
-        requires(Robot.dumper);
-        requires(Robot.climber);
-        requires(Robot.intake);
+    public ToggleClimber() {
+
     }
 
     // Called just before this Command runs the first time
@@ -22,6 +19,8 @@ public class AutoDoNothing extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	boolean isClimbingMode = Robot.climber.shouldRunClimber;
+    	Robot.climber.setClimbMode(!isClimbingMode);
     }
 
     // Make this return true when this Command no longer needs to run execute()

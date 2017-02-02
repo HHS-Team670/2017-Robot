@@ -1,10 +1,9 @@
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.RunDumper;
+import org.usfirst.frc.team670.robot.commands.ToggleClimber;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team670.robot.commands.PlaceGear;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,7 +19,7 @@ public class OI {
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
 	//Operator Buttons
-	private Button runDumper = new JoystickButton(operatorStick, 1);
+	private Button toggleClimber = new JoystickButton(operatorStick, 1);
 	private Button placeGear = new JoystickButton(operatorStick, 3);
 	private Button cancelCommand = new JoystickButton(operatorStick, 5);
 	
@@ -39,8 +38,7 @@ public class OI {
 		
 		flipCamera.whenPressed(new FlipCamera());
 		
-		runDumper.whenPressed(new RunDumper(1.0));
-		runDumper.whenReleased(new RunDumper(0));
+		toggleClimber.whenPressed(new ToggleClimber());
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}

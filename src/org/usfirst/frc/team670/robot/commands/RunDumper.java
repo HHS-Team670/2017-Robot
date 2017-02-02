@@ -21,7 +21,8 @@ public class RunDumper extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.dumper.runDumper(value);
+    	if(!Robot.climber.shouldRunClimber)
+    		Robot.dumper.runDumper(Robot.oi.getOperatorStick().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -14,7 +14,7 @@ public class NetworkTablesServer {
 	
 	public String getData()
 	{
-		return table.getString("data", "unavailable");
+		return table.getString("data", "connection_failed");
 	}
 
 	public boolean isConnected() {
