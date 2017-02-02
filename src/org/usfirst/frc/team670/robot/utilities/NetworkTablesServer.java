@@ -6,15 +6,20 @@ public class NetworkTablesServer {
 	private static NetworkTable table;
 	private static String tableName;
 	
-	public NetworkTablesServer()
+	public NetworkTablesServer(String tableName)
 	{
-		tableName = "vision";
+		tableName = tableName;
 		table = NetworkTable.getTable(tableName);
 	}
 	
-	public String getData()
+	public String getData(String key)
 	{
-		return table.getString("data", "connection_failed");
+		return table.getString(key, "connection_failed");
+	}
+	
+	public void sendData(String key, String data)
+	{
+		table.putString(key, data);
 	}
 
 	public boolean isConnected() {

@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 
 	private static boolean isFlipped = false;
 
-	public static NetworkTablesServer ns;
+	public static NetworkTablesServer vision, settings;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
@@ -45,7 +45,8 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	ns = new NetworkTablesServer();
+    	vision = new NetworkTablesServer("vision");
+    	settings = new NetworkTablesServer("settings");
 		oi = new OI();
         chooser = new SendableChooser();
         
@@ -99,11 +100,20 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	TimeLeft();
+    	sendSettingsData();
+    	putData();
         Scheduler.getInstance().run();
     }
 
-    public void teleopInit() {
+    private void sendSettingsData() {
+    	String allianceColor = (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue)?("Blue"):("Red");
+    	settings.sendData("alliance_color", allianceColor);
+		settings.sendData("time_left", Double.toString(DriverStation.getInstance().getMatchTime()));
+		settings.sendData("op_mode", (isAutonomous())?("Auto"):("Tele-op"));
+		settings.sendData("voltage", Double.toString(DriverStation.getInstance().getBatteryVoltage()));
+	}
+
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
@@ -115,7 +125,8 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	TimeLeft();
+    	sendSettingsData();
+    	putData();
         Scheduler.getInstance().run();
     }
  
@@ -126,7 +137,7 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
     }
     
-    public void TimeLeft(){
+    public void putData(){
     	SmartDashboard.putString("Time Remaining:", DriverStation.getInstance().getMatchTime() + " Seconds");
     	
     	String omni = (driveBase.isOmniDriving())?("On"):("Off");
@@ -137,6 +148,6 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putString("Operator X-Axis", xAxis);
     	SmartDashboard.putString("Operator Y-Axis", yAxis);
     	
-        SmartDashboard.putString("Gear Movement", ns.getData());
+        SmartDashboard.putString("Gear Movement", vision.getData("data"));
 	}
 }

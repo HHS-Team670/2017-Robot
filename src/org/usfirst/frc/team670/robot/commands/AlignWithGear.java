@@ -20,7 +20,7 @@ public class AlignWithGear extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	String move = Robot.ns.getData();
+    	String move = Robot.vision.getData("data");
     	
     	double speed = 0.5;
     	double angle = 5;
