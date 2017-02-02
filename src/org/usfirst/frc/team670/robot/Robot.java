@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	private static boolean isFlipped = false;
-	
+
 	public static NetworkTablesServer ns;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
