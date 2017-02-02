@@ -26,9 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	private static boolean isFlipped = false;
-
-	public static NetworkTablesServer vision, settings;
+	public static NetworkTablesServer vision;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
@@ -46,7 +44,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	vision = new NetworkTablesServer("vision");
-    	settings = new NetworkTablesServer("settings");
+    	//settings = new NetworkTablesServer("settings");
 		oi = new OI();
         chooser = new SendableChooser();
         
@@ -100,18 +98,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	sendSettingsData();
     	putData();
         Scheduler.getInstance().run();
     }
-
-    private void sendSettingsData() {
-    	String allianceColor = (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue)?("Blue"):("Red");
-    	settings.sendData("alliance_color", allianceColor);
-		settings.sendData("time_left", Double.toString(DriverStation.getInstance().getMatchTime()));
-		settings.sendData("op_mode", (isAutonomous())?("Auto"):("Tele-op"));
-		settings.sendData("voltage", Double.toString(DriverStation.getInstance().getBatteryVoltage()));
-	}
 
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
@@ -125,7 +114,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	sendSettingsData();
     	putData();
         Scheduler.getInstance().run();
     }
