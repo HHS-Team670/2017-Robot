@@ -34,7 +34,7 @@ public class OI {
 		runOmniDrive.whenPressed(new ChangeDriveType(true));
 		runOmniDrive.whenReleased(new ChangeDriveType(false));
 
-		placeGear.whenPressed(new PlaceGear(0));
+		placeGear.whenPressed(new PlaceGear(12));
 		
 		flipCamera.whenPressed(new FlipCamera());
 		

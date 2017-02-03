@@ -24,11 +24,7 @@ public class AlignWithGear extends Command {
     	
     	double speed = 0.5;
     	double angle = 5;
-    	
-    	/*if(move.equals("forward"))
-    		Robot.driveBase.drive(speed, speed, 0);
-    	else if(move.equals("back"))
-    		Robot.driveBase.drive(-speed, -speed, 0);*/
+
     	if(move.equals("moveRight"))
     		Robot.driveBase.drive(0, 0, -speed);
     	else if(move.equals("moveLeft"))
