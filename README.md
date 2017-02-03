@@ -1,2 +1,2 @@
 # 2017-Robot
-Code for 2017 Steamworks Robot
+Code for Team 670's Steamworks Robot
