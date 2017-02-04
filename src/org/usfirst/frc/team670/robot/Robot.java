@@ -127,18 +127,19 @@ public class Robot extends IterativeRobot {
     }
     
     public void putData(){
-    	SmartDashboard.putString("Time Remaining:", DriverStation.getInstance().getMatchTime() + " Seconds");
-    	
+    	double timeLeft = DriverStation.getInstance().getMatchTime();
     	String driveType = driveBase.getDriveTypeInString();
-    	SmartDashboard.putString("Current Drive type:", driveType);
-    	
     	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
     	String xAxis = "Intake";
+    	int aCams = camera.totalAvailableCams;
+    	
+    	settings.sendData("time", timeLeft + "");
+    	
+    	SmartDashboard.putString("Time Remaining:", timeLeft + " Seconds");
+       	SmartDashboard.putString("Current Drive type:", driveType);
     	SmartDashboard.putString("Operator X-Axis", xAxis);
     	SmartDashboard.putString("Operator Y-Axis", yAxis);
-    	
         SmartDashboard.putString("Gear Movement", vision.getData("data"));
-        
-        SmartDashboard.putString("Number of useable cameras: ", Integer.toString(camera.totalAvailableCams));
+        SmartDashboard.putString("Number of useable cameras: ", Integer.toString(aCams));
 	}
 }
