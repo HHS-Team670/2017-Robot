@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	
-	public static NetworkTablesServer vision, settings;
+	public static NetworkTablesServer vision;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
@@ -45,7 +45,6 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	vision = new NetworkTablesServer("vision");
-    	settings = new NetworkTablesServer("settings");
 		oi = new OI();
         chooser = new SendableChooser();
         
@@ -132,9 +131,7 @@ public class Robot extends IterativeRobot {
     	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
     	String xAxis = "Intake";
     	int aCams = camera.totalAvailableCams;
-    	
-    	settings.sendData("time", timeLeft + "");
-    	
+    	    	
     	SmartDashboard.putString("Time Remaining:", timeLeft + " Seconds");
        	SmartDashboard.putString("Current Drive type:", driveType);
     	SmartDashboard.putString("Operator X-Axis", xAxis);
