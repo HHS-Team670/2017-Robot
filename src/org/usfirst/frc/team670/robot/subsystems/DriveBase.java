@@ -2,6 +2,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team670.robot.utilities.DriveState;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -26,8 +27,9 @@ public class DriveBase extends Subsystem {
 	public static final double pivotRadius = 16;
 	
 	//Drive only with omniwheel
-	private static boolean isOmniDrive = false;
-
+	//private static boolean isOmniDrive = false;
+	private static DriveState current = DriveState.FOURWHEEL;
+		
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
@@ -159,13 +161,22 @@ public class DriveBase extends Subsystem {
 		rightTalon1.set(numTicks);
 	}
 	
-	public boolean isOmniDriving()
+	public DriveState getDriveType()
 	{
-		return isOmniDrive;
+		return current;
 	}
 	
-	public void setOmniDrive(boolean drive)
+	public void setDriveType(DriveState x)
 	{
-		isOmniDrive = drive;
+		current = x;
+	}
+	
+	public String getDriveTypeInString()
+	{
+		return (getDriveType() == DriveState.ALLWHEEL)?
+		    	("All Wheel"):((getDriveType() == DriveState.FOURWHEEL)?
+		    	("Four Wheel"):((getDriveType() == DriveState.OMNIWHEEL)?
+		    	("Omni Wheel"):
+		    	("Somehting is wrong")));
 	}
 }

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.DriveState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,10 +17,12 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.driveBase.isOmniDriving())
-    		Robot.driveBase.drive(0,0,(Robot.oi.getrightStick().getX()));
-    	else if(!Robot.driveBase.isOmniDriving())
-    		Robot.driveBase.drive((Robot.oi.getleftStick().getY()), (Robot.oi.getrightStick().getY()), 0);
+    	if(Robot.driveBase.getDriveType() == DriveState.FOURWHEEL)
+    		Robot.driveBase.drive(Robot.oi.getleftStick().getY(),Robot.oi.getrightStick().getY(), 0);
+    	if(Robot.driveBase.getDriveType() == DriveState.OMNIWHEEL)
+    		Robot.driveBase.drive(0,0,Robot.oi.getrightStick().getX());
+    	else if(Robot.driveBase.getDriveType() == DriveState.ALLWHEEL)
+    		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     	else
     		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     }

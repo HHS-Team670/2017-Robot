@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.DriveState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ChangeDriveType extends Command {
 
-	private boolean drive;
+	private DriveState drive;
 	
-    public ChangeDriveType(boolean drive) {
-    	this.drive = drive;
+    public ChangeDriveType(DriveState d) {
+    	this.drive = d;
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +22,7 @@ public class ChangeDriveType extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.setOmniDrive(drive);
-    	this.cancel();
+    	Robot.driveBase.setDriveType(drive);
     }
 
     // Make this return true when this Command no longer needs to run execute()

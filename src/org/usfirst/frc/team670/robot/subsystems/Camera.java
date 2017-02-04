@@ -15,10 +15,10 @@ public class Camera extends Subsystem {
     
 	private CameraServer server;
 	private Image frame;
-	private int frontCamera;
-	private int backCamera;
+	private int[] camera;
+	private final int totalCameraNumber = 3;
 	private int currentCamera;
-	private boolean isFrontCam;
+	public int totalAvailableCams = 0;
 	
 	// If a camera can't be opened, set its variable to this value.
 	// We're assuming the OpenCamera method will never return this value
@@ -26,31 +26,33 @@ public class Camera extends Subsystem {
 	private static final int BAD_CAMERA = -1;
 	
 	public Camera() {
+		
 		// Attempt to open the cameras, but fail gracefully if they aren't found.
 		// Upon error, set the camera variable to the BAD_CAMERA constant defined above.
-		try {
-			frontCamera = NIVision.IMAQdxOpenCamera("cam0", 
-					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		} catch (Exception ex) {
-			System.out.println("Camera() failed to open the claw camera (cam0)!!");
-			frontCamera = BAD_CAMERA;
+		for(int i = 0; i < totalCameraNumber; i++)
+		{
+			try {
+				camera[i] = NIVision.IMAQdxOpenCamera("cam" + i, 
+						NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+			} catch (Exception ex) {
+				System.out.println("Unable to openCamera: " + i);
+				camera[i] = BAD_CAMERA;
+			}
 		}
-		try {
-			backCamera = NIVision.IMAQdxOpenCamera("cam1", 
-					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		} catch (Exception ex){
-			System.out.println("Camera() failed to open the flap camera (cam1)!!");
-			backCamera = BAD_CAMERA;
-		}
-		
 		// Set the default camera here, skipping to the secondary camera if needed.
 		// Also set the frontCam boolean (front = claw side = true)
-		if (frontCamera != BAD_CAMERA)
-			currentCamera = frontCamera;
-		else if (backCamera != BAD_CAMERA)
-			currentCamera = backCamera;
-		else
+		for(int i = totalCameraNumber; i > 0; i--)
+		{
+			if(camera[i] != BAD_CAMERA)
+			{
+				totalAvailableCams++;
+				currentCamera = camera[i];
+			}
+		}
+		if(totalAvailableCams <= 0)
+		{
 			currentCamera = BAD_CAMERA;
+		}
 				
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		
@@ -61,19 +63,37 @@ public class Camera extends Subsystem {
 		// Don't call startAutomaticCapture() here because we're using setImage() instead
 	}
 	
-	public void switchCam() {
-		if (isFrontCam == true)
-			switchToCamFlap();
-		else
-			switchToCamClaw();
+	public void switchCam() 
+	{
+			switchToCamera(getNextCamIndex());
 	}
 	
-	public void switchToCamFlap() {
-		switchToCamera(backCamera);
-	}
-	
-	public void switchToCamClaw() {
-		switchToCamera(frontCamera);
+	public int getNextCamIndex()
+	{
+		if(currentCamera != BAD_CAMERA)
+		{
+			int index = 0;
+			for(int i = 0; i < camera.length; i++)
+			{
+				if(currentCamera == camera[i])
+				{
+					index = i;
+					break;
+				}
+			}
+			if(index + 1 > camera.length - 1)
+			{
+				for(int i = 0; i < camera.length; i++)
+				{
+					if(camera[i] != BAD_CAMERA)
+						return i;
+				}
+			}
+			else
+				return index+1;
+		}
+		currentCamera = BAD_CAMERA;
+		return -1;
 	}
 
 	/* Private method used to avoid duplicating the code in two places */
@@ -88,7 +108,6 @@ public class Camera extends Subsystem {
 			NIVision.IMAQdxStartAcquisition(newCam);
 			
 			currentCamera = newCam;
-			isFrontCam = (newCam == frontCamera);
 			// Get an initial image and display it.
 			// We need to run getImage() regularly elsewhere in the code
 			// in order to get a continuous feed. See the default command below.

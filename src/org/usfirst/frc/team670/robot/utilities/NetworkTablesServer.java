@@ -4,11 +4,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class NetworkTablesServer {
 
 	private static NetworkTable table;
-	private static String tableName;
 	
 	public NetworkTablesServer(String tableName)
 	{
-		tableName = tableName;
 		table = NetworkTable.getTable(tableName);
 	}
 	

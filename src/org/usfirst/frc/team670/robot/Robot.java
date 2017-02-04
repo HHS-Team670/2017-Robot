@@ -20,13 +20,14 @@ import org.usfirst.frc.team670.robot.subsystems.Dumper;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
+import org.usfirst.frc.team670.robot.utilities.DriveState;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	
-	public static NetworkTablesServer vision;
+	public static NetworkTablesServer vision, settings;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
@@ -44,7 +45,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	vision = new NetworkTablesServer("vision");
-    	//settings = new NetworkTablesServer("settings");
+    	settings = new NetworkTablesServer("settings");
 		oi = new OI();
         chooser = new SendableChooser();
         
@@ -128,8 +129,8 @@ public class Robot extends IterativeRobot {
     public void putData(){
     	SmartDashboard.putString("Time Remaining:", DriverStation.getInstance().getMatchTime() + " Seconds");
     	
-    	String omni = (driveBase.isOmniDriving())?("On"):("Off");
-    	SmartDashboard.putString("Omni-Drive", omni);
+    	String driveType = driveBase.getDriveTypeInString();
+    	SmartDashboard.putString("Current Drive type:", driveType);
     	
     	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
     	String xAxis = "Intake";
@@ -137,5 +138,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putString("Operator Y-Axis", yAxis);
     	
         SmartDashboard.putString("Gear Movement", vision.getData("data"));
+        
+        SmartDashboard.putString("Number of useable cameras: ", Integer.toString(camera.totalAvailableCams));
 	}
 }
