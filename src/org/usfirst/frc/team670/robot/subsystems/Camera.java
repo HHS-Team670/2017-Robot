@@ -15,10 +15,9 @@ public class Camera extends Subsystem {
     
 	private CameraServer server;
 	private Image frame;
-	private int[] camera;
-	private final int totalCameraNumber = 3;
+	public int cam1, cam2, cam3, cam4;
 	private int currentCamera;
-	public int totalAvailableCams = 0;
+	public boolean one, two, three, four;
 	
 	// If a camera can't be opened, set its variable to this value.
 	// We're assuming the OpenCamera method will never return this value
@@ -29,28 +28,62 @@ public class Camera extends Subsystem {
 		
 		// Attempt to open the cameras, but fail gracefully if they aren't found.
 		// Upon error, set the camera variable to the BAD_CAMERA constant defined above.
-		for(int i = 0; i < totalCameraNumber; i++)
+		try {
+ 			cam1 = NIVision.IMAQdxOpenCamera("cam0", 
+ 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 		} catch (Exception ex) {
+ 			System.out.println("Camera() failed to open the claw camera (cam0)!!");
+ 			cam1 = BAD_CAMERA;
+ 		}
+ 		try {
+ 			cam2 = NIVision.IMAQdxOpenCamera("cam1", 
+ 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 		} catch (Exception ex){
+ 			System.out.println("Camera() failed to open the flap camera (cam1)!!");
+ 			cam2 = BAD_CAMERA;
+ 		}
+ 		try {
+ 			cam3 = NIVision.IMAQdxOpenCamera("cam2", 
+ 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 		} catch (Exception ex){
+ 			System.out.println("Camera() failed to open the flap camera (cam2)!!");
+ 			cam3 = BAD_CAMERA;
+ 		}
+ 		try {
+ 			cam4 = NIVision.IMAQdxOpenCamera("cam3", 
+ 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 		} catch (Exception ex){
+ 			System.out.println("Camera() failed to open the flap camera (cam3)!!");
+ 			cam4 = BAD_CAMERA;
+ 		}
+ 			
+		if (cam1 != BAD_CAMERA)
 		{
-			try {
-				camera[i] = NIVision.IMAQdxOpenCamera("cam" + i, 
-						NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-			} catch (Exception ex) {
-				System.out.println("Unable to openCamera: " + i);
-				camera[i] = BAD_CAMERA;
-			}
+			setAllToFalse();
+			one = true;
+			currentCamera = cam1;
 		}
-		// Set the default camera here, skipping to the secondary camera if needed.
-		// Also set the frontCam boolean (front = claw side = true)
-		for(int i = totalCameraNumber; i > 0; i--)
+		else if (cam2 != BAD_CAMERA)
 		{
-			if(camera[i] != BAD_CAMERA)
-			{
-				totalAvailableCams++;
-				currentCamera = camera[i];
-			}
+			setAllToFalse();
+			two = true;
+			currentCamera = cam2;
 		}
-		if(totalAvailableCams <= 0)
+		else if (cam3 != BAD_CAMERA)
 		{
+			setAllToFalse();
+			three = true;
+			currentCamera = cam3;
+		}
+		else if (cam4 != BAD_CAMERA)
+		{
+			setAllToFalse();
+			four = true;
+			currentCamera = cam4;
+		}
+		else
+		{
+			setAllToFalse();
 			currentCamera = BAD_CAMERA;
 		}
 				
@@ -63,41 +96,73 @@ public class Camera extends Subsystem {
 		// Don't call startAutomaticCapture() here because we're using setImage() instead
 	}
 	
-	public void switchCam() 
-	{
-			switchToCamera(getNextCamIndex());
+	public void switchCam() {
+	 		if (one)
+	 		{
+	 			if(cam2 != BAD_CAMERA)
+	 				switchToCamera(cam2);
+	 			else if(cam3 != BAD_CAMERA)
+	 				switchToCamera(cam3);
+	 			else if(cam4 != BAD_CAMERA)
+	 				switchToCamera(cam4);
+	 			else
+	 				switchToCamera(cam1);
+	 		}
+	 		else if(two)
+	 		{
+	 			if(cam3 != BAD_CAMERA)
+	 				switchToCamera(cam3);
+	 			else if(cam4 != BAD_CAMERA)
+	 				switchToCamera(cam4);
+	 			else if(cam1 != BAD_CAMERA)
+	 				switchToCamera(cam1);
+	 			else
+	 				switchToCamera(cam2);
+	 		}
+	 		else if(three)
+	 		{
+	 			if(cam4 != BAD_CAMERA)
+	 				switchToCamera(cam4);
+	 			else if(cam1 != BAD_CAMERA)
+	 				switchToCamera(cam1);
+	 			else if(cam2 != BAD_CAMERA)
+	 				switchToCamera(cam2);
+	 			else
+	 				switchToCamera(cam3);
+	 		}
+	 		else
+	 		{
+	 			if(cam2 != BAD_CAMERA)
+	 				switchToCamera(cam2);
+	 			else if(cam3 != BAD_CAMERA)
+	 				switchToCamera(cam3);
+	 			else if(cam4 != BAD_CAMERA)
+	 				switchToCamera(cam4);
+	 			else if(cam1 != BAD_CAMERA)
+	 				switchToCamera(cam1);
+	 		}
 	}
 	
-	public int getNextCamIndex()
+	public void setAllToFalse()
 	{
-		if(currentCamera != BAD_CAMERA)
-		{
-			int index = 0;
-			for(int i = 0; i < camera.length; i++)
-			{
-				if(currentCamera == camera[i])
-				{
-					index = i;
-					break;
-				}
-			}
-			if(index + 1 > camera.length - 1)
-			{
-				for(int i = 0; i < camera.length; i++)
-				{
-					if(camera[i] != BAD_CAMERA)
-						return i;
-				}
-			}
-			else
-				return index+1;
-		}
-		currentCamera = BAD_CAMERA;
-		return -1;
+		one = false;
+		two = false;
+		three = false;
+		four = false;
 	}
 
 	/* Private method used to avoid duplicating the code in two places */
 	private void switchToCamera(int newCam) {
+		setAllToFalse();
+		
+		if(newCam == cam1)
+			one = true;
+		else if(newCam == cam2)
+			two = true;
+		else if(newCam == cam3)
+			three = true;
+		else if(newCam == cam4)
+			four = true;
 		// Don't do anything if the desired camera wasn't found
 		if (newCam != BAD_CAMERA) {
 			// Stop any camera that's running right now

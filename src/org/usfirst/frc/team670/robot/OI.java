@@ -36,7 +36,8 @@ public class OI {
 		runOmniDrive.whenPressed(new ChangeDriveType(DriveState.OMNIWHEEL));
 		runOmniDrive.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
 
-		runAllWheel.whenPressed(new ChangeDriveType((Robot.driveBase.getDriveType() == DriveState.ALLWHEEL)?(DriveState.FOURWHEEL):(DriveState.ALLWHEEL)));
+		runAllWheel.whenPressed(new ChangeDriveType(DriveState.ALLWHEEL));
+		runAllWheel.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
 		
 		placeGear.whenPressed(new PlaceGear(12));
 		

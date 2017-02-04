@@ -130,13 +130,10 @@ public class Robot extends IterativeRobot {
     	String driveType = driveBase.getDriveTypeInString();
     	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
     	String xAxis = "Intake";
-    	int aCams = camera.totalAvailableCams;
-    	    	
     	SmartDashboard.putString("Time Remaining:", timeLeft + " Seconds");
        	SmartDashboard.putString("Current Drive type:", driveType);
     	SmartDashboard.putString("Operator X-Axis", xAxis);
     	SmartDashboard.putString("Operator Y-Axis", yAxis);
         SmartDashboard.putString("Gear Movement", vision.getData("data"));
-        SmartDashboard.putString("Number of useable cameras: ", Integer.toString(aCams));
 	}
 }

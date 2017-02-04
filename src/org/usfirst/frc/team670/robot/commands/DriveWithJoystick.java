@@ -23,8 +23,6 @@ public class DriveWithJoystick extends Command {
     		Robot.driveBase.drive(0,0,Robot.oi.getrightStick().getX());
     	else if(Robot.driveBase.getDriveType() == DriveState.ALLWHEEL)
     		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
-    	else
-    		Robot.driveBase.drive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
