@@ -14,20 +14,18 @@ import org.usfirst.frc.team670.robot.commands.autonomous.AutoCenterGear_Vision;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoLeftGear_Vision;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoRightGear_Vision;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
-import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Dumper;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
-import org.usfirst.frc.team670.robot.utilities.DriveState;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	
-	public static NetworkTablesServer vision;
+	private static NetworkTablesServer vision;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
@@ -134,6 +132,11 @@ public class Robot extends IterativeRobot {
        	SmartDashboard.putString("Current Drive type:", driveType);
     	SmartDashboard.putString("Operator X-Axis", xAxis);
     	SmartDashboard.putString("Operator Y-Axis", yAxis);
-        SmartDashboard.putString("Gear Movement", vision.getData("data"));
+        SmartDashboard.putString("Gear Movement", getData());
 	}
+    
+    public static String getData()
+    {
+    	return vision.getData("data");
+    }
 }
