@@ -12,7 +12,7 @@ public class NetworkTablesServer {
 	
 	public String getData(String key)
 	{
-		return table.getString(key, "connection_failed");
+		return table.getString(key, "data_unavailable");
 	}
 	
 	public void sendData(String key, String data)

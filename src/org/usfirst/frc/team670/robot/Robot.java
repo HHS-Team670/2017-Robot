@@ -124,15 +124,14 @@ public class Robot extends IterativeRobot {
     }
     
     public void putData(){
-    	double timeLeft = DriverStation.getInstance().getMatchTime();
     	String driveType = driveBase.getDriveTypeInString();
     	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
     	String xAxis = "Intake";
-    	SmartDashboard.putString("Time Remaining:", timeLeft + " Seconds");
+    	
        	SmartDashboard.putString("Current Drive type:", driveType);
     	SmartDashboard.putString("Operator X-Axis", xAxis);
-    	SmartDashboard.putString("Operator Y-Axis", yAxis);
-        SmartDashboard.putString("Gear Movement", getData());
+    	SmartDashboard.putString("Operator Y-Axis", yAxis);        
+        SmartDashboard.putString("Is vision available?", (vision.isConnected())?("YES"):("NO"));
 	}
     
     public static String getData()
