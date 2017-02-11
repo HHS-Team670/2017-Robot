@@ -12,6 +12,7 @@ public class AlignWithGear extends Command {
 
     public AlignWithGear() {
         requires(Robot.driveBase);
+        requires(Robot.distanceSensor);
     }
 
     // Called just before this Command runs the first time
@@ -43,7 +44,7 @@ public class AlignWithGear extends Command {
 	    	else if(move.equals("centered"))
 	    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
 	    	else if(move.equals("cancel"))
-	    		this.cancel();
+	    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
     	}
     }
 

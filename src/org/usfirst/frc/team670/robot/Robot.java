@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
-	//public static DistanceSensor distanceSensor = new DistanceSensor();
+	public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
 	public static Dumper dumper = new Dumper();
 	public static Climber climber = new Climber();
@@ -130,7 +130,7 @@ public class Robot extends IterativeRobot {
     	String xAxis = "Intake";
     	
        	SmartDashboard.putString("Drive type:", driveType);
-       	//SmartDashboard.putString("Current Distance:", ""+distanceSensor.getDistanceInches());
+       	SmartDashboard.putString("Current Distance:", ""+distanceSensor.getVoltage());
     	SmartDashboard.putString("Operator X-Axis", xAxis);
     	SmartDashboard.putString("Operator Y-Axis", yAxis);        
         SmartDashboard.putString("Vision System:", (vision.isConnected())?("Running"):("FAILURE"));

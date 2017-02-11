@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DistanceSensor extends Subsystem {
     
 	private AnalogInput analog;
-	private double inchesProportion = 24/0.5358886122703552;
+	private double voltage = 0.5358886122703552;
 	private double cmToInches = 2.54;
 	
 	public DistanceSensor()
@@ -23,19 +23,19 @@ public class DistanceSensor extends Subsystem {
 		analog = new AnalogInput(RobotMap.UltrasonicAI);
 	}
 	
-	public String getDistanceInches()
+	public Double getDistanceInches()
 	{
-		 return Double.toString(getVoltage()*inchesProportion).substring(0, 5);
+		 return (24*(getVoltage()/voltage));
 	}
 	
 	public double getVoltage()
 	{
-		return analog.getAverageVoltage();
+		return analog.getVoltage();
 	}
     
 	public String getDistanceCM()
 	{
-		 return Double.toString(getVoltage()*inchesProportion*cmToInches).substring(0, 5);
+		 return Double.toString((getDistanceInches())*cmToInches).substring(0, 5);
 
 	}
 
