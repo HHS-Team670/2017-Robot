@@ -51,8 +51,8 @@ public class DriveBase extends Subsystem {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(-left);
-		rightTalon1.set(right);
+		leftTalon1.set(left);
+		rightTalon1.set(-right);
 		omniTalon.set(omni);
 	}
 	
@@ -61,8 +61,8 @@ public class DriveBase extends Subsystem {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(-left);
-		rightTalon1.set(right);
+		leftTalon1.set(left);
+		rightTalon1.set(-right);
 	}
 	
 	public void omniDrive(double omni)
@@ -171,12 +171,12 @@ public class DriveBase extends Subsystem {
 		current = x;
 	}
 	
-	public String getDriveTypeInString()
+	public String toString()
 	{
 		return (getDriveType() == DriveState.ALLWHEEL)?
 		    	("All Wheel"):((getDriveType() == DriveState.FOURWHEEL)?
 		    	("Four Wheel"):((getDriveType() == DriveState.OMNIWHEEL)?
 		    	("Omni Wheel"):
-		    	("Somehting is wrong")));
+		    	("No Wheel")));
 	}
 }

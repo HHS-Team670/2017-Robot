@@ -17,8 +17,7 @@ public class RobotMap {
     public static int dumperMotor = 7;
     public static int grapplerMotor = 8;
     
-    public static int UltrasonicDO = 1;
-    public static int UltrasonicDI = 1;
+    public static int UltrasonicAI = 0;
 
     //Joysticks + Buttons
     public static int operatorStick = 0;

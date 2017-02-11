@@ -1,6 +1,11 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
+import java.nio.file.Files;
+
 import org.usfirst.frc.team670.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.AccumulatorResult;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -9,29 +14,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DistanceSensor extends Subsystem {
     
-	Ultrasonic ultra;
+	private AnalogInput analog;
+	private double inchesProportion = 24/0.5358886122703552;
+	private double cmToInches = 2.54;
 	
 	public DistanceSensor()
 	{
-		try
-		{
-			ultra = new Ultrasonic(RobotMap.UltrasonicDO, RobotMap.UltrasonicDI);
-		}
-		catch(Exception e)
-		{
-			ultra = null;
-		}
+		analog = new AnalogInput(RobotMap.UltrasonicAI);
 	}
 	
-	public double getDistanceInches()
+	public String getDistanceInches()
 	{
-		if(ultra == null)
-			return -1;
-		else
-			return ultra.getRangeInches();
+		 return Double.toString(getVoltage()*inchesProportion).substring(0, 5);
 	}
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	
+	public double getVoltage()
+	{
+		return analog.getAverageVoltage();
+	}
+    
+	public String getDistanceCM()
+	{
+		 return Double.toString(getVoltage()*inchesProportion*cmToInches).substring(0, 5);
+
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

@@ -17,6 +17,7 @@ import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Dumper;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
+import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
 
@@ -124,14 +125,15 @@ public class Robot extends IterativeRobot {
     }
     
     public void putData(){
-    	String driveType = driveBase.getDriveTypeInString();
+    	String driveType = driveBase.toString();
     	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
     	String xAxis = "Intake";
     	
-       	SmartDashboard.putString("Current Drive type:", driveType);
+       	SmartDashboard.putString("Drive type:", driveType);
+       	//SmartDashboard.putString("Current Distance:", ""+distanceSensor.getDistanceInches());
     	SmartDashboard.putString("Operator X-Axis", xAxis);
     	SmartDashboard.putString("Operator Y-Axis", yAxis);        
-        SmartDashboard.putString("Is vision available?", (vision.isConnected())?("YES"):("NO"));
+        SmartDashboard.putString("Vision System:", (vision.isConnected())?("Running"):("FAILURE"));
 	}
     
     public static String getData()

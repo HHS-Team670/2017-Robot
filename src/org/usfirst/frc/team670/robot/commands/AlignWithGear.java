@@ -22,26 +22,29 @@ public class AlignWithGear extends Command {
     protected void execute() {
     	String move = Robot.getData();
     	
-    	double speed = 0.5;
+    	double pivotSpeed = 0.2;
+    	double speed = 0.25;
     	double angle = 5;
 
     	if(!move.equals("data_unavailable"))
     	{
-	    	if(move.equals("moveRight"))
+	    	if(move.equals("right"))
 	    		Robot.driveBase.drive(0, 0, -speed);
-	    	else if(move.equals("moveLeft"))
+	    	else if(move.equals("left"))
 	    		Robot.driveBase.drive(0, 0, speed);
-	    	else if(move.equals("pivot_left"))
-	    		Robot.driveBase.pivot(angle);
-	    	else if(move.equals("pivot_right"))
-	    		Robot.driveBase.pivot(-angle);
+	    	else if(move.equals("right_pivot"))
+	    	{
+	    		Robot.driveBase.drive(-pivotSpeed, pivotSpeed, 0);
+	    	}
+	    	else if(move.equals("left_pivot"))
+	    	{
+	    		Robot.driveBase.drive(pivotSpeed, -pivotSpeed, -0);
+	    	}
 	    	else if(move.equals("centered"))
-	    		System.out.println("ALIGNED");//None
+	    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
+	    	else if(move.equals("cancel"))
+	    		this.cancel();
     	}
-    	else
-    		Robot.driveBase.drive(0, 0, 0);
-    	
-    	SmartDashboard.putString("Co-Pro commands:", move);
     }
 
     // Make this return true when this Command no longer needs to run execute()
