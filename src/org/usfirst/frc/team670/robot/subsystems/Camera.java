@@ -1,57 +1,63 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
-
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
 /**
  *
  */
 public class Camera extends Subsystem {
     
+	private Rect a = new Rect(0,0,0,0);
+	private Rect b = new Rect(0,0,0,0);
 	private CameraServer server;
-	private Image frame;
-	public int cam1, cam2, cam3, cam4;
+	public int cam1=0,cam2=1,cam3=2,cam4=3;
 	private int currentCamera;
 	public boolean one, two, three, four;
+	private CvSource source;
+	private Mat frame;
+	private CvSink sink;
+	private Scalar upper = new Scalar(255,255,255), lower = new Scalar(255,255,255);
 	
 	// If a camera can't be opened, set its variable to this value.
 	// We're assuming the OpenCamera method will never return this value
 	// if a camera is found successfully. (The API docs don't clarify.)
 	private static final int BAD_CAMERA = -1;
 	
-	public Camera() {
+	public Camera() {		
+		frame = new Mat();
 		
 		// Attempt to open the cameras, but fail gracefully if they aren't found.
 		// Upon error, set the camera variable to the BAD_CAMERA constant defined above.
 		try {
- 			cam1 = NIVision.IMAQdxOpenCamera("cam0", 
- 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 			CameraServer.getInstance().startAutomaticCapture(cam1);
  		} catch (Exception ex) {
  			System.out.println("Camera() failed to open the claw camera (cam0)!!");
  			cam1 = BAD_CAMERA;
  		}
  		try {
- 			cam2 = NIVision.IMAQdxOpenCamera("cam1", 
- 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 			CameraServer.getInstance().startAutomaticCapture(cam2);
  		} catch (Exception ex){
  			System.out.println("Camera() failed to open the flap camera (cam1)!!");
  			cam2 = BAD_CAMERA;
  		}
  		try {
- 			cam3 = NIVision.IMAQdxOpenCamera("cam2", 
- 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 			CameraServer.getInstance().startAutomaticCapture(cam3);
  		} catch (Exception ex){
  			System.out.println("Camera() failed to open the flap camera (cam2)!!");
  			cam3 = BAD_CAMERA;
  		}
  		try {
- 			cam4 = NIVision.IMAQdxOpenCamera("cam3", 
- 					NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+ 			CameraServer.getInstance().startAutomaticCapture(cam4);
  		} catch (Exception ex){
  			System.out.println("Camera() failed to open the flap camera (cam3)!!");
  			cam4 = BAD_CAMERA;
@@ -86,11 +92,6 @@ public class Camera extends Subsystem {
 			setAllToFalse();
 			currentCamera = BAD_CAMERA;
 		}
-				
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		
-		server = CameraServer.getInstance();
-		server.setQuality(50);
 		
 		switchToCamera(currentCamera);
 		// Don't call startAutomaticCapture() here because we're using setImage() instead
@@ -166,13 +167,13 @@ public class Camera extends Subsystem {
 		// Don't do anything if the desired camera wasn't found
 		if (newCam != BAD_CAMERA) {
 			// Stop any camera that's running right now
-			if (currentCamera != BAD_CAMERA)
-				NIVision.IMAQdxStopAcquisition(currentCamera);
-			
-			NIVision.IMAQdxConfigureGrab(newCam);
-			NIVision.IMAQdxStartAcquisition(newCam);
+			CameraServer.getInstance().startAutomaticCapture(newCam);
 			
 			currentCamera = newCam;
+			
+			sink = CameraServer.getInstance().getVideo();
+			
+			source = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
 			// Get an initial image and display it.
 			// We need to run getImage() regularly elsewhere in the code
 			// in order to get a continuous feed. See the default command below.
@@ -186,8 +187,8 @@ public class Camera extends Subsystem {
 	 */
 	public void getImage() {
 		if (currentCamera != BAD_CAMERA) {
-			NIVision.IMAQdxGrab(currentCamera, frame, 1);
-			server.setImage(frame);
+			sink.grabFrame(frame);
+			source.putFrame(frame);
 		}
 	}
 	

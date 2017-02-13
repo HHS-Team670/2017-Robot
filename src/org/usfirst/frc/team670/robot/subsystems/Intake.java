@@ -2,8 +2,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.RunIntake;
-
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
