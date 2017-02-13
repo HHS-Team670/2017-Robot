@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AlignWithGear extends Command {
 
+	private boolean shouldEnd = false;
+	
     public AlignWithGear() {
         requires(Robot.driveBase);
         requires(Robot.distanceSensor);
@@ -25,7 +27,6 @@ public class AlignWithGear extends Command {
     	
     	double pivotSpeed = 0.2;
     	double speed = 0.25;
-    	double angle = 5;
 
     	if(!move.equals("data_unavailable"))
     	{
@@ -44,13 +45,13 @@ public class AlignWithGear extends Command {
 	    	else if(move.equals("centered"))
 	    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
 	    	else if(move.equals("cancel"))
-	    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
+	    		shouldEnd = true;
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return shouldEnd;
     }
 
     // Called once after isFinished returns true
