@@ -2,7 +2,9 @@
 Code for Team 670's Steamworks Robot
 
 ### TODO list
+
 ##Robot
+
 - [x] DriveBase
 - [x] 	Drive With Joystick
 - [x] 	PID authodrive
@@ -17,13 +19,17 @@ Code for Team 670's Steamworks Robot
 - [x] Camera
 - [ ]	Update Camera command
 - [ ]	Switch input
+
 ##Autonomous
+
 - [x] Do nothing (0pt.)
 - [x] Move to line (5pts.)
 - [x] Gear Auto (60 pts.)
 - [ ] 	All gear sides w/o vision (x3)
 - [ ]	Center gear w/ vision (x1)
+
 ##Vision
+
 - [ ] Calibration Tool
 - [x] Communication with RoboRIO
 - [ ] 	Sending command data
