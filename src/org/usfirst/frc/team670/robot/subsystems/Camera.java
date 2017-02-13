@@ -2,24 +2,17 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
-/**
- *
- */
+
 public class Camera extends Subsystem {
     
 	private Rect a = new Rect(0,0,0,0);
 	private Rect b = new Rect(0,0,0,0);
-	private CameraServer server;
 	public int cam1=0,cam2=1,cam3=2,cam4=3;
 	private int currentCamera;
 	public boolean one, two, three, four;
