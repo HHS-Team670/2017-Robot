@@ -5,6 +5,7 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.opencv.core.Mat;
+import org.opencv.videoio.VideoCapture;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
 
 public class Camera extends Subsystem {
@@ -27,7 +28,12 @@ public class Camera extends Subsystem {
 		for(int i = 0; i < cam.length; i++)
 		{
 			cam[i] = i;
-			currentCamera = cam[i];
+			VideoCapture cap = new VideoCapture(cam[i]);
+			
+			if(cap.isOpened())
+				currentCamera = cam[i];
+			else
+				break;
 		}
 		
 		frame = new Mat();

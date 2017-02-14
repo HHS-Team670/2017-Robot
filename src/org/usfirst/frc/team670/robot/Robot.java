@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 	private static NetworkTablesServer vision;
 	public static OI oi;
 	public static DriveBase driveBase = new DriveBase();
-	//public static Camera camera = new Camera();
+	public static Camera camera = new Camera();
 	public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
 	public static Dumper dumper = new Dumper();
