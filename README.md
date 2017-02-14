@@ -1,4 +1,4 @@
-# 2017-Robot
+# The Vegan
 Code for Team 670's Steamworks Robot
 
 --------------------------
