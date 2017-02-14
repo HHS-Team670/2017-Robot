@@ -3,11 +3,11 @@ Code for Team 670's Steamworks Robot
 
 ###Steps to flash a new RoboRIO
 
-HERE(docs/RoboRIO_Flash.md)
+[HERE](docs/RoboRIO_Flash.md)
 
 ###Steps to flash a new Router
 
-HERE(docs/Router_Flash.md)
+[HERE](docs/Router_Flash.md)
 
 ### TODO list
 
