@@ -1,17 +1,9 @@
 # 2017-Robot
 Code for Team 670's Steamworks Robot
 
-###Steps to flash a new RoboRIO
-
-[HERE](docs/RoboRIO_Flash.md)
-
-###Steps to flash a new Router
-
-[HERE](docs/Router_Flash.md)
-
 ### TODO list
 
-##Robot
+#Robot
 
 - [x] DriveBase
 - [x] |---Drive With Joystick
@@ -28,7 +20,7 @@ Code for Team 670's Steamworks Robot
 - [ ]	|---Update Camera command
 - [ ]	|---Switch input
 
-##Autonomous
+#Autonomous
 
 - [x] Do nothing (0pt.)
 - [x] Move to line (5pts.)
@@ -36,12 +28,25 @@ Code for Team 670's Steamworks Robot
 - [ ] |---All gear sides w/ vision (x3)
 - [ ]	|---Center gear w/o vision (x1)
 
-##Vision
+#Vision
 
 - [ ] Calibration Tool
 - [x] Communication with RoboRIO
 - [ ] |---Sending command data
 
-#UPDATE (2/12/17): 
+###Guides
 
+#Steps to flash a new RoboRIO
+
+[HERE](docs/RoboRIO_Flash.md)
+
+#Steps to flash a new Router
+
+[HERE](docs/Router_Flash.md)
+
+
+
+###UPDATES
+
+(2/12/17): 
 FIRST is nice, but as always, updates disable us for long periods of time. The SRX CANTalon libraries have been disabled, so now need to go to: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources, to install the update library (Only on Windows) --> NEVER OPEN THIS PROJECT ON A MAC OR PC WITHOUT THIS PROGRAM INSTALLED
