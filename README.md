@@ -1,5 +1,6 @@
 # 2017-Robot
 Code for Team 670's Steamworks Robot
+
 --------------------------
 ## TODO list
 
@@ -34,6 +35,7 @@ Code for Team 670's Steamworks Robot
 - [x] Communication with RoboRIO
 - [ ] |---Sending command data
 
+--------------------------
 ##Guides
 
 ###Steps to flash a new RoboRIO
@@ -44,8 +46,7 @@ Code for Team 670's Steamworks Robot
 
 [HERE](docs/Router_Flash.md)
 
-
-
+--------------------------
 ##UPDATES
 
 ###(2/12/17): 
