@@ -1,6 +1,5 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,49 +8,45 @@ import org.opencv.videoio.VideoCapture;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
 
 public class Camera extends Subsystem {
-    
-	//private Rect a = new Rect(0,0,0,0), Rect b = new Rect(0,0,0,0);
-	
+    	
 	//Max of four cameras
-	public int[] cam = new int[2];
-	
+	public int[] camera = new int[0];
 	private int currentCamera;
-	
+	private VideoCapture capture;
 	public boolean one, two, three, four;
 	private CvSource source;
 	private Mat frame;
-	private CvSink sink;
-	//private Scalar upper = new Scalar(255,255,255), lower = new Scalar(255,255,255);
 	
 	public Camera() {	
 		
-		for(int i = 0; i < cam.length; i++)
+		for(int i = 0; i < 6; i++)
 		{
-			cam[i] = i;
-			VideoCapture cap = new VideoCapture(cam[i]);
-			
-			if(cap.isOpened())
-				currentCamera = cam[i];
+			capture = new VideoCapture(i);
+			if(capture.isOpened())
+			{
+				int[] temp = camera;
+				camera = new int[i];
+				for(int x = 0; x < temp.length; x++)
+					camera[x] = temp[x];
+				camera[i] = i;
+			}
 			else
 				break;
 		}
 		
 		frame = new Mat();
-				
-		CameraServer.getInstance().startAutomaticCapture(currentCamera);
-				
+		
 		switchToCamera(currentCamera);
-		// Don't call startAutomaticCapture() here because we're using setImage() instead
 	}
 	
 	public void switchCam() 
 	{
 		int newCam = 0;
-		for(int i = 0; i < cam.length; i++)
+		for(int i = 0; i < camera.length; i++)
 		{
 			if(i == currentCamera)
 				newCam = i + 1;
-			if(newCam >= cam.length)
+			if(newCam >= camera.length)
 				newCam = 0;
 		}
 		switchToCamera(newCam);
@@ -60,9 +55,8 @@ public class Camera extends Subsystem {
 	/* Private method used to avoid duplicating the code in two places */
 	private void switchToCamera(int newCam) 
 	{
-			CameraServer.getInstance().startAutomaticCapture(newCam);
-			currentCamera = newCam;	
-			sink = CameraServer.getInstance().getVideo();		
+			capture = new VideoCapture(newCam);
+			currentCamera = newCam;			
 			source = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
 			getImage();
 	}
@@ -73,7 +67,7 @@ public class Camera extends Subsystem {
 	 */
 	public void getImage() 
 	{
-			sink.grabFrame(frame);
+			capture.read(frame);
 			source.putFrame(frame);
 	}
 	

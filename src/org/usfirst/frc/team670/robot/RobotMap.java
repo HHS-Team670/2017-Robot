@@ -7,10 +7,10 @@ package org.usfirst.frc.team670.robot;
  */
 public class RobotMap {
     //DriveBase
-    public static int leftMotor1 = 3;
-    public static int leftMotor2 = 4;
-    public static int rightMotor1 = 2;
-    public static int rightMotor2 = 1;
+    public static int rightMotor1 = 3;
+    public static int rightMotor2 = 4;
+    public static int leftMotor1 = 2;
+    public static int leftMotor2 = 1;
     public static int omniWheel = 5;
     
     public static int intakeMotor = 6;

@@ -1,4 +1,5 @@
 package org.usfirst.frc.team670.robot.utilities;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class NetworkTablesServer {
