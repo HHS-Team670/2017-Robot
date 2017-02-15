@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber = new Climber();
 	
     Command autonomousCommand;
-    SendableChooser chooser;
+    SendableChooser<Command> chooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	vision = new NetworkTablesServer("vision");
 		oi = new OI();
-        chooser = new SendableChooser();
+        chooser = new SendableChooser<Command>();
         
         chooser.addDefault("Align with gear (TESTING)", new AlignWithGear());
         chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());

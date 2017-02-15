@@ -14,7 +14,6 @@ public class AlignWithGear extends Command {
 	
     public AlignWithGear() {
         requires(Robot.driveBase);
-        requires(Robot.distanceSensor);
     }
 
     // Called just before this Command runs the first time
@@ -24,28 +23,34 @@ public class AlignWithGear extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	String move = Robot.getData();
+    	double distanceInches = Robot.distanceSensor.getDistanceInches();
     	
     	double pivotSpeed = 0.2;
     	double speed = 0.25;
 
     	if(!move.equals("data_unavailable"))
     	{
-	    	if(move.equals("right"))
-	    		Robot.driveBase.drive(0, 0, -speed);
-	    	else if(move.equals("left"))
-	    		Robot.driveBase.drive(0, 0, speed);
-	    	else if(move.equals("right_pivot"))
-	    	{
-	    		Robot.driveBase.drive(-pivotSpeed, pivotSpeed, 0);
-	    	}
-	    	else if(move.equals("left_pivot"))
-	    	{
-	    		Robot.driveBase.drive(pivotSpeed, -pivotSpeed, -0);
-	    	}
-	    	else if(move.equals("centered"))
-	    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
-	    	else if(move.equals("cancel"))
-	    		shouldEnd = true;
+    		if(distanceInches > 12)
+    		{
+		    	if(move.equals("right"))
+		    		Robot.driveBase.drive(0, 0, -speed);
+		    	else if(move.equals("left"))
+		    		Robot.driveBase.drive(0, 0, speed);
+		    	else if(move.equals("right_pivot"))
+		    	{
+		    		Robot.driveBase.drive(-pivotSpeed, pivotSpeed, 0);
+		    	}
+		    	else if(move.equals("left_pivot"))
+		    	{
+		    		Robot.driveBase.drive(pivotSpeed, -pivotSpeed, -0);
+		    	}
+		    	else if(move.equals("centered"))
+		    		Robot.driveBase.drive(pivotSpeed, pivotSpeed, 0);
+		    	else if(move.equals("cancel"))
+		    		shouldEnd = true;
+    		}
+    		else
+    			shouldEnd = true;
     	}
     }
 

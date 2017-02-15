@@ -9,26 +9,26 @@ import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
 
 public class Camera extends Subsystem {
     	
-	//Max of four cameras
-	public int[] camera = new int[0];
-	private int currentCamera;
-	private VideoCapture capture;
-	public boolean one, two, three, four;
+	public int[] cameraArray = new int[0];
+	public int maxCameras = 4;
+	private final int BAD_CAMERA = -1;
+	private int currentCameraIndex = BAD_CAMERA;
+	private VideoCapture videoInput;
 	private CvSource source;
 	private Mat frame;
 	
 	public Camera() {	
 		
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < maxCameras; i++)
 		{
-			capture = new VideoCapture(i);
-			if(capture.isOpened())
+			if(new VideoCapture(i).isOpened())
 			{
-				int[] temp = camera;
-				camera = new int[i];
+				int[] temp = cameraArray;
+				cameraArray = new int[i+1];
 				for(int x = 0; x < temp.length; x++)
-					camera[x] = temp[x];
-				camera[i] = i;
+					cameraArray[x] = temp[x];
+				cameraArray[i] = i;
+				currentCameraIndex = cameraArray[i];
 			}
 			else
 				break;
@@ -36,17 +36,17 @@ public class Camera extends Subsystem {
 		
 		frame = new Mat();
 		
-		switchToCamera(currentCamera);
+		switchToCamera(currentCameraIndex);
 	}
 	
 	public void switchCam() 
 	{
 		int newCam = 0;
-		for(int i = 0; i < camera.length; i++)
+		for(int i = 0; i < cameraArray.length; i++)
 		{
-			if(i == currentCamera)
+			if(i == currentCameraIndex)
 				newCam = i + 1;
-			if(newCam >= camera.length)
+			if(newCam >= cameraArray.length)
 				newCam = 0;
 		}
 		switchToCamera(newCam);
@@ -55,10 +55,13 @@ public class Camera extends Subsystem {
 	/* Private method used to avoid duplicating the code in two places */
 	private void switchToCamera(int newCam) 
 	{
-			capture = new VideoCapture(newCam);
-			currentCamera = newCam;			
+		if(newCam != BAD_CAMERA)
+		{
+			videoInput = new VideoCapture(newCam);
+			currentCameraIndex = newCam;			
 			source = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
 			getImage();
+		}
 	}
 	
 	/* Grab a new image from the current camera, putting it into the frame.
@@ -67,8 +70,11 @@ public class Camera extends Subsystem {
 	 */
 	public void getImage() 
 	{
-			capture.read(frame);
+		if(currentCameraIndex != BAD_CAMERA)
+		{
+			videoInput.read(frame);
 			source.putFrame(frame);
+		}
 	}
 	
     public void initDefaultCommand() {

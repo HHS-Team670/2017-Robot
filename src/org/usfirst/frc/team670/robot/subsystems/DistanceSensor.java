@@ -1,21 +1,13 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import java.nio.file.Files;
-
 import org.usfirst.frc.team670.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.AccumulatorResult;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class DistanceSensor extends Subsystem {
     
 	private AnalogInput analog;
-	private double voltage = 0.5358886122703552;
+	private double voltageProportionInches = 44.7854264;
 	private double cmToInches = 2.54;
 	
 	public DistanceSensor()
@@ -25,7 +17,7 @@ public class DistanceSensor extends Subsystem {
 	
 	public Double getDistanceInches()
 	{
-		 return (24*(getVoltage()/voltage));
+		 return getVoltage()*voltageProportionInches;
 	}
 	
 	public double getVoltage()
@@ -33,9 +25,9 @@ public class DistanceSensor extends Subsystem {
 		return analog.getVoltage();
 	}
     
-	public String getDistanceCM()
+	public Double getDistanceCM()
 	{
-		 return Double.toString((getDistanceInches())*cmToInches).substring(0, 5);
+		 return getDistanceInches()*cmToInches;
 
 	}
 
