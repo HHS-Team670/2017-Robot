@@ -5,9 +5,6 @@ import org.usfirst.frc.team670.robot.commands.IntakeWithJoystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Intake extends Subsystem {
     
 	Spark intake = new Spark(RobotMap.intakeMotor);

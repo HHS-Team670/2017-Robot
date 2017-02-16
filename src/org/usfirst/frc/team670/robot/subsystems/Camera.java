@@ -6,38 +6,47 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
+import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
+import org.usfirst.frc.team670.robot.utilities.CameraLoc;
 
 public class Camera extends Subsystem {
     	
-	private int currentCameraIndex = 0;
 	private UsbCamera camera;
 	private CvSink cvSink;
 	private CvSource outputStream;
 	private Mat mat;
+	private CameraLoc currentCamera;
+	private int currentCameraIndex = 0;
 	
-	public Camera() {		
-		switchToCamera(currentCameraIndex);
+	public Camera() 
+	{		
+		currentCamera = CameraLoc.GEAR;
+		switchToCamera(currentCamera);
 	}
 	
+	//Goes from: Gear-->Shooter-->Climber
 	public void switchCam() 
 	{
-		camera = CameraServer.getInstance().startAutomaticCapture(currentCameraIndex++);
-		cvSink = CameraServer.getInstance().getVideo();
-		
-		if(cvSink.grabFrame(new Mat()) == 0)
-			currentCameraIndex=0;
-		switchToCamera(currentCameraIndex);
+		if (currentCamera.equals(CameraLoc.GEAR))
+			currentCamera = CameraLoc.SHOOTER;
+		else if (currentCamera.equals(CameraLoc.SHOOTER))
+			currentCamera = CameraLoc.CLIMBER;
+		else if (currentCamera.equals(CameraLoc.CLIMBER))
+			currentCamera = CameraLoc.GEAR;
 	}
 
 	/* Private method used to avoid duplicating the code in two places */
-	private void switchToCamera(int newCam) 
+	private void switchToCamera(CameraLoc x) 
 	{
-		camera = CameraServer.getInstance().startAutomaticCapture(newCam);
+		if(x.equals(CameraLoc.CLIMBER))
+			currentCameraIndex = RobotMap.climberCamera;
+		else if(x.equals(CameraLoc.GEAR))
+			currentCameraIndex = RobotMap.gearCamera;
+		else if(x.equals(CameraLoc.SHOOTER))
+			currentCameraIndex = RobotMap.shooterCamera;
+		
+		camera = CameraServer.getInstance().startAutomaticCapture(currentCameraIndex);
 		camera.setResolution(640, 480);
 		cvSink = CameraServer.getInstance().getVideo();
 		outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
@@ -46,10 +55,6 @@ public class Camera extends Subsystem {
 		getImage();
 	}
 	
-	/* Grab a new image from the current camera, putting it into the frame.
-	 * Then set that as the current frame in the camera server.
-	 * If we don't have a working camera, just skip the whole process.
-	 */
 	public void getImage() 
 	{
 		if (cvSink.grabFrame(mat) == 0) 
@@ -58,7 +63,8 @@ public class Camera extends Subsystem {
 			outputStream.putFrame(mat);
 	}
 	
-    public void initDefaultCommand() {
+    public void initDefaultCommand()
+    {
         setDefaultCommand(new UpdateCamera());
     }
 }

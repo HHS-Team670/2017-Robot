@@ -9,10 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShootWithJoystick extends Command {
 
-	private double value;
-    public ShootWithJoystick(double value) {
+    public ShootWithJoystick() {
     	requires(Robot.dumper);
-    	this.value = value;
     }
 
     // Called just before this Command runs the first time
