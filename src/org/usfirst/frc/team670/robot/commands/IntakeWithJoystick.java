@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class RunIntake extends Command {
+public class IntakeWithJoystick extends Command {
 
-    public RunIntake() {
+    public IntakeWithJoystick() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.intake);

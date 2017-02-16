@@ -1,67 +1,49 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
+import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
 
 public class Camera extends Subsystem {
     	
-	public int[] cameraArray = new int[0];
-	public int maxCameras = 4;
-	private final int BAD_CAMERA = -1;
-	private int currentCameraIndex = BAD_CAMERA;
-	private VideoCapture videoInput;
-	private CvSource source;
-	private Mat frame;
+	private int currentCameraIndex = 0;
+	private UsbCamera camera;
+	private CvSink cvSink;
+	private CvSource outputStream;
+	private Mat mat;
 	
-	public Camera() {	
-		
-		for(int i = 0; i < maxCameras; i++)
-		{
-			if(new VideoCapture(i).isOpened())
-			{
-				int[] temp = cameraArray;
-				cameraArray = new int[i+1];
-				for(int x = 0; x < temp.length; x++)
-					cameraArray[x] = temp[x];
-				cameraArray[i] = i;
-				currentCameraIndex = cameraArray[i];
-			}
-			else
-				break;
-		}
-		
-		frame = new Mat();
-		
+	public Camera() {		
 		switchToCamera(currentCameraIndex);
 	}
 	
 	public void switchCam() 
 	{
-		int newCam = 0;
-		for(int i = 0; i < cameraArray.length; i++)
-		{
-			if(i == currentCameraIndex)
-				newCam = i + 1;
-			if(newCam >= cameraArray.length)
-				newCam = 0;
-		}
-		switchToCamera(newCam);
+		camera = CameraServer.getInstance().startAutomaticCapture(currentCameraIndex++);
+		cvSink = CameraServer.getInstance().getVideo();
+		
+		if(cvSink.grabFrame(new Mat()) == 0)
+			currentCameraIndex=0;
+		switchToCamera(currentCameraIndex);
 	}
 
 	/* Private method used to avoid duplicating the code in two places */
 	private void switchToCamera(int newCam) 
 	{
-		if(newCam != BAD_CAMERA)
-		{
-			videoInput = new VideoCapture(newCam);
-			currentCameraIndex = newCam;			
-			source = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
-			getImage();
-		}
+		camera = CameraServer.getInstance().startAutomaticCapture(newCam);
+		camera.setResolution(640, 480);
+		cvSink = CameraServer.getInstance().getVideo();
+		outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+		mat = new Mat();
+		
+		getImage();
 	}
 	
 	/* Grab a new image from the current camera, putting it into the frame.
@@ -70,15 +52,13 @@ public class Camera extends Subsystem {
 	 */
 	public void getImage() 
 	{
-		if(currentCameraIndex != BAD_CAMERA)
-		{
-			videoInput.read(frame);
-			source.putFrame(frame);
-		}
+		if (cvSink.grabFrame(mat) == 0) 
+			outputStream.notifyError(cvSink.getError());
+		else
+			outputStream.putFrame(mat);
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         setDefaultCommand(new UpdateCamera());
     }
 }

@@ -23,6 +23,8 @@ public class Climb extends Command {
     protected void execute() {
     	if(Robot.climber.shouldRunClimber)
     		Robot.climber.runClimber(Robot.oi.getOperatorStick().getY());
+    	else
+    		Robot.climber.runClimber(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

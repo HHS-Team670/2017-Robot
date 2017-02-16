@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunDumper extends Command {
+public class ShootWithJoystick extends Command {
 
 	private double value;
-    public RunDumper(double value) {
+    public ShootWithJoystick(double value) {
     	requires(Robot.dumper);
     	this.value = value;
     }
@@ -23,6 +23,9 @@ public class RunDumper extends Command {
     protected void execute() {
     	if(!Robot.climber.shouldRunClimber)
     		Robot.dumper.runDumper(Robot.oi.getOperatorStick().getY());
+    	else
+    		Robot.dumper.runDumper(0);
+
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -14,7 +14,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.AutoLeftGear_Vision;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoRightGear_Vision;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
-import org.usfirst.frc.team670.robot.subsystems.Dumper;
+import org.usfirst.frc.team670.robot.subsystems.Shooter;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static Camera camera = new Camera();
 	public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
-	public static Dumper dumper = new Dumper();
+	public static Shooter dumper = new Shooter();
 	public static Climber climber = new Climber();
 	
     Command autonomousCommand;

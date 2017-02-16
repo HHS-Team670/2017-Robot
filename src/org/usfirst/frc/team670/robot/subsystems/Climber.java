@@ -9,7 +9,8 @@ import com.ctre.*;
  */
 public class Climber extends Subsystem {
 	
-	CANTalon grapplerMotor = new CANTalon(RobotMap.grapplerMotor);
+	CANTalon grapplerMotor = new CANTalon(RobotMap.climberMotor);
+	
 	public boolean shouldRunClimber = false;
     
     // Put methods for controlling this subsystem

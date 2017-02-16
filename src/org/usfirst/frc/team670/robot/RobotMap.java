@@ -13,9 +13,9 @@ public class RobotMap {
     public static int leftMotor2 = 1;
     public static int omniWheel = 5;
     
-    public static int intakeMotor = 6;
-    public static int dumperMotor = 7;
-    public static int grapplerMotor = 8;
+    public static int intakeMotor = 1;
+    public static int dumperMotor = 0;
+    public static int climberMotor = 6;
     
     public static int UltrasonicAI = 0;
 
