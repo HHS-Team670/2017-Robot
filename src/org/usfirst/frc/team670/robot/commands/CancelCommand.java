@@ -11,7 +11,7 @@ public class CancelCommand extends Command {
 
     public CancelCommand() {
         requires(Robot.driveBase);
-        requires(Robot.dumper);
+        requires(Robot.shooter);
         requires(Robot.climber);
         requires(Robot.intake);
     }

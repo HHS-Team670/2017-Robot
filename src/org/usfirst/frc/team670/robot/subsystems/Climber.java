@@ -15,7 +15,7 @@ public class Climber extends Subsystem {
         setDefaultCommand(new ClimbWithJoystick());
     }
     
-    public void runClimber(double value){
+    public void climb(double value){
     	grapplerMotor.set(value);
     }
 

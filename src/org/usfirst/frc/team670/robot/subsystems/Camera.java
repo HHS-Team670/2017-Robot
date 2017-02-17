@@ -1,70 +1,83 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.opencv.core.Mat;
-import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
-import org.usfirst.frc.team670.robot.utilities.CameraLoc;
+import edu.wpi.first.wpilibj.vision.CameraServer;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class Camera extends Subsystem {
     	
-	private UsbCamera camera;
-	private CvSink cvSink;
-	private CvSource outputStream;
-	private Mat mat;
-	private CameraLoc currentCamera;
-	private int currentCameraIndex = 0;
+	private ArrayList<USBCamera> cameras;
+	private USBCamera currentCamera;
+	private USBCamera BAD_CAMERA = null;
 	
 	public Camera() 
 	{		
-		currentCamera = CameraLoc.GEAR;
+		try {
+ 			cameras.add(new USBCamera("cam0"));
+ 			CameraServer.getInstance().startAutomaticCapture(cameras.get(0));
+ 			currentCamera = cameras.get(0);
+ 		} catch (Exception ex) {
+ 			System.out.println("Camera() failed to open the claw camera (cam0)!!");
+ 			cameras.remove(0);
+ 		}
+		try {
+ 			cameras.add(new USBCamera("cam1"));
+ 			CameraServer.getInstance().startAutomaticCapture(cameras.get(1));
+ 			currentCamera = cameras.get(1);
+ 		} catch (Exception ex) {
+ 			System.out.println("Camera() failed to open the claw camera (cam1)!!");
+ 			cameras.remove(1);
+ 		}
+		try {
+ 			cameras.add(new USBCamera("cam2"));
+ 			CameraServer.getInstance().startAutomaticCapture(cameras.get(2));
+ 			currentCamera = cameras.get(2);
+ 		} catch (Exception ex) {
+ 			System.out.println("Camera() failed to open the claw camera (cam2)!!");
+ 			cameras.remove(2);
+ 		}
+		try {
+ 			cameras.add(new USBCamera("cam3"));
+ 			CameraServer.getInstance().startAutomaticCapture(cameras.get(3));
+ 			currentCamera = cameras.get(3);
+ 		} catch (Exception ex) {
+ 			System.out.println("Camera() failed to open the claw camera (cam3)!!");
+ 			cameras.remove(3);
+ 		}
+		
 		switchToCamera(currentCamera);
 	}
 	
 	//Goes from: Gear-->Shooter-->Climber
 	public void switchCam() 
 	{
-		if (currentCamera.equals(CameraLoc.GEAR))
-			currentCamera = CameraLoc.SHOOTER;
-		else if (currentCamera.equals(CameraLoc.SHOOTER))
-			currentCamera = CameraLoc.CLIMBER;
-		else if (currentCamera.equals(CameraLoc.CLIMBER))
-			currentCamera = CameraLoc.GEAR;
+		USBCamera newCam = null;
+	
+		if(cameras.size() <= cameras.indexOf(currentCamera))
+			newCam = cameras.get(0);
+		else
+			newCam = cameras.get(cameras.indexOf(currentCamera)+1);
+		
+		switchToCamera(newCam);
 	}
 
 	/* Private method used to avoid duplicating the code in two places */
-	private void switchToCamera(CameraLoc x) 
+	private void switchToCamera(USBCamera newCam) 
 	{
-		if(x.equals(CameraLoc.CLIMBER))
-			currentCameraIndex = RobotMap.climberCamera;
-		else if(x.equals(CameraLoc.GEAR))
-			currentCameraIndex = RobotMap.gearCamera;
-		else if(x.equals(CameraLoc.SHOOTER))
-			currentCameraIndex = RobotMap.shooterCamera;
-		
-		camera = CameraServer.getInstance().startAutomaticCapture(currentCameraIndex);
-		camera.setResolution(640, 480);
-		cvSink = CameraServer.getInstance().getVideo();
-		outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
-		mat = new Mat();
-		
-		getImage();
-	}
-	
-	public void getImage() 
-	{
-		if (cvSink.grabFrame(mat) == 0) 
-			outputStream.notifyError(cvSink.getError());
-		else
-			outputStream.putFrame(mat);
+		currentCamera.closeCamera();
+		newCam.openCamera();
+		if (currentCamera != BAD_CAMERA)
+		{
+			 CameraServer.getInstance().startAutomaticCapture(newCam);
+			 currentCamera = newCam;
+		}
+		CameraServer.getInstance().setQuality(50);
 	}
 	
     public void initDefaultCommand()
     {
-        setDefaultCommand(new UpdateCamera());
+    	
     }
 }

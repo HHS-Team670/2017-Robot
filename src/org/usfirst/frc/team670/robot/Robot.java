@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static Camera camera = new Camera();
 	public static DistanceSensor distanceSensor = new DistanceSensor();
 	public static Intake intake = new Intake();
-	public static Shooter dumper = new Shooter();
+	public static Shooter shooter = new Shooter();
 	public static Climber climber = new Climber();
 	
     Command autonomousCommand;

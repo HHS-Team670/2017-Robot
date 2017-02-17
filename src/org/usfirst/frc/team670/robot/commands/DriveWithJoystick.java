@@ -17,11 +17,11 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.driveBase.getDriveType() == DriveState.FOURWHEEL)
+    	if(Robot.driveBase.getDriveType().equals(DriveState.FOURWHEEL))
     		Robot.driveBase.drive(-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getY(), 0);
-    	if(Robot.driveBase.getDriveType() == DriveState.OMNIWHEEL)
+    	if(Robot.driveBase.getDriveType().equals(DriveState.OMNIWHEEL))
     		Robot.driveBase.drive(0,0,Robot.oi.getrightStick().getX());
-    	else if(Robot.driveBase.getDriveType() == DriveState.ALLWHEEL)
+    	else if(Robot.driveBase.getDriveType().equals(DriveState.ALLWHEEL))
     		Robot.driveBase.drive(-Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getY(), Robot.oi.getrightStick().getX());
     }
 

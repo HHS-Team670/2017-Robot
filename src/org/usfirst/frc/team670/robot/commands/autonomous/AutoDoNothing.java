@@ -11,7 +11,7 @@ public class AutoDoNothing extends Command {
 
     public AutoDoNothing() {
         requires(Robot.driveBase);
-        requires(Robot.dumper);
+        requires(Robot.shooter);
         requires(Robot.climber);
         requires(Robot.intake);
     }

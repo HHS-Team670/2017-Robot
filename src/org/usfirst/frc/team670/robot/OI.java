@@ -1,8 +1,9 @@
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.ToggleClimber;
+import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.PlaceGear;
@@ -12,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
+	
+	private OperatorState os = OperatorState.NONE;
 		
 	//Joysticks
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
@@ -20,9 +23,11 @@ public class OI {
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
 	//Operator Buttons
-	private Button toggleClimber = new JoystickButton(operatorStick, 1);
-	private Button placeGear = new JoystickButton(operatorStick, 3);
-	private Button cancelCommand = new JoystickButton(operatorStick, 5);
+	private Button toggleClimber = new JoystickButton(operatorStick, 5);
+	private Button toggleIntake = new JoystickButton(operatorStick, 3);
+	private Button toggleShooter = new JoystickButton(operatorStick, 4);
+	private Button placeGear = new JoystickButton(operatorStick, 8);
+	private Button cancelCommand = new JoystickButton(operatorStick, 9);
 	
 	//Driver Controls
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);
@@ -43,10 +48,25 @@ public class OI {
 		
 		flipCamera.whenPressed(new FlipCamera());
 		
-		toggleClimber.whenPressed(new ToggleClimber());
+		toggleClimber.whenPressed(new SetOperatorCommand(OperatorState.CLIMBER));
+		toggleClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		toggleIntake.whenPressed(new SetOperatorCommand(OperatorState.INTAKE));
+		toggleIntake.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		toggleShooter.whenPressed(new SetOperatorCommand(OperatorState.SHOOTER));
+		toggleShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}
+	
+	public void setOperatorCommand(OperatorState os)
+	{
+		this.os = os;
+	}
+	
+	public OperatorState getOS()
+	{
+		return os;
+	}
 	
 	public Joystick getleftStick(){
 		return leftDriveStick;

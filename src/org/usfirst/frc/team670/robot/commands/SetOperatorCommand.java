@@ -1,16 +1,19 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ToggleClimber extends Command {
+public class SetOperatorCommand extends Command {
 
-    public ToggleClimber() {
-
+	private OperatorState os;
+	
+    public SetOperatorCommand(OperatorState os) {
+    	this.os = os;
     }
 
     // Called just before this Command runs the first time
@@ -19,8 +22,7 @@ public class ToggleClimber extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean isClimbingMode = Robot.climber.shouldRunClimber;
-    	Robot.climber.setClimbMode(!isClimbingMode);
+    	Robot.oi.setOperatorCommand(os);
     }
 
     // Make this return true when this Command no longer needs to run execute()

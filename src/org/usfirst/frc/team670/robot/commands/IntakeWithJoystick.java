@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,7 +23,10 @@ public class IntakeWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.runIntake(Robot.oi.getOperatorStick().getX());
+    	if(Robot.oi.getOS().equals(OperatorState.INTAKE))
+    		Robot.intake.intake(Robot.oi.getOperatorStick().getY());
+    	else
+    		Robot.intake.intake(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +36,7 @@ public class IntakeWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.runIntake(0);
+    	Robot.intake.intake(0);
     }
 
     // Called when another command which requires one or more of the same

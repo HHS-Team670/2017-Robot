@@ -13,7 +13,7 @@ public class Shooter extends Subsystem {
         setDefaultCommand(new ShootWithJoystick());
     }
     
-    public void runDumper(double value) {
+    public void shoot(double value) {
     	shootMotor.set(value);
     }
     

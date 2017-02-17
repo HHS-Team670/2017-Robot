@@ -13,7 +13,7 @@ public class Intake extends Subsystem {
         setDefaultCommand(new IntakeWithJoystick());
     }
     
-    public void runIntake(double value)
+    public void intake(double value)
     {
     	intake.set(value);
     }

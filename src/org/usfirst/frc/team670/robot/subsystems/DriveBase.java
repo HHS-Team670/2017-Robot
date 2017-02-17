@@ -174,9 +174,9 @@ public class DriveBase extends Subsystem {
 	
 	public String toString()
 	{
-		return (getDriveType() == DriveState.ALLWHEEL)?
-		    	("All Wheel"):((getDriveType() == DriveState.FOURWHEEL)?
-		    	("Four Wheel"):((getDriveType() == DriveState.OMNIWHEEL)?
+		return (getDriveType().equals(DriveState.ALLWHEEL))?
+		    	("All Wheel"):((getDriveType().equals(DriveState.FOURWHEEL))?
+		    	("Four Wheel"):((getDriveType().equals(DriveState.OMNIWHEEL))?
 		    	("Omni Wheel"):
 		    	("No Wheel")));
 	}

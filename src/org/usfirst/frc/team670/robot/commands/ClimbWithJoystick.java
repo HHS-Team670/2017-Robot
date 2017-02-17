@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,10 +22,20 @@ public class ClimbWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.climber.shouldRunClimber)
-    		Robot.climber.runClimber(Robot.oi.getOperatorStick().getY());
+    	if(Robot.oi.getOS().equals(OperatorState.CLIMBER))
+    	{
+    		double value = -Robot.oi.getOperatorStick().getY();
+    		if(value >= 0)
+    		{
+    			Robot.climber.climb(-value);
+    		}
+    		else
+    		{
+    			Robot.climber.climb(0);
+    		}
+    	}
     	else
-    		Robot.climber.runClimber(0);
+    		Robot.climber.climb(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,7 +45,7 @@ public class ClimbWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climber.runClimber(0);
+    	Robot.climber.climb(0);
     }
 
     // Called when another command which requires one or more of the same
