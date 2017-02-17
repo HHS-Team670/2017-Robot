@@ -2,78 +2,67 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import java.util.ArrayList;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.vision.CameraServer;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class Camera extends Subsystem {
     	
-	private ArrayList<USBCamera> cameras;
-	private USBCamera currentCamera;
-	private USBCamera BAD_CAMERA = null;
+	private ArrayList<Integer> cameras;
+	private int currentCam = 0, BAD_CAMERA = -1;
+	private Mat rawSRC = new Mat();
+	private Mat outputSRC = new Mat();
+	private CvSink cvSink;
+	private CvSource outputStream;
 	
 	public Camera() 
 	{		
-		try {
- 			cameras.add(new USBCamera("cam0"));
- 			CameraServer.getInstance().startAutomaticCapture(cameras.get(0));
- 			currentCamera = cameras.get(0);
- 		} catch (Exception ex) {
- 			System.out.println("Camera() failed to open the claw camera (cam0)!!");
- 			cameras.remove(0);
- 		}
-		try {
- 			cameras.add(new USBCamera("cam1"));
- 			CameraServer.getInstance().startAutomaticCapture(cameras.get(1));
- 			currentCamera = cameras.get(1);
- 		} catch (Exception ex) {
- 			System.out.println("Camera() failed to open the claw camera (cam1)!!");
- 			cameras.remove(1);
- 		}
-		try {
- 			cameras.add(new USBCamera("cam2"));
- 			CameraServer.getInstance().startAutomaticCapture(cameras.get(2));
- 			currentCamera = cameras.get(2);
- 		} catch (Exception ex) {
- 			System.out.println("Camera() failed to open the claw camera (cam2)!!");
- 			cameras.remove(2);
- 		}
-		try {
- 			cameras.add(new USBCamera("cam3"));
- 			CameraServer.getInstance().startAutomaticCapture(cameras.get(3));
- 			currentCamera = cameras.get(3);
- 		} catch (Exception ex) {
- 			System.out.println("Camera() failed to open the claw camera (cam3)!!");
- 			cameras.remove(3);
- 		}
-		
-		switchToCamera(currentCamera);
+		//Decide which cameras are used
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(currentCam);
+        camera.setResolution(640, 480);
+        
+        cvSink = CameraServer.getInstance().getVideo();
+        outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+      
+		switchToCamera(currentCam);
 	}
 	
 	//Goes from: Gear-->Shooter-->Climber
 	public void switchCam() 
 	{
-		USBCamera newCam = null;
-	
-		if(cameras.size() <= cameras.indexOf(currentCamera))
-			newCam = cameras.get(0);
-		else
-			newCam = cameras.get(cameras.indexOf(currentCamera)+1);
-		
-		switchToCamera(newCam);
+		if(cameras.size() > 1)
+		{
+			int newCam = 0;
+			if(cameras.size() <= cameras.indexOf(currentCam))
+				newCam = cameras.get(0);
+			else
+				newCam = cameras.get(cameras.indexOf(currentCam)+1);
+			switchToCamera(newCam);
+		}
 	}
 
 	/* Private method used to avoid duplicating the code in two places */
-	private void switchToCamera(USBCamera newCam) 
+	private void switchToCamera(int newCam) 
 	{
-		currentCamera.closeCamera();
-		newCam.openCamera();
-		if (currentCamera != BAD_CAMERA)
+		if (newCam != BAD_CAMERA)
 		{
-			 CameraServer.getInstance().startAutomaticCapture(newCam);
-			 currentCamera = newCam;
+			 currentCam = newCam;
+			 UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(currentCam);
+		     camera.setResolution(640, 480);
 		}
-		CameraServer.getInstance().setQuality(50);
+		getImage();
+	}
+	
+	public void getImage()
+	{
+		cvSink.grabFrame(rawSRC);
+        Imgproc.cvtColor(rawSRC, outputSRC, Imgproc.COLOR_BGR2GRAY);
+        outputStream.putFrame(outputSRC);
 	}
 	
     public void initDefaultCommand()
