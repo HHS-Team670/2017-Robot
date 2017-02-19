@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous;
+package org.usfirst.frc.team670.robot.commands.camera;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoBaseline extends Command {
+public class UpdateCamera extends Command {
 
-    public AutoBaseline() {
-        requires(Robot.driveBase);
+    public UpdateCamera() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
@@ -19,8 +20,7 @@ public class AutoBaseline extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Drive seven feet to baseline
-    	Robot.driveBase.driveDistance(8*12);
+    	Robot.camera.getImage();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +30,6 @@ public class AutoBaseline extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

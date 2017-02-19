@@ -23,9 +23,11 @@ public class DriveBase extends Subsystem {
 	public static final double diameterInInches = radiusInInches * 2;
 	public static final double circumferenceInInches = diameterInInches * Math.PI;
 	public static final double inchesPerTick = circumferenceInInches / 360;
-	public static final double P = 0.8, I = 0.001, D = 0;
+	public static final double P = 1, I = 0, D = 0;
+	//0.001 at a time
+	//Old Robot --> P:0.8, I:0.001, D = 0;
 	//Pivot radius in inches
-	public static final double pivotRadius = 16;
+	public static final double pivotRadius = Math.sqrt(277);
 	
 	//Drive only with omniwheel
 	//private static boolean isOmniDrive = false;
@@ -51,28 +53,13 @@ public class DriveBase extends Subsystem {
 	public void drive(double left, double right, double omni) {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-
-		leftTalon1.set(left);
-		rightTalon1.set(-right);
-		omniTalon.set(-omni);
-	}
-	
-	public void tankDrive(double left, double right) 
-	{
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-
-		leftTalon1.set(left);
-		rightTalon1.set(-right);
-	}
-	
-	public void omniDrive(double omni)
-	{
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
+		leftTalon1.set(-left);
+		rightTalon1.set(right);
 		omniTalon.set(-omni);
 	}
-
+	
 	public void resetRightEncoder() {
 		rightTalon1.setEncPosition(0);
 	}
@@ -84,42 +71,8 @@ public class DriveBase extends Subsystem {
 	public void resetOmniEncoder() {
 		omniTalon.setEncPosition(0);
 	}
-
-	public void posDriveLeft(double left) 
-	{
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftTalon1.reverseSensor(true);
-
-		leftTalon1.setPID(P,I,D);
-
-		leftTalon1.set(-2520 * left * 0.5);
-	}
-
-	public void posDriveRight(double right) 
-	{
-										
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightTalon1.reverseSensor(true);
-
-		rightTalon1.setPID(P,I,D);
-		
-		rightTalon1.set(2520 * right * 0.5);
-	}
-
-	public void omniDriveDistance(double inches)
-	{
-		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
-
-		omniTalon.changeControlMode(CANTalon.TalonControlMode.Position);
-		omniTalon.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
-		omniTalon.setPID(P,I,D); //Set the PID constants (p, i, d)
-		omniTalon.enableControl(); //Enable PID control on the talon
-		omniTalon.set(numTicks);
-	}
 	
-	public void tankDriveDistance(double inches) 
+	public void driveDistance(double inches) 
 	{
 		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
 
@@ -133,11 +86,11 @@ public class DriveBase extends Subsystem {
 		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		leftTalon1.enableControl(); //Enable PID control on the talon
 		
-		leftTalon1.set(numTicks);
-		rightTalon1.set(-numTicks);
+		leftTalon1.set(-numTicks);
+		rightTalon1.set(numTicks);
 	}
 
-	public void pivot(double degrees) 
+	public void pivotRight(double degrees) 
 	{
 		double pivotCircumference = 2 * Math.PI * pivotRadius;
 		double pivotArcLength = (degrees / 360) * pivotCircumference;
@@ -150,13 +103,30 @@ public class DriveBase extends Subsystem {
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightTalon1.setEncPosition(0);
-	
-		double p = P;
-		double i = I;
-		double d = D;
 
-		leftTalon1.setPID(p, i, d);
-		rightTalon1.setPID(p, i, d);
+		leftTalon1.setPID(P,I,D);
+		rightTalon1.setPID(P,I,D);
+
+		leftTalon1.set(-numTicks);
+		rightTalon1.set(-numTicks);
+	}
+	
+	public void pivotLeft(double degrees) 
+	{
+		double pivotCircumference = 2 * Math.PI * pivotRadius;
+		double pivotArcLength = (degrees / 360) * pivotCircumference;
+		double numTicks = ((pivotArcLength / inchesPerTick) / 360) * 2520;
+
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.setEncPosition(0);
+
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.setEncPosition(0);
+
+		leftTalon1.setPID(P,I,D);
+		rightTalon1.setPID(P,I,D);
 
 		leftTalon1.set(numTicks);
 		rightTalon1.set(numTicks);

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous;
+package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,14 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveDistance extends Command {
+public class PivotLeft extends Command {
 
-	private double inches = 0;
+	private double angle;
 	
-    public DriveDistance(double inches) {
-    	this.inches = inches;
-        // Use requires() here to declare subsystem dependencies
+    public PivotLeft(double angle) {
         requires(Robot.driveBase);
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +22,7 @@ public class DriveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.tankDriveDistance(inches);
+    	Robot.driveBase.pivotLeft(angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

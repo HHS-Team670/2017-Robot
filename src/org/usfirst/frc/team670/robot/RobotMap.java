@@ -29,10 +29,5 @@ public class RobotMap
     public static int leftDriveStick = 1;
     public static int rightDriveStick = 2;
     public static int arcButtons = 3;
-	
-    //Cameras on Robot
-    public static int gearCamera = 0;
-    public static int shooterCamera = 1;
-    public static int climberCamera = 2;  
     
 }

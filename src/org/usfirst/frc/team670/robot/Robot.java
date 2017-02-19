@@ -6,12 +6,18 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
+import org.usfirst.frc.team670.robot.commands.DriveDistance;
+import org.usfirst.frc.team670.robot.commands.auto_vision.AutoCenterGear_Vision;
+import org.usfirst.frc.team670.robot.commands.auto_vision.AutoLeftGear_Vision;
+import org.usfirst.frc.team670.robot.commands.auto_vision.AutoRightGear_Vision;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoDoNothing;
-import org.usfirst.frc.team670.robot.commands.autonomous.AutoCenterGear;
-import org.usfirst.frc.team670.robot.commands.autonomous.AutoCenterGear_Vision;
-import org.usfirst.frc.team670.robot.commands.autonomous.AutoLeftGear_Vision;
-import org.usfirst.frc.team670.robot.commands.autonomous.AutoRightGear_Vision;
+import org.usfirst.frc.team670.robot.commands.autonomous.CenterGearLeft;
+import org.usfirst.frc.team670.robot.commands.autonomous.CenterGearRight;
+import org.usfirst.frc.team670.robot.commands.autonomous.LeftGear;
+import org.usfirst.frc.team670.robot.commands.autonomous.LeftGearCenter;
+import org.usfirst.frc.team670.robot.commands.autonomous.RightGear;
+import org.usfirst.frc.team670.robot.commands.autonomous.RightGearCenter;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
@@ -19,6 +25,7 @@ import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,14 +53,20 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser<Command>();
         
-        chooser.addDefault("Align with gear (TESTING)", new AlignWithGear());
-        chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
+        chooser.addDefault("Drive 1 ft", new DriveDistance(12));
+        //add this as default
         chooser.addObject("Baseline Auto (5pts)", new AutoBaseline());
-        chooser.addObject("Center Gear W/O vision (60pts)", new AutoCenterGear());
-        chooser.addObject("Center Gear ~ Vision (60pts)", new AutoCenterGear_Vision());
-        chooser.addObject("Left Gear ~ Vision (60pts)", new AutoLeftGear_Vision());
-        chooser.addObject("Right Gear ~ Vision (60pts)", new AutoRightGear_Vision());
-                
+        chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
+        
+        chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
+        chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
+        
+        chooser.addObject("Left Gear (60pts)", new LeftGear());
+        chooser.addObject("Right Gear (60pts)", new RightGear());
+        
+        chooser.addObject("Left Gear from Center (60pts)", new LeftGearCenter());
+        chooser.addObject("Right Gear from Center (60pts)", new RightGearCenter());
+        
         SmartDashboard.putData("Auto mode", chooser);
     }
 	
@@ -122,17 +135,15 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
-    
+        
     public void putData(){
     	String driveType = driveBase.toString();
-    	String yAxis = (climber.shouldRunClimber)?("Climber"):("Shooter");
-    	String xAxis = "Intake";
+    	String os = (oi.getOS().equals(OperatorState.CLIMBER))?("Climber"):(oi.getOS().equals(OperatorState.SHOOTER)?("Shooter"):(oi.getOS().equals(OperatorState.INTAKE)?("Intake"):(oi.getOS().equals(OperatorState.REVERSECLIMBER)?("Reverse Climber"):("None"))));
     	
        	SmartDashboard.putString("Drive type:", driveType);
-       	SmartDashboard.putString("Current Distance:", ""+distanceSensor.getVoltage());
-    	SmartDashboard.putString("Operator X-Axis", xAxis);
-    	SmartDashboard.putString("Operator Y-Axis", yAxis);        
-        SmartDashboard.putString("Vision System:", (vision.isConnected())?("Running"):("FAILURE"));
+       	SmartDashboard.putString("Current Distance:", "" + distanceSensor.getDistanceInches());
+    	SmartDashboard.putString("Operator Stick", os);
+        SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
 	}
     
     public static String getData()

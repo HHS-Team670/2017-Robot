@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous;
+package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,13 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Pivot extends Command {
+public class DriveToWall extends Command {
 
-	private double angle;
+	boolean cancel = false;
 	
-    public Pivot(double angle) {
-        requires(Robot.driveBase);
-        this.angle = angle;
+    public DriveToWall() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	
+    	requires(Robot.distanceSensor);
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -22,17 +25,25 @@ public class Pivot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.pivot(angle);
+    	double speed = 0.3;
+    	if(Robot.distanceSensor.getDistanceInches() >= 12)
+    	{
+    		Robot.driveBase.drive(speed, speed, 0);
+    	}
+    	else
+    	{
+    		Robot.driveBase.driveDistance(14);
+    		cancel = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return cancel;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

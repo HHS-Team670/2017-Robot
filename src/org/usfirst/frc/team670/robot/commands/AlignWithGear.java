@@ -3,7 +3,6 @@ package org.usfirst.frc.team670.robot.commands;
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,6 +17,7 @@ public class AlignWithGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run

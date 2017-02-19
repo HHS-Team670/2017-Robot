@@ -1,6 +1,8 @@
-package org.usfirst.frc.team670.robot.commands.autonomous;
+package org.usfirst.frc.team670.robot.commands.auto_vision;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.DriveDistance;
+import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.PlaceGear;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -8,18 +10,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoRightGear_Vision extends CommandGroup {
+public class AutoLeftGear_Vision extends CommandGroup {
     
-    public  AutoRightGear_Vision() {
+    public  AutoLeftGear_Vision() {
     	requires(Robot.driveBase);
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	
     	addSequential(new DriveDistance(6*12));
-    	addSequential(new Pivot(45));
-    	addSequential(new PlaceGear(12));
+    	addSequential(new PivotLeft(-45));
+    	//addSequential(new PlaceGear(12));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

@@ -1,3 +1,3 @@
 package org.usfirst.frc.team670.robot.utilities;
 
-public enum OperatorState {INTAKE,SHOOTER,CLIMBER,NONE}
+public enum OperatorState {INTAKE,SHOOTER,CLIMBER, REVERSECLIMBER, NONE}

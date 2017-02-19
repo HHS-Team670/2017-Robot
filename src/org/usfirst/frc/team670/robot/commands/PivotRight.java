@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous;
+package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,10 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoBaseline extends Command {
+public class PivotRight extends Command {
 
-    public AutoBaseline() {
+	private double angle;
+	
+    public PivotRight(double angle) {
         requires(Robot.driveBase);
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
@@ -19,8 +22,7 @@ public class AutoBaseline extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Drive seven feet to baseline
-    	Robot.driveBase.driveDistance(8*12);
+    	Robot.driveBase.pivotRight(angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

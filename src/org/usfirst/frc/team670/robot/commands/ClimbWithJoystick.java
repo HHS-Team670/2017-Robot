@@ -34,6 +34,18 @@ public class ClimbWithJoystick extends Command {
     			Robot.climber.climb(0);
     		}
     	}
+    	else if(Robot.oi.getOS().equals(OperatorState.REVERSECLIMBER))
+    	{
+    		double value = -Robot.oi.getOperatorStick().getY();
+    		if(value >= 0)
+    		{
+    			Robot.climber.climb(value);
+    		}
+    		else
+    		{
+    			Robot.climber.climb(0);
+    		}
+    	}
     	else
     		Robot.climber.climb(0);
     }

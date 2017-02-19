@@ -9,8 +9,6 @@ public class Climber extends Subsystem {
 	
 	CANTalon grapplerMotor = new CANTalon(RobotMap.climberMotor);
 	
-	public boolean shouldRunClimber = false;
-
     public void initDefaultCommand() {
         setDefaultCommand(new ClimbWithJoystick());
     }
@@ -18,9 +16,5 @@ public class Climber extends Subsystem {
     public void climb(double value){
     	grapplerMotor.set(value);
     }
-
-	public void setClimbMode(boolean b) {
-		shouldRunClimber = b;
-	}
 }
 

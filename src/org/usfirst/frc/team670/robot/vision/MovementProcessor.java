@@ -10,7 +10,7 @@ public class MovementProcessor {
 		private static boolean isLeftValid, isRightValid;
 		private static double EPSILON = 30;
 
-		private static Point targetPoint = new Point(640/2,480/2);
+		//private static Point targetPoint = new Point(640/2,480/2);
 		
 		public MovementProcessor()
 		{
@@ -104,7 +104,7 @@ public class MovementProcessor {
 		public String alignPerpendicular(Rect left, Rect right)
 		{
 			double xAverage = midpointX(left,right);
-			double centerX = targetPoint.x;
+			double centerX = 300;
 			double avgDif = centerX - xAverage;
 			if(avgDif < EPSILON && avgDif > -EPSILON)
 				return "centered";
