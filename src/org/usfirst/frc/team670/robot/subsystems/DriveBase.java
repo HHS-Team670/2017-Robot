@@ -17,7 +17,7 @@ public class DriveBase extends Subsystem {
 	public CANTalon rightTalon1;
 	public CANTalon rightTalon2;
 	public CANTalon omniTalon;
-	
+
 	//Wheel/PID Variables
 	public static final double radiusInInches = 3;
 	public static final double diameterInInches = radiusInInches * 2;
@@ -28,11 +28,11 @@ public class DriveBase extends Subsystem {
 	//Old Robot --> P:0.8, I:0.001, D = 0;
 	//Pivot radius in inches
 	public static final double pivotRadius = Math.sqrt(277);
-	
+
 	//Drive only with omniwheel
 	//private static boolean isOmniDrive = false;
 	private static DriveState current = DriveState.FOURWHEEL;
-		
+
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
@@ -49,7 +49,7 @@ public class DriveBase extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveWithJoystick());
 	}
-	
+
 	public void drive(double left, double right, double omni) {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
@@ -59,7 +59,7 @@ public class DriveBase extends Subsystem {
 		rightTalon1.set(right);
 		omniTalon.set(-omni);
 	}
-	
+
 	public void resetRightEncoder() {
 		rightTalon1.setEncPosition(0);
 	}
@@ -67,11 +67,11 @@ public class DriveBase extends Subsystem {
 	public void resetLeftEncoder() {
 		leftTalon1.setEncPosition(0);
 	}
-	
+
 	public void resetOmniEncoder() {
 		omniTalon.setEncPosition(0);
 	}
-	
+
 	public void driveDistance(double inches) 
 	{
 		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
@@ -80,12 +80,12 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
 		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		rightTalon1.enableControl(); //Enable PID control on the talon
-		
+
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
 		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		leftTalon1.enableControl(); //Enable PID control on the talon
-		
+
 		leftTalon1.set(-numTicks);
 		rightTalon1.set(numTicks);
 	}
@@ -110,7 +110,7 @@ public class DriveBase extends Subsystem {
 		leftTalon1.set(-numTicks);
 		rightTalon1.set(-numTicks);
 	}
-	
+
 	public void pivotLeft(double degrees) 
 	{
 		double pivotCircumference = 2 * Math.PI * pivotRadius;
@@ -131,23 +131,23 @@ public class DriveBase extends Subsystem {
 		leftTalon1.set(numTicks);
 		rightTalon1.set(numTicks);
 	}
-	
+
 	public DriveState getDriveType()
 	{
 		return current;
 	}
-	
+
 	public void setDriveType(DriveState x)
 	{
 		current = x;
 	}
-	
+
 	public String toString()
 	{
 		return (getDriveType().equals(DriveState.ALLWHEEL))?
-		    	("All Wheel"):((getDriveType().equals(DriveState.FOURWHEEL))?
-		    	("Four Wheel"):((getDriveType().equals(DriveState.OMNIWHEEL))?
-		    	("Omni Wheel"):
-		    	("No Wheel")));
+				("All Wheel"):((getDriveType().equals(DriveState.FOURWHEEL))?
+						("Four Wheel"):((getDriveType().equals(DriveState.OMNIWHEEL))?
+								("Omni Wheel"):
+									("No Wheel")));
 	}
 }

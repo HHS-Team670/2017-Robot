@@ -5,11 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
-import org.usfirst.frc.team670.robot.commands.auto_vision.AutoCenterGear_Vision;
-import org.usfirst.frc.team670.robot.commands.auto_vision.AutoLeftGear_Vision;
-import org.usfirst.frc.team670.robot.commands.auto_vision.AutoRightGear_Vision;
+import org.usfirst.frc.team670.robot.commands.PivotLeft;
+import org.usfirst.frc.team670.robot.commands.PivotRight;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoDoNothing;
 import org.usfirst.frc.team670.robot.commands.autonomous.CenterGearLeft;
@@ -53,8 +51,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser<Command>();
         
-        chooser.addDefault("Drive 1 ft", new DriveDistance(12));
-        //add this as default
+        //Commands for testing PID etc.
+        chooser.addDefault("Drive 1 ft", new DriveDistance(1));
+        chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
+        chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
+        
+        //add below as default
         chooser.addObject("Baseline Auto (5pts)", new AutoBaseline());
         chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
         
