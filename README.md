@@ -18,22 +18,22 @@ Code for Team 670's Steamworks Robot
 - [x] Grappler (rope climber)
 - [x] |---Joystick control (x-axis)
 - [x] Camera
-- [ ]	|---Update Camera command
-- [ ]	|---Switch input
+- [x]	|---Update Camera command
+- [x]	|---Switch input
 
 ###Autonomous
 
 - [x] Do nothing (0pt.)
 - [x] Move to line (5pts.)
-- [ ] Gear Auto (60 pts.)
+- [x] Gear Auto (60 pts.)
 - [ ] |---All gear sides w/ vision (x3)
-- [ ]	|---Center gear w/o vision (x1)
+- [x]	|---All sides gear w/o vision (x1)
 
 ###Vision
 
 - [ ] Calibration Tool
 - [x] Communication with RoboRIO
-- [ ] |---Sending command data
+- [x] |---Sending command data
 
 --------------------------
 ##Guides
@@ -52,5 +52,5 @@ Code for Team 670's Steamworks Robot
 ###(2/12/17): 
 FIRST is nice, but as always, updates disable us for long periods of time. The SRX CANTalon libraries have been disabled, so now need to go to: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources, to install the update library (Only on Windows) --> NEVER OPEN THIS PROJECT ON A MAC OR PC WITHOUT THIS PROGRAM INSTALLED
 
-###(2/12/17): 
+###(2/16/17): 
 FIRST is not nice, but as always, updates disable us for long periods of time. The Nivision (Camera) libraries have been disabled, so now need to go to: https://github.com/wpilibsuite/nivision/releases, to install the update library (Only on Windows) --> NEVER OPEN THIS PROJECT ON A MAC OR PC WITHOUT THIS PROGRAM INSTALLED
