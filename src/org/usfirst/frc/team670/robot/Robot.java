@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser<Command>();
         
         //Commands for testing PID etc.
-        chooser.addDefault("Drive 1 ft", new DriveDistance(1));
+        chooser.addDefault("Drive 2 ft", new DriveDistance(24));
         chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
         chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
         

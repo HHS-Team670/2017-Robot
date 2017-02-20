@@ -18,6 +18,9 @@ public class DriveBase extends Subsystem {
 	public CANTalon rightTalon2;
 	public CANTalon omniTalon;
 
+	//Converts turn distance to a number the talon can read (It needs it multiplied for some reason)
+	private final int talonConversion = 2520;
+	
 	//Wheel/PID Variables
 	public static final double radiusInInches = 3;
 	public static final double diameterInInches = radiusInInches * 2;
@@ -74,7 +77,7 @@ public class DriveBase extends Subsystem {
 
 	public void driveDistance(double inches) 
 	{
-		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
+		double numTicks = ((inches / inchesPerTick) / 360) * talonConversion;
 
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
@@ -94,7 +97,7 @@ public class DriveBase extends Subsystem {
 	{
 		double pivotCircumference = 2 * Math.PI * pivotRadius;
 		double pivotArcLength = (degrees / 360) * pivotCircumference;
-		double numTicks = ((pivotArcLength / inchesPerTick) / 360) * 2520;
+		double numTicks = ((pivotArcLength / inchesPerTick) / 360) * talonConversion;
 
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -115,7 +118,7 @@ public class DriveBase extends Subsystem {
 	{
 		double pivotCircumference = 2 * Math.PI * pivotRadius;
 		double pivotArcLength = (degrees / 360) * pivotCircumference;
-		double numTicks = ((pivotArcLength / inchesPerTick) / 360) * 2520;
+		double numTicks = ((pivotArcLength / inchesPerTick) / 360) * talonConversion;
 
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);

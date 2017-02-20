@@ -31,8 +31,8 @@ public class OI {
 	//Operator Buttons
 	private Button toggleClimber = new JoystickButton(operatorStick, 5);
 	private Button toggleReverseClimber = new JoystickButton(operatorStick, 8);
-	private Button toggleIntake = new JoystickButton(operatorStick, 4);
-	private Button toggleShooter = new JoystickButton(operatorStick, 3);
+	private Button toggleIntake = new JoystickButton(operatorStick, 3);
+	private Button toggleShooter = new JoystickButton(operatorStick, 4);
 	private Button placeGear = new JoystickButton(operatorStick, 2);
 	private Button cancelCommand = new JoystickButton(operatorStick, 9);
 	
