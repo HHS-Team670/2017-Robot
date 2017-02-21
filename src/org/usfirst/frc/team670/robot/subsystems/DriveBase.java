@@ -7,6 +7,7 @@ import org.usfirst.frc.team670.robot.utilities.DriveState;
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
@@ -37,16 +38,16 @@ public class DriveBase extends Subsystem {
 	private static DriveState current = DriveState.FOURWHEEL;
 
 	public DriveBase() {
-		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
+		leftTalon1 = new CANTalon(RobotMap.leftMotor2);
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
-		rightTalon1 = new CANTalon(RobotMap.rightMotor1);
-		rightTalon2 = new CANTalon(RobotMap.rightMotor2);
+		rightTalon1 = new CANTalon(RobotMap.rightMotor2);
+		rightTalon2 = new CANTalon(RobotMap.rightMotor1);
 		omniTalon = new CANTalon(RobotMap.omniWheel);
 
 		leftTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		leftTalon2.set(RobotMap.leftMotor1);
+		leftTalon2.set(RobotMap.leftMotor2);
 		rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		rightTalon2.set(RobotMap.rightMotor1);
+		rightTalon2.set(RobotMap.rightMotor2);
 	}
 
 	public void initDefaultCommand() {
@@ -54,22 +55,34 @@ public class DriveBase extends Subsystem {
 	}
 
 	//WIP, pretty useless
-	public void driveTime(double seconds)
+	public void omniDriveLeftTime(double seconds)
 	{
-		long t = System.currentTimeMillis();
-		long end = t + (long)(seconds * 1000);
 
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		Timer timer = new Timer();
+		timer.start();
+		double t = timer.get();
+		double end = t + seconds;
 
-		while(System.currentTimeMillis() < end)
+		while(timer.get() < end)
 		{
-			leftTalon1.set(-10);
-			rightTalon1.set(10);
-			omniTalon.set(-10);
+			omniTalon.set(1);
 		}
 
+	}
+	
+	public void omniDriveRightTime(double seconds)
+	{
+		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		
+		Timer timer = new Timer();
+		timer.start();
+		long t = (long) timer.get();
+		long end = (long) (t + (seconds * 1000));
+		while(timer.get() < end)
+		{
+			omniTalon.set(-1);
+		}
 	}
 
 

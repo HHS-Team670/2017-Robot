@@ -10,24 +10,24 @@ public class RobotMap
 {
 
 	//DriveBase
-    public static int rightMotor1 = 3;
-    public static int rightMotor2 = 4;
-    public static int leftMotor1 = 2;
-    public static int leftMotor2 = 1;
-    public static int omniWheel = 5;
+    public final static int rightMotor2 = 3;
+    public final static int rightMotor1 = 4;
+    public final static int leftMotor2 = 2;
+    public final static int leftMotor1 = 1;
+    public final static int omniWheel = 5;
     
     //Action motors
-    public static int intakeMotor = 1;
-    public static int dumperMotor = 0;
-    public static int climberMotor = 6;
-    
+    public final static int intakeMotor = 1;
+    public final static int dumperMotor = 0;
+    public final static int climberMotor = 6;
+  
     //Sensor ports
-    public static int UltrasonicAI = 0;
+    public final static int UltrasonicAI = 0;
 
     //Joysticks + Buttons
-    public static int operatorStick = 0;
-    public static int leftDriveStick = 1;
-    public static int rightDriveStick = 2;
-    public static int arcButtons = 3;
+    public final static int operatorStick = 0;
+    public final static int leftDriveStick = 1;
+    public final static int rightDriveStick = 2;
+    public final static int arcButtons = 3;
     
 }
