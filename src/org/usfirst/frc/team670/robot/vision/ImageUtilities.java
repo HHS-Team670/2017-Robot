@@ -114,4 +114,5 @@ public class ImageUtilities{
 			Imgproc.rectangle(frame, new Point(boxes[i].x, boxes[i].y), new Point(boxes[i].x+boxes[i].width, boxes[i].y+boxes[i].height), new Scalar(c.getBlue(), c.getGreen(), c.getRed()));
 		return frame;
 	}
+
 }

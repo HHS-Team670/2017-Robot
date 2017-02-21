@@ -1,9 +1,6 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
 import java.util.ArrayList;
-import java.util.Vector;
-
-import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
@@ -14,7 +11,6 @@ import org.usfirst.frc.team670.robot.vision.ParticleReport;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.DrawMode;
 import com.ni.vision.NIVision.Image;
-import com.ni.vision.NIVision.ImageType;
 import com.ni.vision.NIVision.ShapeMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;

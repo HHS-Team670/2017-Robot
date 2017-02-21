@@ -1,6 +1,5 @@
 package org.usfirst.frc.team670.robot.vision;
 
-import java.awt.Point;
 import org.opencv.core.Rect;
 
 public class MovementProcessor {

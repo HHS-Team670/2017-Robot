@@ -1,22 +1,19 @@
 package org.usfirst.frc.team670.robot.commands;
 
-import org.usfirst.frc.team670.robot.Robot;
 
+import org.opencv.core.Rect;
+import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class DriveToWall extends Command {
-
-	boolean cancel = false;
+public class DrawReticle extends Command {
 	
-    public DriveToWall() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	
-    	requires(Robot.distanceSensor);
-    	requires(Robot.driveBase);
+	private boolean on = false;
+	//This is the rectangle that gets drawn, need to offset it 4 inches to the left somehow.
+	Rect[] rects = {new Rect(318, 238, 322, 242)};
+	
+    public DrawReticle(boolean on) {
+     requires(Robot.camera);
+     this.on = on;
     }
 
     // Called just before this Command runs the first time
@@ -25,21 +22,16 @@ public class DriveToWall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double speed = Math.abs(Robot.oi.getrightStick().getY());
-    	if(Robot.distanceSensor.getDistanceInches() >= 12)
+    	if(on == true)
     	{
-    		Robot.driveBase.drive(speed, speed, 0);
+    		Robot.camera.drawOnFrame(rects);
     	}
-    	else
-    	{
-    		Robot.driveBase.driveDistance(14);
-    		cancel = true;
-    	}
+    		
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return cancel;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -5,6 +5,7 @@ import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.enums.DriveState;
 import org.usfirst.frc.team670.robot.enums.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
+import org.usfirst.frc.team670.robot.commands.DrawReticle;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.DriveToWall;
 import org.usfirst.frc.team670.robot.commands.OmniDriveTime;
@@ -39,24 +40,23 @@ public class OI {
 	private Button toggleIntake = new JoystickButton(operatorStick, 3);
 	private Button toggleShooter = new JoystickButton(operatorStick, 4);
 	private Button cancelCommand = new JoystickButton(operatorStick, 9);
-	private Button intakeShooterSame = new JoystickButton(operatorStick, 1);
-	private Button intakeShooterOpp = new JoystickButton(operatorStick, 2);
+	private Button intakeShooter = new JoystickButton(operatorStick, 1);
 	
 	//Driver Controls
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);
 	private Button runAllWheel = new JoystickButton(leftDriveStick, 1);
-	private Button flipCamera = new JoystickButton(rightDriveStick, 4);	
+	private Button flipCamera = new JoystickButton(leftDriveStick, 3);
 	private Button placeGear = new JoystickButton(rightDriveStick, 2);
 	private Button ramWall = new JoystickButton(rightDriveStick, 1);
 	private Button leftPivot = new JoystickButton(leftDriveStick, 4);
 	private Button rightPivot = new JoystickButton(leftDriveStick, 5);
-	private Button incrementF = new JoystickButton(leftDriveStick, 3);
+	//private Button incrementF = new JoystickButton(leftDriveStick, 3);
 	private Button incrementB = new JoystickButton(leftDriveStick, 2);
 	private Button leftStrafe = new JoystickButton(rightDriveStick, 4);
 	private Button rightStrafe = new JoystickButton(rightDriveStick, 5);
 
 	//Arcade buttons
-
+	private Button toggleReticle = new JoystickButton(arcButtons, 0);
 	
 	public OI(){
 		
@@ -87,21 +87,21 @@ public class OI {
 		toggleShooter.whenPressed(new SetOperatorCommand(OperatorState.SHOOTER));
 		toggleShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
 		
-		intakeShooterSame.whenPressed(new SetOperatorCommand(OperatorState.INTAKESHOOTSAME));
-		intakeShooterSame.whenReleased(new SetOperatorCommand(OperatorState.NONE));
-		
-		intakeShooterOpp.whenPressed(new SetOperatorCommand(OperatorState.INTAKESHOOTOPP));
-		intakeShooterOpp.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		intakeShooter.whenPressed(new SetOperatorCommand(OperatorState.INTAKESHOOT));
+		intakeShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
 		
 		//Precise Movement Buttons
 		leftPivot.whenPressed(new PivotLeft(10));
 		rightPivot.whenPressed(new PivotRight(10));
 		
-		incrementF.whenPressed(new DriveDistance(1));
+		//incrementF.whenPressed(new DriveDistance(1));
 		incrementB.whenPressed(new DriveDistance(-1));
 		
 		leftStrafe.whenPressed(new OmniDriveTime(0.25,'l', 0.5));
 		rightStrafe.whenPressed(new OmniDriveTime(0.25,'r', 0.5));
+		
+		toggleReticle.whenActive(new DrawReticle(true));
+		toggleReticle.whenInactive(new DrawReticle(false));
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}

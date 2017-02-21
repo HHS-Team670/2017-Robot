@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.commands.vision_auto;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
+import org.usfirst.frc.team670.robot.commands.DriveToWallAuto;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
 
@@ -24,6 +25,7 @@ double baseWidthInches = Robot.oi.baseWidthInches;
     	addSequential(new DriveDistance(64.25-(((baseWidthInches/2)-19-((34.5/(2*Math.sqrt(3)))))/(Math.sqrt(3)))));
         addSequential(new PivotRight(60));
         addSequential(new AlignWithGear());
+        addSequential(new DriveToWallAuto());
         
         
         // To run multiple commands at the same time,

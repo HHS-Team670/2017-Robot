@@ -7,25 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveToWall extends Command {
+public class DriveToWallAuto extends Command {
 
 	boolean cancel = false;
 	
-    public DriveToWall() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	
+    public DriveToWallAuto() {
     	requires(Robot.distanceSensor);
     	requires(Robot.driveBase);
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	double speed = Math.abs(Robot.oi.getrightStick().getY());
+    	double speed = 0.3;
     	if(Robot.distanceSensor.getDistanceInches() >= 12)
     	{
     		Robot.driveBase.drive(speed, speed, 0);
@@ -37,9 +31,13 @@ public class DriveToWall extends Command {
     	}
     }
 
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    }
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return cancel;
+        return false;
     }
 
     // Called once after isFinished returns true

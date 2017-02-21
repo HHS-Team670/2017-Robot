@@ -8,7 +8,8 @@ import org.opencv.core.Scalar;
 
 public class GearLocator 
 {
-
+	//Use this for calculating distance and stuff
+	private static int targetWidth = 2;
 	private static Scalar lower, upper;
 	private static Rect a = new Rect(0,0,0,0), b = new Rect(0,0,0,0);
 	private static MovementProcessor mp;
