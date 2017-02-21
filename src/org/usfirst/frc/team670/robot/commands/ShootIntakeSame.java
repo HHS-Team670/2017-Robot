@@ -11,12 +11,23 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootIntakeSame extends Command {
 
 	public ShootIntakeSame() {
-		requires(Robot.intake);
-		requires(Robot.shooter);
 	}
 
 	// Called just before this Command runs the first time
-	protected void initialize() {
+	protected void initialize() 
+	//PROBLEM
+	//OperatorState does get set, but this command is not executed. 
+	{
+		if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOTSAME))
+		{
+			Robot.intake.intake(-Robot.oi.getOperatorStick().getY());
+			Robot.shooter.shoot(Robot.oi.getOperatorStick().getY());
+		}
+		else
+		{
+			Robot.intake.intake(0);
+			Robot.shooter.shoot(0);
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run

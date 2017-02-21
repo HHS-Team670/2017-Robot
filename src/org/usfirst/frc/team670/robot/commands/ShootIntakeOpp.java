@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootIntakeOpp extends Command {
 
     public ShootIntakeOpp() {
-       requires(Robot.shooter);
-       requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
