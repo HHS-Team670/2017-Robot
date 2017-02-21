@@ -56,35 +56,6 @@ public class DriveBase extends Subsystem {
 		setDefaultCommand(new DriveWithJoystick());
 	}
 
-	//WIP, pretty useless
-	public void omniDriveLeftTime(double seconds)
-	{
-
-		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		omniTalon.set(-1);
-//		try {
-//			Thread.sleep((long) (seconds * 1000));
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-		omniTalon.set(0);
-
-	}
-
-	public void omniDriveRightTime(double seconds)
-	{
-		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-
-		double t = Timer.getFPGATimestamp();
-		double end = t + seconds;
-		while(Timer.getFPGATimestamp() < end)
-		{
-			omniTalon.set(-1);
-		}
-		
-	}
-
-
 	public void drive(double left, double right, double omni) {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
