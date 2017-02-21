@@ -17,5 +17,23 @@ public class Intake extends Subsystem {
     {
     	intake.set(value);
     }
+    
+    public void spinForward(double value)
+    {
+    	if(value < 0)
+    	{
+    		value = -value;
+    	}
+    	intake.set(value);
+    }
+    
+    public void spinBackward(double value)
+    {
+    	if(value > 0)
+    	{
+    		value = -value;
+    	}
+    	intake.set(value);
+    }
 }
 

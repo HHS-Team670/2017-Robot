@@ -17,5 +17,22 @@ public class Shooter extends Subsystem {
     	shootMotor.set(value);
     }
     
+    public void shootForward(double value)
+    {
+    	if(value < 0)
+    	{
+    		value = -value;
+    	}
+    	shootMotor.set(value);
+    }
+    
+    public void shootBackward(double value)
+    {
+    	if(value > 0)
+    	{
+    		value = -value;
+    	}
+    	shootMotor.set(value);
+    }
 }
 

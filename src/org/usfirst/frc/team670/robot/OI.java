@@ -91,8 +91,8 @@ public class OI {
 		intakeShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
 		
 		//Precise Movement Buttons
-		leftPivot.whenPressed(new PivotLeft(10));
-		rightPivot.whenPressed(new PivotRight(10));
+		//leftPivot.whenPressed(new PivotLeft(10));
+		//rightPivot.whenPressed(new PivotRight(10));
 		
 		//incrementF.whenPressed(new DriveDistance(1));
 		//incrementB.whenPressed(new DriveDistance(-1));
