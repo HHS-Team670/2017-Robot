@@ -70,19 +70,24 @@ public class DriveBase extends Subsystem {
 		}
 
 	}
-	
+
 	public void omniDriveRightTime(double seconds)
 	{
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+
+//		double t = Timer.getFPGATimestamp();
+//		double end = t + seconds;
+//		while(Timer.getFPGATimestamp() < end)
+//		{
+//			omniTalon.set(-1);
+//		}
 		
-		Timer timer = new Timer();
-		timer.start();
-		long t = (long) timer.get();
+		long t = System.currentTimeMillis();
 		long end = (long) (t + (seconds * 1000));
-		while(timer.get() < end)
-		{
+		while(System.currentTimeMillis() < end){
 			omniTalon.set(-1);
 		}
+			omniTalon.set(0);
 	}
 
 
