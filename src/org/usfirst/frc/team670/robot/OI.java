@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
+	public boolean drawRopeReticle = false;
 	
 	
 	//This is the width of driver's side of the field for auto calculations. Need to figure if this is right.
@@ -55,6 +56,7 @@ public class OI {
 	private Button rightStrafe = new JoystickButton(rightDriveStick, 5);
 
 	//Arcade buttons
+
 	
 	public OI(){
 		
@@ -71,8 +73,7 @@ public class OI {
 		ramWall.whenReleased(new CancelCommand());
 		
 		flipCamera.whenPressed(new FlipCamera());
-		
-		
+				
 		//Operator Button Commands
 		toggleClimber.whenPressed(new SetOperatorCommand(OperatorState.CLIMBER));
 		toggleClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));
