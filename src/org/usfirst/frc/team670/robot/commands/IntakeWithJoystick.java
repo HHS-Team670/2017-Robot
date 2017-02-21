@@ -25,7 +25,7 @@ public class IntakeWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.oi.getOS().equals(OperatorState.INTAKE))
-    		Robot.intake.intake(Robot.oi.getOperatorStick().getY());
+    		Robot.intake.intake(-Robot.oi.getOperatorStick().getY());
     	else
     		Robot.intake.intake(0);
     }

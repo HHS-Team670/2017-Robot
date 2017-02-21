@@ -72,6 +72,7 @@ public class OI {
 		
 		flipCamera.whenPressed(new FlipCamera());
 		
+		
 		//Operator Button Commands
 		toggleClimber.whenPressed(new SetOperatorCommand(OperatorState.CLIMBER));
 		toggleClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));

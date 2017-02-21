@@ -23,7 +23,7 @@ public class ShootIntakeOpp extends Command {
     protected void execute() {
     	if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOTOPP))
 		{
-			Robot.intake.intake(-Robot.oi.getOperatorStick().getY());
+			Robot.intake.intake(Robot.oi.getOperatorStick().getY());
 			Robot.shooter.shoot(Robot.oi.getOperatorStick().getY());
 		}
 		else
@@ -40,6 +40,8 @@ public class ShootIntakeOpp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intake.intake(0);
+    	Robot.shooter.shoot(0);
     }
 
     // Called when another command which requires one or more of the same

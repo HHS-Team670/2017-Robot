@@ -2,7 +2,9 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
 import org.usfirst.frc.team670.robot.enums.DriveState;
+import org.usfirst.frc.team670.robot.enums.OperatorState;
 
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -59,15 +61,13 @@ public class DriveBase extends Subsystem {
 	{
 
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		Timer timer = new Timer();
-		timer.start();
-		double t = timer.get();
-		double end = t + seconds;
-
-		while(timer.get() < end)
-		{
-			omniTalon.set(1);
-		}
+		omniTalon.set(-1);
+//		try {
+//			Thread.sleep((long) (seconds * 1000));
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+		omniTalon.set(0);
 
 	}
 
@@ -75,19 +75,13 @@ public class DriveBase extends Subsystem {
 	{
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-//		double t = Timer.getFPGATimestamp();
-//		double end = t + seconds;
-//		while(Timer.getFPGATimestamp() < end)
-//		{
-//			omniTalon.set(-1);
-//		}
-		
-		long t = System.currentTimeMillis();
-		long end = (long) (t + (seconds * 1000));
-		while(System.currentTimeMillis() < end){
+		double t = Timer.getFPGATimestamp();
+		double end = t + seconds;
+		while(Timer.getFPGATimestamp() < end)
+		{
 			omniTalon.set(-1);
 		}
-			omniTalon.set(0);
+		
 	}
 
 

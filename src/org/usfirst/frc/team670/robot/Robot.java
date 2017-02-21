@@ -39,6 +39,7 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter = new Shooter();
 	public static Climber climber = new Climber();
 	
+	
     Command autonomousCommand;
     SendableChooser<Command> chooser;
 
@@ -140,7 +141,7 @@ public class Robot extends IterativeRobot {
         
     public void putData(){
     	String driveType = driveBase.toString();
-    	String os = (oi.getOS().equals(OperatorState.CLIMBER))?("Climber"):(oi.getOS().equals(OperatorState.SHOOTER)?("Shooter"):(oi.getOS().equals(OperatorState.INTAKE)?("Intake"):(oi.getOS().equals(OperatorState.REVERSECLIMBER)?("Reverse Climber"):("None"))));
+    	String os = (oi.getOS().equals(OperatorState.CLIMBER))?("Climber"):(oi.getOS().equals(OperatorState.SHOOTER))?("Shooter"):(oi.getOS().equals(OperatorState.INTAKE))?("Intake"):(oi.getOS().equals(OperatorState.REVERSECLIMBER))?("Reverse Climber"):(oi.getOS().equals(OperatorState.INTAKESHOOTOPP))?("IN"):(oi.getOS().equals(OperatorState.INTAKESHOOTSAME))?("OUT"):("None");
     	
        	SmartDashboard.putString("Drive type:", driveType);
        	SmartDashboard.putString("Current Distance:", "" + distanceSensor.getDistanceInches());
