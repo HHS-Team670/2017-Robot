@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
-	public boolean drawRopeReticle = false;
+	public static boolean drawRopeReticle = false;
 	
 	
 	//This is the width of driver's side of the field for auto calculations. Need to figure if this is right.
@@ -100,7 +100,7 @@ public class OI {
 		leftStrafe.whenPressed(new OmniDriveTime(0.25,'l', 0.5));
 		rightStrafe.whenPressed(new OmniDriveTime(0.25,'r', 0.5));
 		
-		toggleReticle.whenActive(new DrawReticle(true));
+		toggleReticle.cancelWhenActive(new DrawReticle(true));;
 		toggleReticle.whenInactive(new DrawReticle(false));
 		
 		cancelCommand.whenPressed(new CancelCommand());

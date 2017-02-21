@@ -1,5 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.camera;
 
+import org.opencv.core.Rect;
+import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class UpdateCamera extends Command {
 
+	Rect[] rects = {new Rect(318, 238, 322, 242)};
+	
     public UpdateCamera() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.camera);
@@ -21,6 +25,10 @@ public class UpdateCamera extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.camera.getImage();
+    	if(OI.drawRopeReticle = true)
+    	{
+    		Robot.camera.drawOnFrame(rects);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

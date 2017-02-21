@@ -2,6 +2,7 @@ package org.usfirst.frc.team670.robot.commands;
 
 
 import org.opencv.core.Rect;
+import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,9 +25,10 @@ public class DrawReticle extends Command {
     protected void execute() {
     	if(on == true)
     	{
-    		Robot.camera.drawOnFrame(rects);
+    		OI.drawRopeReticle = true;
     	}
-    		
+    	else
+    		OI.drawRopeReticle = false;
     }
 
     // Make this return true when this Command no longer needs to run execute()
