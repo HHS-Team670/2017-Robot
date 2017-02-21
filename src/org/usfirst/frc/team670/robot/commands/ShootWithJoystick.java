@@ -25,13 +25,13 @@ public class ShootWithJoystick extends Command {
     	//Shoot
     	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOT) && value > 0)
     	{
-    		Robot.shooter.shoot(value);
-    		Robot.intake.intake(-value);
+    		Robot.shooter.shoot(-value);
+    		Robot.intake.intake(value);
     	}
-    	//intake
+    	//Intake
     	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOT) && value < 0)
     	{
-    		Robot.shooter.shoot(-value);
+    		Robot.shooter.shoot(value);
     		Robot.intake.intake(value);
     	}
     	else

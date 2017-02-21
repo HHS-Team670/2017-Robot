@@ -2,14 +2,11 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
 import org.usfirst.frc.team670.robot.enums.DriveState;
-import org.usfirst.frc.team670.robot.enums.OperatorState;
 
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
