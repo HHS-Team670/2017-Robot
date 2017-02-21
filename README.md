@@ -26,14 +26,14 @@ Code for Team 670's Steamworks Robot
 - [x] Do nothing (0pt.)
 - [x] Move to line (5pts.)
 - [x] Gear Auto (60 pts.)
-- [ ] |---All gear sides w/ vision (x3)
+- [x] |---All gear sides w/ vision (x3)
 - [x]	|---All sides gear w/o vision (x1)
 
-###Vision
-
-- [ ] Calibration Tool
-- [x] Communication with RoboRIO
-- [x] |---Sending command data
+LIST:
+1. Reticle on rope cam
+2. Offset camera stuff in vision so it works
+3. PID
+4. Make sure all hotkeys and stuff work (especially shooter and intake)
 
 --------------------------
 ##Guides
