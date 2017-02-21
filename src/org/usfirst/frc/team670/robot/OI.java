@@ -2,18 +2,16 @@ package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
-import org.usfirst.frc.team670.robot.utilities.DriveState;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
+import org.usfirst.frc.team670.robot.enums.DriveState;
+import org.usfirst.frc.team670.robot.enums.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.DriveToWall;
-import org.usfirst.frc.team670.robot.commands.GetNextCommand;
 import org.usfirst.frc.team670.robot.commands.OmniDriveTime;
-import org.usfirst.frc.team670.robot.commands.OmniDriveRightTime;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
+import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.PlaceGear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -63,14 +61,12 @@ public class OI {
 		runOmniDrive.whenPressed(new ChangeDriveType(DriveState.OMNIWHEEL));
 		runOmniDrive.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
 		
-
 		runAllWheel.whenPressed(new ChangeDriveType(DriveState.ALLWHEEL));
 		runAllWheel.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
-				
-		//placeGear centers the robot with the target, ramWall sends the robot into the wall to actually place it
-		//placeGear is button under omniwheel (right stick), ramWall is trigger on the same stick.
-		placeGear.whenPressed(new PlaceGear());
+		
+		placeGear.whenPressed(new AlignWithGear());
 		placeGear.whenReleased(new CancelCommand());
+		
 		ramWall.whenPressed(new DriveToWall());
 		ramWall.whenReleased(new CancelCommand());
 		

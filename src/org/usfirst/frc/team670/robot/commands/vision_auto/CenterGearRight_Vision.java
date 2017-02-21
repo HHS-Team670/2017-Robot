@@ -1,9 +1,9 @@
-package org.usfirst.frc.team670.robot.commands.auto_vision;
+package org.usfirst.frc.team670.robot.commands.vision_auto;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
-import org.usfirst.frc.team670.robot.commands.PlaceGear;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -19,7 +19,7 @@ public class CenterGearRight_Vision extends CommandGroup{
     	addSequential(new PivotLeft(90));
     	addSequential(new DriveDistance(baseWidthInches/2 - 19));
     	addSequential(new PivotLeft(90));
-    	addSequential(new PlaceGear());
+    	addSequential(new AlignWithGear());
     	
     	//Align the robot in front of the gear
     	//addSequential(new PlaceGear(12));

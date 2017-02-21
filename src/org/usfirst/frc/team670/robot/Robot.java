@@ -1,5 +1,5 @@
 package org.usfirst.frc.team670.robot;
-//hi
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,14 +16,14 @@ import org.usfirst.frc.team670.robot.commands.autonomous.LeftGear;
 import org.usfirst.frc.team670.robot.commands.autonomous.LeftGearCenter;
 import org.usfirst.frc.team670.robot.commands.autonomous.RightGear;
 import org.usfirst.frc.team670.robot.commands.autonomous.RightGearCenter;
+import org.usfirst.frc.team670.robot.enums.OperatorState;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
-import org.usfirst.frc.team670.robot.utilities.NetworkTablesServer;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
+import org.usfirst.frc.team670.robot.vision.NetworkTablesServer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

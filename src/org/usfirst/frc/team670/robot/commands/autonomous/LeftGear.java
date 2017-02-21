@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
 
@@ -20,6 +21,7 @@ public class LeftGear extends CommandGroup {
         addSequential(new PivotRight(60));
         addSequential(new DriveDistance((((baseWidthInches/2 - 19))*(2/(Math.sqrt(3)))) - 17.25 + 4));
         // these will run in order.
+        addSequential(new CancelCommand());
 
         // To run multiple commands at the same time,
         // use addParallel()

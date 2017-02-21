@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
@@ -21,6 +22,7 @@ public class RightGear extends CommandGroup {
 		addSequential(new PivotLeft(60));
 		addSequential(new DriveDistance((((baseWidthInches/2 - 19))*(2/(Math.sqrt(3)))) - 17.25 + 4));
 		// these will run in order.
+        addSequential(new CancelCommand());
 
 		// To run multiple commands at the same time,
 		// use addParallel()

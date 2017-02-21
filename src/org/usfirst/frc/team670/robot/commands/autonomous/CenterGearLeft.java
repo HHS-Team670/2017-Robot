@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
 
@@ -24,7 +25,8 @@ public class CenterGearLeft extends CommandGroup {
     	addSequential(new DriveDistance(baseWidthInches/2 - 19));
     	addSequential(new PivotRight(90));
     	addSequential(new DriveDistance(epsilon));
-    	
+        addSequential(new CancelCommand());
+
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
