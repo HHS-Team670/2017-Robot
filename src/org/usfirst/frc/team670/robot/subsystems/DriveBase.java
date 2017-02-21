@@ -18,9 +18,9 @@ public class DriveBase extends Subsystem {
 	public CANTalon rightTalon2;
 	public CANTalon omniTalon;
 
-	//Converts turn distance to a number the talon can read (It needs it multiplied for some reason)
+	//Converts ticks distance to a number the talon can read (It needs it multiplied for some reason)
 	private final int talonConversion = 2520;
-	
+
 	//Wheel/PID Variables
 	public static final double radiusInInches = 3;
 	public static final double diameterInInches = radiusInInches * 2;
@@ -52,6 +52,26 @@ public class DriveBase extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveWithJoystick());
 	}
+
+	//WIP, pretty useless
+	public void driveTime(double seconds)
+	{
+		long t = System.currentTimeMillis();
+		long end = t + (long)(seconds * 1000);
+
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+
+		while(System.currentTimeMillis() < end)
+		{
+			leftTalon1.set(-10);
+			rightTalon1.set(10);
+			omniTalon.set(-10);
+		}
+
+	}
+
 
 	public void drive(double left, double right, double omni) {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
