@@ -30,10 +30,10 @@ Code for Team 670's Steamworks Robot
 - [x]	|---All sides gear w/o vision (x1)
 
 LIST:
-1. Reticle on rope cam
-2. Offset camera stuff in vision so it works
-3. PID
-4. Make sure all hotkeys and stuff work (especially shooter and intake)
+- [ ] Reticle on rope cam
+- [ ] Offset camera stuff in vision so it works
+- [ ] PID
+- [ ] Make sure all hotkeys and stuff work (especially shooter and intake)
 
 --------------------------
 ##Guides
