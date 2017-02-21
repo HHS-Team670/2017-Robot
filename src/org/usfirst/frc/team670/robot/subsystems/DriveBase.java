@@ -27,7 +27,7 @@ public class DriveBase extends Subsystem {
 	public static final double circumferenceInInches = diameterInInches * Math.PI;
 	public static final double inchesPerTick = circumferenceInInches / 360;
 	public static final double P = 1, I = 0, D = 0;
-	//0.001 at a time
+	//0.001 at a time for I and D, 0.05 at a time for P.
 	//Old Robot --> P:0.8, I:0.001, D = 0;
 	//Pivot radius in inches
 	public static final double pivotRadius = Math.sqrt(277);

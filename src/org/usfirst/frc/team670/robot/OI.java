@@ -5,6 +5,7 @@ import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
+import org.usfirst.frc.team670.robot.commands.DriveToWall;
 import org.usfirst.frc.team670.robot.commands.GetNextCommand;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.PlaceGear;
@@ -33,7 +34,8 @@ public class OI {
 	private Button toggleReverseClimber = new JoystickButton(operatorStick, 8);
 	private Button toggleIntake = new JoystickButton(operatorStick, 3);
 	private Button toggleShooter = new JoystickButton(operatorStick, 4);
-	private Button placeGear = new JoystickButton(operatorStick, 2);
+	private Button placeGear = new JoystickButton(rightDriveStick, 2);
+	private Button ramWall = new JoystickButton(rightDriveStick, 1);
 	private Button cancelCommand = new JoystickButton(operatorStick, 9);
 	
 	//Driver Controls
@@ -47,12 +49,17 @@ public class OI {
 		
 		runOmniDrive.whenPressed(new ChangeDriveType(DriveState.OMNIWHEEL));
 		runOmniDrive.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
+		
 
 		runAllWheel.whenPressed(new ChangeDriveType(DriveState.ALLWHEEL));
 		runAllWheel.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
 				
+		//placeGear centers the robot with the target, ramWall sends the robot into the wall to actually place it
+		//placeGear is button under omniwheel (right stick), ramWall is trigger on the same stick.
 		placeGear.whenPressed(new PlaceGear());
 		placeGear.whenReleased(new CancelCommand());
+		ramWall.whenPressed(new DriveToWall());
+		ramWall.whenReleased(new CancelCommand());
 		
 		flipCamera.whenPressed(new FlipCamera());
 		

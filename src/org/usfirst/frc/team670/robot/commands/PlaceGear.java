@@ -15,8 +15,7 @@ public class PlaceGear extends CommandGroup {
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
-        addSequential(new AlignWithGear());
-        addSequential(new DriveToWall());        
+        addSequential(new AlignWithGear());    
         // Command1 and Command2 will run in parallel.
         // A command group will require all of the subsystems that each member
         // would require.
