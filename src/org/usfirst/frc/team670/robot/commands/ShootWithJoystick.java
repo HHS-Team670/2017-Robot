@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShootWithJoystick extends Command {
-
+	
     public ShootWithJoystick() {
     	requires(Robot.shooter);
     }
@@ -19,8 +19,19 @@ public class ShootWithJoystick extends Command {
     }
 
     protected void execute() {
+    	double value = Robot.oi.getOperatorStick().getY();
     	if(Robot.oi.getOS().equals(OperatorState.SHOOTER))
-    		Robot.shooter.shoot(Robot.oi.getOperatorStick().getY());
+    		Robot.shooter.shoot(value);
+    	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOTSAME) && value > 0)
+    	{
+    		Robot.shooter.shoot(value);
+    		Robot.intake.intake(-value);
+    	}
+    	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOTOPP) && value < 0)
+    	{
+    		Robot.shooter.shoot(value);
+    		Robot.intake.intake(value);
+    	}
     	else
     		Robot.shooter.shoot(0);
     }
