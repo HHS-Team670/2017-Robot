@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class UpdateCamera extends Command {
-
-	Rect[] rects = {new Rect(318, 238, 322, 242)};
+	
+	public static Rect[] rects = {new Rect(318, 238, 322, 242)};
 	
     public UpdateCamera() {
         // Use requires() here to declare subsystem dependencies

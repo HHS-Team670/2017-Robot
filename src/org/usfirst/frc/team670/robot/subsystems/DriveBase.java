@@ -37,16 +37,16 @@ public class DriveBase extends Subsystem {
 	private static DriveState current = DriveState.FOURWHEEL;
 
 	public DriveBase() {
-		leftTalon1 = new CANTalon(RobotMap.leftMotor2);
+		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
-		rightTalon1 = new CANTalon(RobotMap.rightMotor2);
-		rightTalon2 = new CANTalon(RobotMap.rightMotor1);
+		rightTalon1 = new CANTalon(RobotMap.rightMotor1);
+		rightTalon2 = new CANTalon(RobotMap.rightMotor2);
 		omniTalon = new CANTalon(RobotMap.omniWheel);
 
 		leftTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		leftTalon2.set(RobotMap.leftMotor2);
+		leftTalon1.set(RobotMap.leftMotor1);
 		rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		rightTalon2.set(RobotMap.rightMotor2);
+		rightTalon1.set(RobotMap.rightMotor1);
 	}
 
 	public void initDefaultCommand() {

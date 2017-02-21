@@ -1,5 +1,6 @@
 package org.usfirst.frc.team670.robot.commands.camera;
 
+import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,6 +21,10 @@ public class FlipCamera extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.camera.switchCam();
+    	if(OI.drawRopeReticle = true)
+    	{
+    		Robot.camera.drawOnFrame(UpdateCamera.rects);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

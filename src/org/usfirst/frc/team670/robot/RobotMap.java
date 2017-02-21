@@ -10,8 +10,8 @@ public class RobotMap
 {
 
 	//DriveBase
-    public final static int rightMotor2 = 3;
-    public final static int rightMotor1 = 4;
+    public final static int rightMotor1 = 3;
+    public final static int rightMotor2 = 4;
     public final static int leftMotor2 = 2;
     public final static int leftMotor1 = 1;
     public final static int omniWheel = 5;

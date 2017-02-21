@@ -1,7 +1,6 @@
 package org.usfirst.frc.team670.robot.commands;
 
 
-import org.opencv.core.Rect;
 import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,7 +9,6 @@ public class DrawReticle extends Command {
 	
 	private boolean on = false;
 	//This is the rectangle that gets drawn, need to offset it 4 inches to the left somehow.
-	Rect[] rects = {new Rect(318, 238, 322, 242)};
 	
     public DrawReticle(boolean on) {
      requires(Robot.camera);

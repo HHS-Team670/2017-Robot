@@ -50,7 +50,7 @@ public class OI {
 	private Button ramWall = new JoystickButton(rightDriveStick, 1);
 	private Button leftPivot = new JoystickButton(leftDriveStick, 4);
 	private Button rightPivot = new JoystickButton(leftDriveStick, 5);
-	//private Button incrementF = new JoystickButton(leftDriveStick, 3);
+	private Button incrementF = new JoystickButton(leftDriveStick, 3);
 	private Button incrementB = new JoystickButton(leftDriveStick, 2);
 	private Button leftStrafe = new JoystickButton(rightDriveStick, 4);
 	private Button rightStrafe = new JoystickButton(rightDriveStick, 5);
@@ -91,11 +91,11 @@ public class OI {
 		intakeShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
 		
 		//Precise Movement Buttons
-		//leftPivot.whenPressed(new PivotLeft(10));
-		//rightPivot.whenPressed(new PivotRight(10));
+		leftPivot.whenPressed(new PivotLeft(10));
+		rightPivot.whenPressed(new PivotRight(10));
 		
-		//incrementF.whenPressed(new DriveDistance(1));
-		//incrementB.whenPressed(new DriveDistance(-1));
+		incrementF.whenPressed(new DriveDistance(1));
+		incrementB.whenPressed(new DriveDistance(-1));
 		
 		leftStrafe.whenPressed(new OmniDriveTime(0.25,'l', 0.5));
 		rightStrafe.whenPressed(new OmniDriveTime(0.25,'r', 0.5));
