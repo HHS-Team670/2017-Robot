@@ -7,13 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OmniDriveLeftTime extends Command {
+public class OmniDriveTime extends Command {
 	
 	private double seconds = 0;
+	private char direction = ' ';
 	
-    public OmniDriveLeftTime(double seconds) {
+	//'l' for left, 'r' for right
+    public OmniDriveTime(double seconds, char direction) {
+    	this.direction = direction;
     	this.seconds = seconds;
-    	 requires(Robot.driveBase);
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +25,12 @@ public class OmniDriveLeftTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.omniDriveLeftTime(seconds);
+    	if(direction == 'l')
+    		Robot.driveBase.omniDriveLeftTime(seconds);
+    	else if(direction == 'r')
+    		Robot.driveBase.omniDriveRightTime(seconds);
+    	else
+    		Robot.driveBase.omniDriveRightTime(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

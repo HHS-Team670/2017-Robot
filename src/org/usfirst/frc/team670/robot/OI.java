@@ -8,7 +8,7 @@ import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.DriveToWall;
 import org.usfirst.frc.team670.robot.commands.GetNextCommand;
-import org.usfirst.frc.team670.robot.commands.OmniDriveLeftTime;
+import org.usfirst.frc.team670.robot.commands.OmniDriveTime;
 import org.usfirst.frc.team670.robot.commands.OmniDriveRightTime;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
@@ -79,24 +79,31 @@ public class OI {
 		//Operator Button Commands
 		toggleClimber.whenPressed(new SetOperatorCommand(OperatorState.CLIMBER));
 		toggleClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		
 		toggleReverseClimber.whenPressed(new SetOperatorCommand(OperatorState.REVERSECLIMBER));
 		toggleReverseClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		
 		toggleIntake.whenPressed(new SetOperatorCommand(OperatorState.INTAKE));
 		toggleIntake.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		
 		toggleShooter.whenPressed(new SetOperatorCommand(OperatorState.SHOOTER));
 		toggleShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		
 		intakeShooterSame.whenPressed(new SetOperatorCommand(OperatorState.INTAKESHOOTSAME));
 		intakeShooterSame.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		
 		intakeShooterOpp.whenPressed(new SetOperatorCommand(OperatorState.INTAKESHOOTOPP));
 		intakeShooterOpp.whenReleased(new SetOperatorCommand(OperatorState.NONE));
 		
 		//Precise Movement Buttons
 		leftPivot.whenPressed(new PivotLeft(10));
 		rightPivot.whenPressed(new PivotRight(10));
+		
 		incrementF.whenPressed(new DriveDistance(1));
 		incrementB.whenPressed(new DriveDistance(-1));
-		leftStrafe.whenPressed(new OmniDriveLeftTime(0.25));
-		rightStrafe.whenPressed(new OmniDriveRightTime(0.25));
+		
+		leftStrafe.whenPressed(new OmniDriveTime(0.25,'l'));
+		rightStrafe.whenPressed(new OmniDriveTime(0.25,'r'));
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}
