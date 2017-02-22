@@ -43,7 +43,7 @@ LIST:
 4 PID
 5 Vision
 6 Reticle
-7 Current on Climber motor
+7 Current on Climber motor - DONE
 
 
 
