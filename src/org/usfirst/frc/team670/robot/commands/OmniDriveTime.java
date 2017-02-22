@@ -28,9 +28,9 @@ public class OmniDriveTime extends Command {
     protected void execute() {
     	setTimeout(seconds);
     	if(direction == 'l')
-    		Robot.driveBase.drive(0, 0, speed);
-    	else if(direction == 'r')
     		Robot.driveBase.drive(0, 0, -speed);
+    	else if(direction == 'r')
+    		Robot.driveBase.drive(0, 0, speed);
     	else
     		Robot.driveBase.drive(0, 0, 0);
     }

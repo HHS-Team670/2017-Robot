@@ -21,6 +21,7 @@ public class AutoBaseline extends Command {
     protected void execute() {
     	//Drive seven feet to baseline
     	Robot.driveBase.driveDistance(8*12);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
