@@ -17,8 +17,8 @@ public class RobotMap
     public final static int omniWheel = 5;
     
     //Action motors
-    public final static int intakeMotor = 1;
-    public final static int dumperMotor = 0;
+    public final static int intakeMotor = 0;
+    public final static int dumperMotor = 1;
     public final static int climberMotor = 6;
   
     //Sensor ports

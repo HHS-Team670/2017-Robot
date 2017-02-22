@@ -3,13 +3,21 @@ package org.usfirst.frc.team670.robot.commands;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.enums.OperatorState;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
 
 /**
  *
  */
 public class ClimbWithJoystick extends Command {
 
+	PowerDistributionPanel pdp = new PowerDistributionPanel();
+	private double current = pdp.getCurrent(12);
+	private double maxPowerSpec = 337;
+	private double batteryVoltage = pdp.getVoltage();
+	private double currentLimit = maxPowerSpec/batteryVoltage;
+			
     public ClimbWithJoystick() {
     	requires(Robot.climber);
         // Use requires() here to declare subsystem dependencies
@@ -22,6 +30,11 @@ public class ClimbWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+		System.err.println(current);
+    	current = pdp.getCurrent(12);
+    	batteryVoltage = pdp.getVoltage();
+    	currentLimit = maxPowerSpec/batteryVoltage;
+    	
     	if(Robot.oi.getOS().equals(OperatorState.CLIMBER))
     	{
     		double value = -Robot.oi.getOperatorStick().getY();
@@ -52,7 +65,12 @@ public class ClimbWithJoystick extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+		if(current >= currentLimit)
+		{
+			return true;
+		}
+		else
+			return false;
     }
 
     // Called once after isFinished returns true

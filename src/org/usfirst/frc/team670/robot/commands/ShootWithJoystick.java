@@ -16,23 +16,30 @@ public class ShootWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	requires(Robot.shooter);
+    	requires(Robot.intake);
     }
 
     protected void execute() {
     	double stickYValue = Robot.oi.getOperatorStick().getY();
     	if(Robot.oi.getOS().equals(OperatorState.SHOOTER))
     		Robot.shooter.shoot(stickYValue);
-    	//Shoot
-    	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOT) && stickYValue > 0)
-    	{
-    		Robot.shooter.shootForward(stickYValue);
-    		Robot.intake.spinBackward(stickYValue);
-    	}
     	//Intake
     	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOT) && stickYValue < 0)
     	{
+//    		Robot.intake.spinForward(stickYValue);
+//    		Robot.shooter.shootForward(stickYValue);
+    		Robot.intake.spinForward(stickYValue);
     		Robot.shooter.shootBackward(stickYValue);
-    		Robot.intake.spinBackward(stickYValue);
+    		
+    	}
+    	//Shoot
+    	else if(Robot.oi.getOS().equals(OperatorState.INTAKESHOOT) && stickYValue > 0)
+    	{
+    		//Robot.intake.spinForward(stickYValue);
+    		//Robot.shooter.shootBackward(stickYValue);
+    		Robot.intake.spinForward(stickYValue);
+    		Robot.shooter.shootForward(stickYValue);
     	}
     	else
     		Robot.shooter.shoot(0);

@@ -3,6 +3,8 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.ClimbWithJoystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+
 import com.ctre.*;
 
 public class Climber extends Subsystem {

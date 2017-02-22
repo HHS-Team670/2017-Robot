@@ -36,10 +36,23 @@ LIST:
 3. PID
 4. Make sure all hotkeys and stuff work (especially shooter and intake)
 =======
-- [ ] Reticle on rope cam
-- [ ] Offset camera stuff in vision so it works
-- [ ] PID
-- [ ] Make sure all hotkeys and stuff work (especially shooter and intake)
+
+1. Omni
+2 Shooter Intake
+3 Update Talons
+4 PID
+5 Vision
+6 Reticle
+7 Current on Climber motor
+
+
+
+- [ ] 2 Firmware on Talons
+- [ ] 4 VisionReticle on rope cam
+- [ ] 5 Offset camera stuff in vision so it works
+- [ ] 3 PID
+- [ ] 1 Shooter and intake
+- [ ] 6 Check current on climber motor- make it stop when it hits the limit
 >>>>>>> origin/master
 
 --------------------------

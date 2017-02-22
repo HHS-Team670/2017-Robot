@@ -35,8 +35,8 @@ public class Robot extends IterativeRobot {
 	public static DriveBase driveBase = new DriveBase();
 	public static Camera camera = new Camera();
 	public static DistanceSensor distanceSensor = new DistanceSensor();
-	public static Intake intake = new Intake();
-	public static Shooter shooter = new Shooter();
+	public final static Intake intake = new Intake();
+	public final static Shooter shooter = new Shooter();
 	public static Climber climber = new Climber();
 	
 	
