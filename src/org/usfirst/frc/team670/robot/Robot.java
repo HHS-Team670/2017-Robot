@@ -58,7 +58,9 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
         
         //add below as default
-        chooser.addObject("Baseline Auto (5pts)", new AutoBaseline());
+	    
+	//Seconds, then speed
+        chooser.addObject("Baseline Auto (5pts)", new AutoBaseline(10, 0.5));
         chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
         
         chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
