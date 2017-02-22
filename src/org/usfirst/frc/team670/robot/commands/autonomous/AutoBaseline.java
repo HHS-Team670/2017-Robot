@@ -9,7 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoBaseline extends Command {
 
-    public AutoBaseline() {
+    private double speed = 0, seconds = 0;
+    
+    public AutoBaseline(double seconds, double speed) {
+        this.speed = speed;
+        this.seconds = seconds;
         requires(Robot.driveBase);
     }
 
@@ -19,14 +23,15 @@ public class AutoBaseline extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        setTimeout(seconds);
     	//Drive seven feet to baseline
-    	Robot.driveBase.driveDistance(8*12);
+    	Robot.driveBase.drive(speed, speed, 0);
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
