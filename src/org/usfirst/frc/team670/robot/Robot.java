@@ -32,12 +32,12 @@ public class Robot extends IterativeRobot {
 	
 	private static NetworkTablesServer vision;
 	public static OI oi;
-	public static DriveBase driveBase = new DriveBase();
-	public static Camera camera = new Camera();
-	public static DistanceSensor distanceSensor = new DistanceSensor();
+	public final static DriveBase driveBase = new DriveBase();
+	public final static Camera camera = new Camera();
+	public final static DistanceSensor distanceSensor = new DistanceSensor();
 	public final static Intake intake = new Intake();
 	public final static Shooter shooter = new Shooter();
-	public static Climber climber = new Climber();
+	public final static Climber climber = new Climber();
 	
 	
     Command autonomousCommand;

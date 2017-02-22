@@ -29,12 +29,12 @@ Code for Team 670's Steamworks Robot
 - [x] |---All gear sides w/ vision (x3)
 - [x]	|---All sides gear w/o vision (x1)
 
-1. Omni
+1. Omni - DONE
 2 Shooter Intake - DONE
-3 Update Talons
+3 Update Talons - DONE
 4 PID
-5 Vision
-6 Reticle
+5 Vision -WIP
+6 Reticle -WIP
 7 Current on Climber motor - DONE
 
 
