@@ -81,14 +81,19 @@ public class DriveBase extends Subsystem {
 
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		leftTalon1.setEncPosition(0);
+		leftTalon1.reverseSensor(true);
 		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		rightTalon1.enableControl(); //Enable PID control on the talon
+		//rightTalon1.enableControl(); //Enable PID control on the talon
 
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		rightTalon1.setEncPosition(0);
+		rightTalon1.reverseSensor(true);
 		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		leftTalon1.enableControl(); //Enable PID control on the talon
-
+		//leftTalon1.enableControl(); //Enable PID control on the talon
+		
+		
 		leftTalon1.set(-numTicks);
 		rightTalon1.set(numTicks);
 	}
