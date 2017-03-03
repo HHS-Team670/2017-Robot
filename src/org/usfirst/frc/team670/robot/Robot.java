@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team670.robot.commands.ClimbWithJoystick;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
@@ -152,6 +153,7 @@ public class Robot extends IterativeRobot {
        	SmartDashboard.putString("Current Distance:", "" + distanceSensor.getDistanceInches());
     	SmartDashboard.putString("Operator Stick", os);
         SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
+        SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.working + "");
 	}
     
     public static String getData()

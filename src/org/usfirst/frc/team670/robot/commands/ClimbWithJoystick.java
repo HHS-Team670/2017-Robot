@@ -19,6 +19,7 @@ public class ClimbWithJoystick extends Command {
 	private double currentLimit = maxPowerSpec/batteryVoltage;
 
 	private boolean stopped = false;
+	public static boolean working = true;
 
 	public ClimbWithJoystick() {
 		requires(Robot.climber);
@@ -42,6 +43,7 @@ public class ClimbWithJoystick extends Command {
 			double value = -Robot.oi.getOperatorStick().getY();
 			if(stopped == false)
 			{
+				working = true;
 				if(value >= 0)
 				{
 					Robot.climber.climb(-value);
@@ -59,6 +61,7 @@ public class ClimbWithJoystick extends Command {
 					e.printStackTrace();
 				}
 				stopped = false;
+				working = true;
 			}
 		}
 		else if(Robot.oi.getOS().equals(OperatorState.REVERSECLIMBER))
@@ -82,6 +85,7 @@ public class ClimbWithJoystick extends Command {
 		if(current >= currentLimit)
 		{
 			stopped = true;
+			working = false;
 			return true;
 		}
 		else
