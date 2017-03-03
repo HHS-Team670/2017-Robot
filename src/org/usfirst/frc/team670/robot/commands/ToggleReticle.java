@@ -1,17 +1,16 @@
-package org.usfirst.frc.team670.robot.commands.camera;
+package org.usfirst.frc.team670.robot.commands;
+
 
 import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class FlipCamera extends Command {
-
-    public FlipCamera() {
-        requires(Robot.camera);
+public class ToggleReticle extends Command {
+	
+	//This is the rectangle that gets drawn, need to offset it 4 inches to the left somehow.
+	
+    public ToggleReticle() {
+     requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +19,7 @@ public class FlipCamera extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.camera.switchCam();
+    	OI.drawRopeReticle = !OI.drawRopeReticle;
     }
 
     // Make this return true when this Command no longer needs to run execute()

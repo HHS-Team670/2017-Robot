@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 import java.util.ArrayList;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
+import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
 import org.usfirst.frc.team670.robot.vision.ImageUtilities;
 import org.usfirst.frc.team670.robot.vision.MovementProcessor;
@@ -199,6 +200,11 @@ public Camera() {
 	public void getImage() {
 		if (currentCamera != BAD_CAMERA) {
 			NIVision.IMAQdxGrab(currentCamera, frame, 1);
+			if(OI.drawRopeReticle)
+			{
+				com.ni.vision.NIVision.Rect rect = new com.ni.vision.NIVision.Rect(10,270,1000,100);
+				NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, 20);
+			}
 			server.setImage(frame);
 		}
 	}

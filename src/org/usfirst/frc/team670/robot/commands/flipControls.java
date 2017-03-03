@@ -1,18 +1,17 @@
 package org.usfirst.frc.team670.robot.commands;
 
-
 import org.usfirst.frc.team670.robot.OI;
-import org.usfirst.frc.team670.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DrawReticle extends Command {
-	
-	private boolean on = false;
-	//This is the rectangle that gets drawn, need to offset it 4 inches to the left somehow.
-	
-    public DrawReticle(boolean on) {
-     requires(Robot.camera);
-     this.on = on;
+/**
+ *
+ */
+public class flipControls extends Command {
+
+    public flipControls() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -21,17 +20,12 @@ public class DrawReticle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(on == true)
-    	{
-    		OI.drawRopeReticle = true;
-    	}
-    	else
-    		OI.drawRopeReticle = false;
+    	OI.winchControls = !OI.winchControls;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

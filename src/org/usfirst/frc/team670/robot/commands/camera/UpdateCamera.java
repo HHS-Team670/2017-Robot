@@ -25,10 +25,6 @@ public class UpdateCamera extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.camera.getImage();
-    	if(OI.drawRopeReticle = true)
-    	{
-    		Robot.camera.drawOnFrame(rects);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

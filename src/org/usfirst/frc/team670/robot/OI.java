@@ -5,14 +5,14 @@ import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.enums.DriveState;
 import org.usfirst.frc.team670.robot.enums.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
-import org.usfirst.frc.team670.robot.commands.DrawReticle;
+import org.usfirst.frc.team670.robot.commands.ToggleReticle;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
-import org.usfirst.frc.team670.robot.commands.DriveToWall;
-import org.usfirst.frc.team670.robot.commands.OmniDriveTime;
+import org.usfirst.frc.team670.robot.commands.DriveToWallAuto;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.PivotRight;
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.flipControls;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -22,6 +22,7 @@ public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
 	public static boolean drawRopeReticle = false;
+	public static boolean winchControls = false;
 	
 	
 	//This is the width of driver's side of the field for auto calculations. Need to figure if this is right.
@@ -35,25 +36,22 @@ public class OI {
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
 	//Operator Buttons
-	private Button toggleClimber = new JoystickButton(operatorStick, 5);
-	private Button toggleReverseClimber = new JoystickButton(operatorStick, 8);
-	private Button toggleIntake = new JoystickButton(operatorStick, 4);
-	private Button toggleShooter = new JoystickButton(operatorStick, 3);
-	private Button cancelCommand = new JoystickButton(operatorStick, 9);
 	private Button intakeShooter = new JoystickButton(operatorStick, 1);
 	private Button toggleReticle = new JoystickButton(operatorStick, 2);
+	private Button toggleShooter = new JoystickButton(operatorStick, 3);
+	private Button toggleIntake = new JoystickButton(operatorStick, 4);
+	private Button toggleClimber = new JoystickButton(operatorStick, 5);
+	private Button toggleReverseClimber = new JoystickButton(operatorStick, 8);
+	private Button cancelCommand = new JoystickButton(operatorStick, 9);
+	
 	
 	//Driver Controls
-	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);
-	private Button runAllWheel = new JoystickButton(leftDriveStick, 1);
-	private Button flipCamera = new JoystickButton(leftDriveStick, 3);
+	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);	
 	private Button placeGear = new JoystickButton(rightDriveStick, 2);
-	private Button ramWall = new JoystickButton(rightDriveStick, 1);
-	//private Button leftPivot = new JoystickButton(leftDriveStick, 4);
-	//private Button rightPivot = new JoystickButton(leftDriveStick, 5);
-	//private Button incrementB = new JoystickButton(leftDriveStick, 2);
-	private Button leftStrafe = new JoystickButton(rightDriveStick, 4);
-	private Button rightStrafe = new JoystickButton(rightDriveStick, 5);
+	private Button ramWall = new JoystickButton(rightDriveStick, 4);
+	
+	private Button flipControls = new JoystickButton(leftDriveStick, 2);
+	private Button flipCamera = new JoystickButton(leftDriveStick, 3);
 
 	//Arcade buttons
 	
@@ -62,13 +60,10 @@ public class OI {
 		runOmniDrive.whenPressed(new ChangeDriveType(DriveState.OMNIWHEEL));
 		runOmniDrive.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
 		
-		runAllWheel.whenPressed(new ChangeDriveType(DriveState.ALLWHEEL));
-		runAllWheel.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
-		
 		placeGear.whenPressed(new AlignWithGear());
 		placeGear.whenReleased(new CancelCommand());
 		
-		ramWall.whenPressed(new DriveToWall());
+		ramWall.whenPressed(new DriveToWallAuto());
 		ramWall.whenReleased(new CancelCommand());
 		
 		flipCamera.whenPressed(new FlipCamera());
@@ -96,11 +91,9 @@ public class OI {
 		//incrementF.whenPressed(new DriveDistance(1));
 		//incrementB.whenPressed(new DriveDistance(-1));
 		
-		leftStrafe.whenPressed(new OmniDriveTime(0.25,'l', 0.5));
-		rightStrafe.whenPressed(new OmniDriveTime(0.25,'r', 0.5));
-		
-		toggleReticle.cancelWhenActive(new DrawReticle(true));;
-		toggleReticle.whenInactive(new DrawReticle(false));
+		toggleReticle.whenPressed(new ToggleReticle());
+
+		flipControls.whenPressed(new flipControls());
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}
