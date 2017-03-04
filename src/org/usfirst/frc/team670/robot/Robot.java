@@ -62,11 +62,11 @@ public class Robot extends IterativeRobot {
 	    
 	//Seconds, then speed
         chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
-        chooser.addObject("Baseline Auto (5pts)", new AutoBaseline(10, 0.5));
+        chooser.addObject("Baseline Auto (5pts)", new AutoBaseline(10, 1));
 	
 	    
 	 //Baseline is just going forward by 10 seconds, Center gear is the exact same thing
-        chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(10, 0.5));
+        chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(10, 1));
         chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
         chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
         
