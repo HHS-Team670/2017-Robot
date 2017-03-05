@@ -19,7 +19,7 @@ public class DriveToWallAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double speed = 0.3;
+    	double speed = 0.75;
     	if(Robot.distanceSensor.getDistanceInches() >= 12)
     	{
     		Robot.driveBase.drive(speed, speed, 0);

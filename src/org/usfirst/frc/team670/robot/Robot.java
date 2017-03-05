@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team670.robot.commands.ClimbWithJoystick;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
-import org.usfirst.frc.team670.robot.commands.PivotRight;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoDoNothing;
 import org.usfirst.frc.team670.robot.commands.autonomous.CenterGearLeft;
@@ -53,19 +52,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser<Command>();
         
-        //Commands for testing PID etc.
-        chooser.addDefault("Drive 2 ft", new DriveDistance(24));
-        //chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
-        chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
-        
-        //add below as default
-	    
-	//Seconds, then speed
+        												//Seconds, then speed
+        chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(10, 1));
         chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
-        chooser.addObject("Baseline Auto (5pts)", new AutoBaseline(10, 1));
 	
 	    
-	 //Baseline is just going forward by 10 seconds, Center gear is the exact same thing
+        //Baseline is just going forward by 10 seconds, Center gear is the exact same thing
         chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(10, 1));
         chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
         chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
@@ -75,6 +67,11 @@ public class Robot extends IterativeRobot {
         
         chooser.addObject("Left Gear from Center (60pts)", new LeftGearCenter());
         chooser.addObject("Right Gear from Center (60pts)", new RightGearCenter());
+        
+        //Commands for testing PID etc.
+        chooser.addObject("Drive 2 ft", new DriveDistance(24));
+        //chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
+        chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
         
         SmartDashboard.putData("Auto mode", chooser);
     }
@@ -150,10 +147,9 @@ public class Robot extends IterativeRobot {
     	String os = (oi.getOS().equals(OperatorState.CLIMBER))?("Climber"):(oi.getOS().equals(OperatorState.SHOOTER))?("Shooter"):(oi.getOS().equals(OperatorState.INTAKE))?("Intake"):(oi.getOS().equals(OperatorState.REVERSECLIMBER))?("Reverse Climber"):(oi.getOS().equals(OperatorState.INTAKESHOOT))?("IN/OUT"):("None");
     	
        	SmartDashboard.putString("Drive type:", driveType);
-       	SmartDashboard.putString("Current Distance:", "" + distanceSensor.getDistanceInches());
-    	SmartDashboard.putString("Operator Stick", os);
+       	SmartDashboard.putString("Operator Stick", os);
         SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
-        SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.working + "");
+        SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
 	}
     
     public static String getData()

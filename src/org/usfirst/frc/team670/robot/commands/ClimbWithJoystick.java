@@ -96,6 +96,11 @@ public class ClimbWithJoystick extends Command {
 	protected void end() {
 		Robot.climber.climb(0);
 	}
+	
+	public static boolean isWorking()
+	{
+		return working;
+	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
