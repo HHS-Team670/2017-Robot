@@ -1,15 +1,12 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
+import org.usfirst.frc.team670.robot.commands.ToggleReticle;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.enums.DriveState;
 import org.usfirst.frc.team670.robot.enums.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
-import org.usfirst.frc.team670.robot.commands.ToggleReticle;
-import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.DriveToWallAuto;
-import org.usfirst.frc.team670.robot.commands.PivotLeft;
-import org.usfirst.frc.team670.robot.commands.PivotRight;
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.flipControls;
