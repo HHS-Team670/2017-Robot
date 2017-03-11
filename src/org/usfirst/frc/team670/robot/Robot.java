@@ -1,5 +1,7 @@
 package org.usfirst.frc.team670.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -52,13 +54,17 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser<Command>();
         
-        												//Seconds, then speed
-        chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(10, 1));
+        						
+        //Seconds, then speed
+        chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(2, 1));
         chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
 	
-	    
+	    //Camera initialize
+//        CameraServer server = CameraServer.getInstance();
+//        UsbCamera winchCam = server.startAutomaticCapture("Winch Cam", 0);
+        
         //Baseline is just going forward by 10 seconds, Center gear is the exact same thing
-        chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(10, 1));
+        chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(0.9, 1));
         chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
         chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
         
@@ -150,6 +156,8 @@ public class Robot extends IterativeRobot {
        	SmartDashboard.putString("Operator Stick", os);
         SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
         SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
+       // SmartDashboard.putString("Cam1:" , Camera.one + "");
+
 	}
     
     public static String getData()

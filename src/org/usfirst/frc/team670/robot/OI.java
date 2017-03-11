@@ -23,7 +23,7 @@ public class OI {
 	
 	
 	//This is the width of driver's side of the field for auto calculations. Need to figure if this is right.
-	public double baseWidthInches = 105.75;
+	public double baseWidthInches = 247.6;
 	//Decides if we use ultrasonic sensor or not during auto.
 	public boolean useUltraSonic = true;
 	//Joysticks

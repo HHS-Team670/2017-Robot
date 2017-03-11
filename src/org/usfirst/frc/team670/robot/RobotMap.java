@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot;
+	package org.usfirst.frc.team670.robot;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -10,10 +10,10 @@ public class RobotMap
 {
 
 	//DriveBase
-    public final static int rightMotor1 = 3;
+    public final static int rightMotor1 = 3;//HOT
     public final static int rightMotor2 = 4;
     public final static int leftMotor2 = 2;
-    public final static int leftMotor1 = 1;
+    public final static int leftMotor1 = 1;//HOT
     public final static int omniWheel = 5;
     
     //Action motors

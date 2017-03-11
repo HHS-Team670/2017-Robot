@@ -14,6 +14,8 @@ import com.ni.vision.NIVision.DrawMode;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ShapeMode;
 
+import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.vision.CameraServer;
 
@@ -169,7 +171,10 @@ public Camera() {
 		setAllToFalse();
 		
 		if(newCam == cam1)
+		{
 			one = true;
+			//UsbCamera cam1  = server.startAutomaticCapture("cam1", 0);
+		}
 		else if(newCam == cam2)
 			two = true;
 		else if(newCam == cam3)
@@ -190,6 +195,12 @@ public Camera() {
 			// We need to run getImage() regularly elsewhere in the code
 			// in order to get a continuous feed. See the default command below.
 			getImage();
+			server = CameraServer.getInstance();
+//			UsbCamera cam1  = server.startAutomaticCapture("cam1", 0);
+//			UsbCamera cam2  = server.startAutomaticCapture("cam2", 0);
+//			UsbCamera cam3  = server.startAutomaticCapture("cam3", 0);
+//			UsbCamera cam4  = server.startAutomaticCapture("cam4", 0);
+			
 		}
 	}
 	
