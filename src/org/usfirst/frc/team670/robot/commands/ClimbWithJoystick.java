@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.hal.PDPJNI;
  */
 public class ClimbWithJoystick extends Command {
 
-	PowerDistributionPanel pdp = new PowerDistributionPanel();
-	private double current = pdp.getCurrent(12);
-	private double maxPowerSpec = 337;
-	private double batteryVoltage = pdp.getVoltage();
-	private double currentLimit = maxPowerSpec/batteryVoltage;
+	//PowerDistributionPanel pdp = new PowerDistributionPanel();
+//	private double current = pdp.getCurrent(12);
+//	private double maxPowerSpec = 337;
+//	private double batteryVoltage = pdp.getVoltage();
+//	private double currentLimit = maxPowerSpec/batteryVoltage;
 
-	private boolean stopped = false;
-	public static boolean working = true;
+//	private boolean stopped = false;
+//	public static boolean working = true;
 
 	public ClimbWithJoystick() {
 		requires(Robot.climber);
@@ -33,36 +33,36 @@ public class ClimbWithJoystick extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		System.err.println(current);
-		current = pdp.getCurrent(12);
-		batteryVoltage = pdp.getVoltage();
-		currentLimit = maxPowerSpec/batteryVoltage;
+//		System.err.println(current);
+//		current = pdp.getCurrent(12);
+//		batteryVoltage = pdp.getVoltage();
+//		currentLimit = maxPowerSpec/batteryVoltage;
 
 		if(Robot.oi.getOS().equals(OperatorState.CLIMBER))
 		{
 			double value = -Robot.oi.getOperatorStick().getY();
-			if(stopped == false)
-			{
-				working = true;
-				if(value >= 0)
-				{
+//			if(stopped == false)
+//			{
+//				working = true;
+//				if(value >= 0)
+//				{
 					Robot.climber.climb(-value);
-				}
-				else
-				{
-					Robot.climber.climb(0);
-				}
-			}
-			else
-			{
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				stopped = false;
-				working = true;
-			}
+//				}
+//				else
+//				{
+//					Robot.climber.climb(0);
+//				}
+//			}
+//			else
+//			{
+//				try {
+//					Thread.sleep(3000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				stopped = false;
+//				working = true;
+//			}
 		}
 		else if(Robot.oi.getOS().equals(OperatorState.REVERSECLIMBER))
 		{
@@ -82,13 +82,13 @@ public class ClimbWithJoystick extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(current >= currentLimit)
-		{
-			stopped = true;
-			working = false;
-			return true;
-		}
-		else
+//		if(current >= currentLimit)
+//		{
+//			stopped = true;
+//			working = false;
+//			return true;
+//		}
+//		else
 			return false;
 	}
 
@@ -97,10 +97,10 @@ public class ClimbWithJoystick extends Command {
 		Robot.climber.climb(0);
 	}
 	
-	public static boolean isWorking()
-	{
-		return working;
-	}
+//	public static boolean isWorking()
+//	{
+//		return working;
+//	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run

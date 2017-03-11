@@ -155,7 +155,7 @@ public class Robot extends IterativeRobot {
        	SmartDashboard.putString("Drive type:", driveType);
        	SmartDashboard.putString("Operator Stick", os);
         SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
-        SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
+        //SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
        // SmartDashboard.putString("Cam1:" , Camera.one + "");
 
 	}
