@@ -19,7 +19,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.LeftGearCenter;
 import org.usfirst.frc.team670.robot.commands.autonomous.RightGear;
 import org.usfirst.frc.team670.robot.commands.autonomous.RightGearCenter;
 import org.usfirst.frc.team670.robot.enums.OperatorState;
-import org.usfirst.frc.team670.robot.subsystems.Camera;
+//import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
@@ -31,61 +31,62 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
-	
+
 	private static NetworkTablesServer vision;
 	public static OI oi;
 	public final static DriveBase driveBase = new DriveBase();
-	public final static Camera camera = new Camera();
+	//public final static Camera camera = new Camera();
 	public final static DistanceSensor distanceSensor = new DistanceSensor();
 	public final static Intake intake = new Intake();
 	public final static Shooter shooter = new Shooter();
 	public final static Climber climber = new Climber();
-	
-	
-    Command autonomousCommand;
-    SendableChooser<Command> chooser;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
-    	vision = new NetworkTablesServer("vision");
+
+	Command autonomousCommand;
+	SendableChooser<Command> chooser;
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
+		vision = new NetworkTablesServer("vision");
 		oi = new OI();
-        chooser = new SendableChooser<Command>();
-        
-        						
-        //Seconds, then speed
-        chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(2, 1));
-        chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
-	
-	    //Camera initialize
-//        CameraServer server = CameraServer.getInstance();
-//        UsbCamera winchCam = server.startAutomaticCapture("Winch Cam", 0);
-        
-        //Baseline is just going forward by 10 seconds, Center gear is the exact same thing
-        chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(0.9, 1));
-        chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
-        chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
-        
-        chooser.addObject("Left Gear from Left (60pts)", new LeftGear());
-        chooser.addObject("Right Gear from Right (60pts)", new RightGear());
-        
-        chooser.addObject("Left Gear from Center (60pts)", new LeftGearCenter());
-        chooser.addObject("Right Gear from Center (60pts)", new RightGearCenter());
-        
-        //Commands for testing PID etc.
-        chooser.addObject("Drive 2 ft", new DriveDistance(24));
-        //chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
-        chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
-        
-        SmartDashboard.putData("Auto mode", chooser);
-    }
-	
-    public void disabledInit(){
+		chooser = new SendableChooser<Command>();
 
-    }
-	
+		//These replace the camera class
+		//If you want to have only a certain camera, just comment out the others and delete them from the smartdash.
+		CameraServer server = CameraServer.getInstance();
+		UsbCamera winchCam = server.startAutomaticCapture("Winch Cam", 1);
+		// UsbCamera frontCam = server.startAutomaticCapture("Front Cam", 0);
+
+		//Seconds, then speed
+		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(2, 1));
+		chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
+
+		//Baseline is just going forward by 10 seconds, Center gear is the exact same thing
+		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(0.95, 1));
+		chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
+		chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
+
+		chooser.addObject("Left Gear from Left (60pts)", new LeftGear());
+		chooser.addObject("Right Gear from Right (60pts)", new RightGear());
+
+		chooser.addObject("Left Gear from Center (60pts)", new LeftGearCenter());
+		chooser.addObject("Right Gear from Center (60pts)", new RightGearCenter());
+
+		//Commands for testing PID etc.
+		chooser.addObject("Drive 2 ft", new DriveDistance(24));
+		//chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
+		chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
+
+		SmartDashboard.putData("Auto mode", chooser);
+	}
+
+	public void disabledInit(){
+
+	}
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
@@ -99,9 +100,9 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
-        
+	public void autonomousInit() {
+		autonomousCommand = (Command) chooser.getSelected();
+
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
@@ -112,56 +113,56 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
-    	
-    	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-    	putData();
-        Scheduler.getInstance().run();
-    }
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null) autonomousCommand.start();
+	}
+
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		putData();
+		Scheduler.getInstance().run();
+	}
 
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-    }
+		// teleop starts running. If you want the autonomous to 
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null) autonomousCommand.cancel();
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-    	putData();
-        Scheduler.getInstance().run();
-    }
- 
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
-        
-    public void putData(){
-    	String driveType = driveBase.toString();
-    	String os = (oi.getOS().equals(OperatorState.CLIMBER))?("Climber"):(oi.getOS().equals(OperatorState.SHOOTER))?("Shooter"):(oi.getOS().equals(OperatorState.INTAKE))?("Intake"):(oi.getOS().equals(OperatorState.REVERSECLIMBER))?("Reverse Climber"):(oi.getOS().equals(OperatorState.INTAKESHOOT))?("IN/OUT"):("None");
-    	
-       	SmartDashboard.putString("Drive type:", driveType);
-       	SmartDashboard.putString("Operator Stick", os);
-        SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
-        //SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
-       // SmartDashboard.putString("Cam1:" , Camera.one + "");
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		putData();
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
+
+	public void putData(){
+		String driveType = driveBase.toString();
+		String os = (oi.getOS().equals(OperatorState.CLIMBER))?("Climber"):(oi.getOS().equals(OperatorState.SHOOTER))?("Shooter"):(oi.getOS().equals(OperatorState.INTAKE))?("Intake"):(oi.getOS().equals(OperatorState.REVERSECLIMBER))?("Reverse Climber"):(oi.getOS().equals(OperatorState.INTAKESHOOT))?("IN/OUT"):("None");
+
+		SmartDashboard.putString("Drive type:", driveType);
+		SmartDashboard.putString("Operator Stick", os);
+		SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
+		//SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
+		// SmartDashboard.putString("Cam1:" , Camera.one + "");
 
 	}
-    
-    public static String getData()
-    {
-    	return vision.getData("data");
-    }
+
+	public static String getData()
+	{
+		return vision.getData("data");
+	}
 }

@@ -75,19 +75,10 @@ public class DriveBase extends Subsystem {
 		rightTalon1.set(-right);
 		omniTalon.set(omni);
 
-		//This code should set it to be less twitchy, never mind this is dumb
-		//		leftTalon1.set(Math.pow(2, left) - 1);
-		//		rightTalon1.set(-(Math.pow(2, right) - 1);
 
-		//Other potential stuff
-		if(left != 0)
-		{
-			leftTalon1.set(Math.pow(left, 2) + 0.1 /* arbitrary number to make it not toooooo unsensitive*/);
-		}
-		if(right != 0)
-		{
-			rightTalon1.set(-Math.pow(right, 2) + 0.1 /* arbitrary number to make it not toooooo unsensitive*/);
-		}
+		//Other potential stuff for twitchiness
+//			leftTalon1.set(Math.pow(left, 2));
+//			rightTalon1.set(-Math.pow(right, 2));
 	}
 
 	public void resetRightEncoder() {

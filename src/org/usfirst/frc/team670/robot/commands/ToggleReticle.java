@@ -10,7 +10,7 @@ public class ToggleReticle extends Command {
 	//This is the rectangle that gets drawn, need to offset it 4 inches to the left somehow.
 	
     public ToggleReticle() {
-     requires(Robot.camera);
+     //requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time

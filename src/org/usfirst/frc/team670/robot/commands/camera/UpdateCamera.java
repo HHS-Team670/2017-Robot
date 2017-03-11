@@ -15,7 +15,7 @@ public class UpdateCamera extends Command {
 	
     public UpdateCamera() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.camera);
+        //requires(Robot.camera);
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +24,7 @@ public class UpdateCamera extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.camera.getImage();
+    	//Robot.camera.getImage();
     }
 
     // Make this return true when this Command no longer needs to run execute()
