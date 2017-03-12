@@ -1,7 +1,6 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.OI;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class flipControls extends Command {
 
+	public static boolean reversedState = false;
+	
     public flipControls() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

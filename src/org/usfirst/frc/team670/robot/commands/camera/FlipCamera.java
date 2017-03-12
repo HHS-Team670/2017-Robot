@@ -1,8 +1,8 @@
 package org.usfirst.frc.team670.robot.commands.camera;
 
-import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
 
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,30 +10,32 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class FlipCamera extends Command {
 
-    public FlipCamera() {
-        //requires(Robot.camera);
-    }
+	public static boolean firstCam = true;
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+	public FlipCamera() {
+		requires(Robot.camera);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    //	Robot.camera.switchCam();
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.camera.flipCam();
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

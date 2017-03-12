@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.enums.DriveState;
+import org.usfirst.frc.team670.robot.extras.DriveState;
 
 import edu.wpi.first.wpilibj.command.Command;
 

@@ -1,13 +1,11 @@
 package org.usfirst.frc.team670.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team670.robot.commands.ClimbWithJoystick;
+import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
@@ -18,10 +16,11 @@ import org.usfirst.frc.team670.robot.commands.autonomous.LeftGear;
 import org.usfirst.frc.team670.robot.commands.autonomous.LeftGearCenter;
 import org.usfirst.frc.team670.robot.commands.autonomous.RightGear;
 import org.usfirst.frc.team670.robot.commands.autonomous.RightGearCenter;
-import org.usfirst.frc.team670.robot.enums.OperatorState;
-//import org.usfirst.frc.team670.robot.subsystems.Camera;
+import org.usfirst.frc.team670.robot.extras.DriveState;
+import org.usfirst.frc.team670.robot.extras.OperatorState;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
+import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
@@ -35,13 +34,12 @@ public class Robot extends IterativeRobot {
 	private static NetworkTablesServer vision;
 	public static OI oi;
 	public final static DriveBase driveBase = new DriveBase();
-	//public final static Camera camera = new Camera();
+	public final static Camera camera = new Camera();
 	public final static DistanceSensor distanceSensor = new DistanceSensor();
 	public final static Intake intake = new Intake();
 	public final static Shooter shooter = new Shooter();
 	public final static Climber climber = new Climber();
-
-
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
 
@@ -54,18 +52,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		chooser = new SendableChooser<Command>();
 
-		//These replace the camera class
-		//If you want to have only a certain camera, just comment out the others and delete them from the smartdash.
-		CameraServer server = CameraServer.getInstance();
-		UsbCamera winchCam = server.startAutomaticCapture("Winch Cam", 1);
-		// UsbCamera frontCam = server.startAutomaticCapture("Front Cam", 0);
-
+		new ChangeDriveType(DriveState.FOURWHEEL);
+		
 		//Seconds, then speed
-		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(2, 1));
+		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(1.2, 1));
 		chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
 
 		//Baseline is just going forward by 10 seconds, Center gear is the exact same thing
-		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(0.95, 1));
+		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(1, 1));
 		chooser.addObject("Center Gear from Left (60pts)", new CenterGearLeft());
 		chooser.addObject("Center Gear from Right (60pts)", new CenterGearRight());
 

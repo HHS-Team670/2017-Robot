@@ -8,12 +8,12 @@
 
 public class RobotMap 
 {
-
+//RightMotor1 = 3, RightMotor2 = 4, leftMotor2 = 2, leftMotor1 = 1
 	//DriveBase
-    public final static int rightMotor1 = 3;//HOT
-    public final static int rightMotor2 = 4;
-    public final static int leftMotor2 = 2;
-    public final static int leftMotor1 = 1;//HOT
+    public static final int rightMotor1 = 3;//HOT
+    public static final int rightMotor2 = 4;
+    public static final int leftMotor2 = 2;
+    public static final int leftMotor1 = 1;//HOT
     public final static int omniWheel = 5;
     
     //Action motors

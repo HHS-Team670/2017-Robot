@@ -2,7 +2,8 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team670.robot.enums.DriveState;
+import org.usfirst.frc.team670.robot.extras.DriveState;
+import org.usfirst.frc.team670.robot.extras.Linearize;
 
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -71,14 +72,9 @@ public class DriveBase extends Subsystem {
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(left);
-		rightTalon1.set(-right);
-		omniTalon.set(omni);
-
-
-		//Other potential stuff for twitchiness
-//			leftTalon1.set(Math.pow(left, 2));
-//			rightTalon1.set(-Math.pow(right, 2));
+		leftTalon1.set(Linearize.getSwayOutput(left));
+		rightTalon1.set(Linearize.getSwayOutput(-right));
+		omniTalon.set(Linearize.getSwayOutput(omni));
 	}
 
 	public void resetRightEncoder() {
@@ -104,6 +100,9 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		rightTalon1.enableControl(); //Enable PID control on the talon
 		rightTalon1.setEncPosition(0);
+		
+		//LEFT IS BACKWARDS
+		
 		//rightTalon1.reverseSensor(true);	
 		//rightTalon1.enableControl(); //Enable PID control on the talon
 		
@@ -112,7 +111,7 @@ public class DriveBase extends Subsystem {
 		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		leftTalon1.enableControl(); //Enable PID control on the talon
 		leftTalon1.setEncPosition(0);
-		//leftTalon1.reverseSensor(true);
+		leftTalon1.reverseSensor(true);
 		//leftTalon1.enableControl(); //Enable PID control on the talon
 
 
