@@ -36,11 +36,11 @@ public class DriveBase extends Subsystem {
 	//Drive only with omniwheel
 	//private static boolean isOmniDrive = false;
 	private static DriveState current = DriveState.FOURWHEEL;
-	
-//	private Encoder encLeft = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-//	private Encoder encRight = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-	
-	
+
+	//	private Encoder encLeft = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	//	private Encoder encRight = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+
+
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
@@ -56,10 +56,10 @@ public class DriveBase extends Subsystem {
 		rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
 		rightTalon2.set(rightTalon1.getDeviceID());
 
-		
+
 		leftTalon1.setEncPosition(0);
 		rightTalon1.setEncPosition(0);
-		
+
 	}
 
 	public void initDefaultCommand() {
@@ -74,10 +74,20 @@ public class DriveBase extends Subsystem {
 		leftTalon1.set(left);
 		rightTalon1.set(-right);
 		omniTalon.set(omni);
-		
-		//This code should set it to be less twitchy
-//		leftTalon1.set((Math.pow(2, left) - 1)/100);
-//		rightTalon1.set(-(Math.pow(2, right) - 1) / 100);
+
+		//This code should set it to be less twitchy, never mind this is dumb
+		//		leftTalon1.set(Math.pow(2, left) - 1);
+		//		rightTalon1.set(-(Math.pow(2, right) - 1);
+
+		//Other potential stuff
+		if(left != 0)
+		{
+			leftTalon1.set(Math.pow(left, 2) + 0.1 /* arbitrary number to make it not toooooo unsensitive*/);
+		}
+		if(right != 0)
+		{
+			rightTalon1.set(-Math.pow(right, 2) + 0.1 /* arbitrary number to make it not toooooo unsensitive*/);
+		}
 	}
 
 	public void resetRightEncoder() {
@@ -94,31 +104,34 @@ public class DriveBase extends Subsystem {
 
 	public void driveDistance(double inches) 
 	{
-//		encLeft.reset();
-//		encRight.reset();
+		//		encLeft.reset();
+		//		encRight.reset();
 		double numTicks = ((inches / inchesPerTick) / 360) * talonConversion;
-		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-
-
 
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
-		rightTalon1.setEncPosition(0);
-		rightTalon1.reverseSensor(true);
-		//rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
+		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		rightTalon1.enableControl(); //Enable PID control on the talon
-
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);	
+		//rightTalon1.enableControl(); //Enable PID control on the talon
+		
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
-		leftTalon1.setEncPosition(0);
-		leftTalon1.reverseSensor(true);
-		//leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
+		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
 		leftTalon1.enableControl(); //Enable PID control on the talon
-		
-		
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.enableControl(); //Enable PID control on the talon
+
+
 		leftTalon1.set(-numTicks);
 		rightTalon1.set(numTicks);
+	}
+	
+	public void driveDistanceRight(double inches)
+	{
+		
 	}
 
 	public void pivotRight(double degrees) 
