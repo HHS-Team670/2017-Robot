@@ -36,7 +36,6 @@ public class DriveBase extends Subsystem {
 	//Drive only with omniwheel
 	//private static boolean isOmniDrive = false;
 	private static DriveState current = DriveState.FOURWHEEL;
-	private static final double speedMultiple = 1.2;
 	
 //	private Encoder encLeft = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 //	private Encoder encRight = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
@@ -72,9 +71,13 @@ public class DriveBase extends Subsystem {
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(speedMultiple * left);
-		rightTalon1.set(-speedMultiple * right);
-		omniTalon.set(speedMultiple * omni);
+		leftTalon1.set(left);
+		rightTalon1.set(-right);
+		omniTalon.set(omni);
+		
+		//This code should set it to be less twitchy
+//		leftTalon1.set((Math.pow(2, left) - 1)/100);
+//		rightTalon1.set(-(Math.pow(2, right) - 1) / 100);
 	}
 
 	public void resetRightEncoder() {
