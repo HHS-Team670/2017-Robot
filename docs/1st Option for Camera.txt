@@ -1,0 +1,51 @@
+package org.usfirst.frc.team670.robot.subsystems;
+
+import org.usfirst.frc.team670.robot.commands.camera.UpdateCamera;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ImageType;
+
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.vision.USBCamera;
+
+/**
+ *
+ */
+public class Camera extends Subsystem {
+	USBCamera cam0,cam1,cam2,cam3;
+	Image frame;
+	Image binaryFrame;
+    CameraServer server;
+    
+	public Camera(){
+		cam0 = new USBCamera("cam0");
+		cam1 = new USBCamera("cam1");
+		cam2 = new USBCamera("cam2");
+		cam3 = new USBCamera("cam3");
+		frame = NIVision.imaqCreateImage(ImageType.IMAGE_HSL, 0);
+		binaryFrame = NIVision.imaqCreateImage(ImageType.IMAGE_U8, 0);
+	}
+
+	
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
+
+    public void initDefaultCommand() {
+        setDefaultCommand(new UpdateCamera());
+    }
+
+	public void getImage() {
+    	server = CameraServer.getInstance();
+    	server.startAutomaticCapture(0);
+    	server.startAutomaticCapture(1);
+    	server.startAutomaticCapture(3);
+    	CameraServer.getInstance().putVideo(getName(), 1000, 500);
+	}
+	
+	public void switchCam()
+	{
+		
+	}
+}
