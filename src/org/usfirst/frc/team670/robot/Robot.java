@@ -69,11 +69,6 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Left Gear from Center (60pts)", new LeftGearCenter());
 		chooser.addObject("Right Gear from Center (60pts)", new RightGearCenter());
 
-		//Commands for testing PID etc.
-		chooser.addObject("Drive 2 ft", new DriveDistance(24));
-		//chooser.addObject("Pivot 90 degrees right", new PivotRight(90));
-		chooser.addObject("Pivot 90 degrees left", new PivotLeft(90));
-
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 

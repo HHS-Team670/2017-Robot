@@ -11,7 +11,7 @@ public class Camera extends Subsystem {
 	
 	boolean isOnWinch = false;
 	CameraServer server = CameraServer.getInstance();
-	UsbCamera winchCam, backCam;
+	UsbCamera winchCam, backCam, frontCam;
 	int ON = 10, OFF = 0;
 	double resolutionFactor = 0.5;
 	int resWidth = (int) (640*resolutionFactor), resHeight = (int) (480*resolutionFactor);
@@ -20,6 +20,7 @@ public class Camera extends Subsystem {
 	{
 		backCam = server.startAutomaticCapture("Back Cam", 0);
 		winchCam = server.startAutomaticCapture("Winch Cam", 1);
+		frontCam = server.startAutomaticCapture("Front Cam", 2);
 		
 		backCam.setFPS(ON);
 		winchCam.setFPS(OFF);
@@ -28,6 +29,7 @@ public class Camera extends Subsystem {
 		
 		winchCam.setResolution(resWidth,resHeight);
 		backCam.setResolution(resWidth,resHeight);
+		frontCam.setResolution(resWidth,resHeight);
 	}
 	
 	public void flipCam()
