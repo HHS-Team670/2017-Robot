@@ -3,7 +3,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team670.robot.extras.DriveState;
-import org.usfirst.frc.team670.robot.extras.Linearize;
+import org.usfirst.frc.team670.robot.extras.PreciseControl;
 
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
 
+	PreciseControl pc;
 	//Motor controllers
 	public CANTalon leftTalon1;
 	public CANTalon leftTalon2;
@@ -43,6 +44,7 @@ public class DriveBase extends Subsystem {
 
 
 	public DriveBase() {
+		pc = new PreciseControl(100);
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
 		leftTalon2 = new CANTalon(RobotMap.leftMotor2);
 		rightTalon1 = new CANTalon(RobotMap.rightMotor1);
@@ -72,9 +74,9 @@ public class DriveBase extends Subsystem {
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(Linearize.getSwayOutput(left));
-		rightTalon1.set(Linearize.getSwayOutput(-right));
-		omniTalon.set(Linearize.getSwayOutput(omni));
+		leftTalon1.set(pc.getFFTOutput(left));
+		rightTalon1.set(pc.getFFTOutput(-right));
+		omniTalon.set(pc.getFFTOutput(omni));
 	}
 
 	public void resetRightEncoder() {
