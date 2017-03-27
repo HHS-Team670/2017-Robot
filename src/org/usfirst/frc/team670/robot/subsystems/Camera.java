@@ -69,3 +69,80 @@ public class Camera extends Subsystem {
     }
 }
 
+
+/*
+package org.usfirst.frc.team670.robot.subsystems;
+
+import org.opencv.core.Mat;
+import org.usfirst.frc.team670.robot.Robot;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class Camera extends Subsystem {
+	
+	UsbCamera winchCam, backCam, frontCam;
+	//0 = Front, 1 = winch, 2 = back
+	private CvSource outputStream;
+	private CvSink cvSinkFront, cvSinkBack, cvSinkWinch, currentCvSink;
+	
+	public Camera()
+	{
+		
+	}
+	
+	public void init()
+	{		
+		winchCam = CameraServer.getInstance().startAutomaticCapture("winch", 1);
+		backCam = CameraServer.getInstance().startAutomaticCapture("back", 0);
+		frontCam = CameraServer.getInstance().startAutomaticCapture("front", 2);
+        winchCam.setResolution(640, 480);
+        backCam.setResolution(640, 480);
+        frontCam.setResolution(640, 480);
+        cvSinkWinch = CameraServer.getInstance().getVideo("winch");
+        cvSinkFront = CameraServer.getInstance().getVideo("front");
+        cvSinkBack = CameraServer.getInstance().getVideo("back");
+        outputStream = CameraServer.getInstance().putVideo("Video", 640, 480);
+        currentCvSink = cvSinkFront;
+        
+        Mat src = new Mat(), output = new Mat();
+        //Run thread to start the processing
+        new Thread(() -> {
+	        	while(true)
+	        	{
+		        	if(Robot.oi.runCamera)
+			        {
+				        currentCvSink.grabFrame(src);
+				        //Run processing here if you are inclined to do so
+				        outputStream.putFrame(src);
+			        }
+	        	}
+        }).start();
+	}
+	
+	public void flipCam()
+	{
+		if(currentCvSink.equals(cvSinkFront))
+		{
+			currentCvSink = cvSinkWinch;
+		}
+		else if(currentCvSink.equals(cvSinkWinch))
+		{
+			currentCvSink = cvSinkBack;
+		}
+		else
+		{
+			currentCvSink = cvSinkFront;
+		}
+	}
+	
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+}
+ */
+
