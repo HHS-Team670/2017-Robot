@@ -21,20 +21,20 @@ public class DriveWithJoystick extends Command {
 		if(OI.winchControls)
 		{
 			if(Robot.driveBase.getDriveType().equals(DriveState.FOURWHEEL))
-				Robot.driveBase.drive(Robot.oi.getleftStick().getY(),Robot.oi.getrightStick().getY(), 0);
+				Robot.driveBase.drive(-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getY(), 0);
 			if(Robot.driveBase.getDriveType().equals(DriveState.OMNIWHEEL))
-				Robot.driveBase.drive(0,0,Robot.oi.getrightStick().getX());
+				Robot.driveBase.drive(0,0,-Robot.oi.getrightStick().getX());
 			else if(Robot.driveBase.getDriveType().equals(DriveState.ALLWHEEL))
-				Robot.driveBase.drive(Robot.oi.getleftStick().getY(),Robot.oi.getrightStick().getY(),Robot.oi.getrightStick().getX());
+				Robot.driveBase.drive(-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getY(),Robot.oi.getrightStick().getX());
 		}
 		else
 		{
 			if(Robot.driveBase.getDriveType().equals(DriveState.FOURWHEEL))
-				Robot.driveBase.drive(-Robot.oi.getrightStick().getY(),-Robot.oi.getleftStick().getY(), 0);
+				Robot.driveBase.drive(Robot.oi.getrightStick().getY(),Robot.oi.getleftStick().getY(), 0);
 			if(Robot.driveBase.getDriveType().equals(DriveState.OMNIWHEEL))
-				Robot.driveBase.drive(0,0,-Robot.oi.getrightStick().getX());
+				Robot.driveBase.drive(0,0,Robot.oi.getrightStick().getX());
 			else if(Robot.driveBase.getDriveType().equals(DriveState.ALLWHEEL))
-				Robot.driveBase.drive(-Robot.oi.getrightStick().getY(),-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getX());
+				Robot.driveBase.drive(Robot.oi.getrightStick().getY(),Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getX());
 		}
 	}
 

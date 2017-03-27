@@ -10,39 +10,59 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Camera extends Subsystem {
 	
 	boolean isOnWinch = false;
-	CameraServer server = CameraServer.getInstance();
-	UsbCamera winchCam, backCam;
-	int ON = 10, OFF = 0;
+	CameraServer server;
+	UsbCamera winchCam, backCam, frontCam;
+	int ON = 10, OFF = 1;
 	double resolutionFactor = 0.5;
+	double invalResFactor = 0.1;
 	int resWidth = (int) (640*resolutionFactor), resHeight = (int) (480*resolutionFactor);
+	int resWidthinval = 1, resHeightinval = 1;
+	//0 = Front, 1 = winch, 2 = back
+	int camNum = 0;
 	
 	public Camera()
 	{
-		backCam = server.startAutomaticCapture("Back Cam", 0);
+		
+	}
+	
+	public void init()
+	{
+		server = CameraServer.getInstance();
+		
 		winchCam = server.startAutomaticCapture("Winch Cam", 1);
+		backCam = server.startAutomaticCapture("Back Cam", 0);
+		frontCam = server.startAutomaticCapture("Front Cam", 2);
 		
-		backCam.setFPS(ON);
-		winchCam.setFPS(OFF);
+		frontCam.setResolution(resWidth, resHeight);
+		backCam.setResolution(resWidthinval,resHeightinval);
+		winchCam.setResolution(resWidthinval,resHeightinval);
 		
-		isOnWinch = false;
-		
-		winchCam.setResolution(resWidth,resHeight);
-		backCam.setResolution(resWidth,resHeight);
+		//winchCam.setFPS(OFF);
+		//backCam.setFPS(ON);
 	}
 	
 	public void flipCam()
 	{
-		if(isOnWinch)
+		if(camNum == 0)
 		{
-			backCam.setFPS(ON);
-			winchCam.setFPS(OFF);
-			isOnWinch = false;
+			winchCam.setResolution(resWidth, resHeight);
+			backCam.setResolution(resWidthinval,resHeightinval);
+			frontCam.setResolution(resWidthinval,resHeightinval);
+			camNum = 1;
+		}
+		else if(camNum == 1)
+		{
+			backCam.setResolution(resWidth, resHeight);
+			frontCam.setResolution(resWidthinval,resHeightinval);
+			winchCam.setResolution(resWidthinval,resHeightinval);
+			camNum = 2;
 		}
 		else
 		{
-			backCam.setFPS(OFF);
-			winchCam.setFPS(ON);
-			isOnWinch = true;
+			frontCam.setResolution(resWidth, resHeight);
+			backCam.setResolution(resWidthinval,resHeightinval);
+			winchCam.setResolution(resWidthinval,resHeightinval);
+			camNum = 0;
 		}
 	}
 	

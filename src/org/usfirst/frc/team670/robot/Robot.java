@@ -24,14 +24,13 @@ import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
-import org.usfirst.frc.team670.robot.vision.NetworkTablesServer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	private static NetworkTablesServer vision;
+	//private static NetworkTablesServer vision;
 	public static OI oi;
 	public final static DriveBase driveBase = new DriveBase();
 	public final static Camera camera = new Camera();
@@ -39,6 +38,8 @@ public class Robot extends IterativeRobot {
 	public final static Intake intake = new Intake();
 	public final static Shooter shooter = new Shooter();
 	public final static Climber climber = new Climber();
+	
+	//Camera stuff
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
@@ -48,9 +49,12 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		vision = new NetworkTablesServer("vision");
+		//vision = new NetworkTablesServer("vision");
 		oi = new OI();
 		chooser = new SendableChooser<Command>();
+		
+		//Cameras
+		camera.init();
 
 		new ChangeDriveType(DriveState.FOURWHEEL);
 		
@@ -149,7 +153,7 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putString("Drive type:", driveType);
 		SmartDashboard.putString("Operator Stick", os);
-		SmartDashboard.putString("Vision System:", (vision.isConnected())?("Connected"):("FAILURE"));
+		SmartDashboard.putString("Controls Flipped?", Boolean.toString(!OI.winchControls));
 		//SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
 		// SmartDashboard.putString("Cam1:" , Camera.one + "");
 
@@ -157,6 +161,6 @@ public class Robot extends IterativeRobot {
 
 	public static String getData()
 	{
-		return vision.getData("data");
+		return "null";
 	}
 }

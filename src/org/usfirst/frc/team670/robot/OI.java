@@ -19,7 +19,7 @@ public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
 	public static boolean drawRopeReticle = false;
-	public static boolean winchControls = false;
+	public static boolean winchControls = true;
 	
 	
 	//This is the width of driver's side of the field for auto calculations. Need to figure if this is right.
