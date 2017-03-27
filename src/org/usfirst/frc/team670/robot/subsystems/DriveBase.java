@@ -2,8 +2,8 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team670.robot.extras.DriveState;
-import org.usfirst.frc.team670.robot.extras.PreciseControl;
+import org.usfirst.frc.team670.robot.utilities.DriveState;
+import org.usfirst.frc.team670.robot.utilities.PreciseControl;
 
 import com.ctre.*;
 import com.ctre.CANTalon.FeedbackDevice;

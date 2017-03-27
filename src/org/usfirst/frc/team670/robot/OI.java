@@ -3,10 +3,9 @@ package org.usfirst.frc.team670.robot;
 import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
 import org.usfirst.frc.team670.robot.commands.ToggleReticle;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
-import org.usfirst.frc.team670.robot.extras.DriveState;
-import org.usfirst.frc.team670.robot.extras.OperatorState;
+import org.usfirst.frc.team670.robot.utilities.DriveState;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
-import org.usfirst.frc.team670.robot.commands.DriveToWallAuto;
 import org.usfirst.frc.team670.robot.commands.AlignWithGear;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.flipControls;
@@ -45,7 +44,6 @@ public class OI {
 	//Driver Controls
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);	
 	private Button placeGear = new JoystickButton(rightDriveStick, 2);
-	private Button ramWall = new JoystickButton(rightDriveStick, 4);
 	
 	private Button flipControls = new JoystickButton(leftDriveStick, 2);
 	private Button flipCamera = new JoystickButton(leftDriveStick, 3);
@@ -59,9 +57,6 @@ public class OI {
 		
 		placeGear.whenPressed(new AlignWithGear());
 		placeGear.whenReleased(new CancelCommand());
-		
-		ramWall.whenPressed(new DriveToWallAuto());
-		ramWall.whenReleased(new CancelCommand());
 		
 		flipCamera.whenPressed(new FlipCamera());
 				
