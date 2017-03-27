@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
 
+	//Ratio of left motor rotations / right motor rotations
+	private double motorRatio = 1;
+	
 	PreciseControl pc;
 	//Motor controllers
 	public CANTalon leftTalon1;
@@ -74,7 +77,7 @@ public class DriveBase extends Subsystem {
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(pc.getFFTOutput(left));
+		leftTalon1.set(pc.getFFTOutput((left*motorRatio)));
 		rightTalon1.set(pc.getFFTOutput(-right));
 		omniTalon.set(pc.getFFTOutput(omni));
 	}
