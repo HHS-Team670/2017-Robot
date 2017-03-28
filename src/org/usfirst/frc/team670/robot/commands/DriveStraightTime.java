@@ -1,5 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
+import org.usfirst.frc.team670.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,9 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightTime extends Command {
 
-    public DriveStraightTime() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    private double speed = 0, seconds = 0;
+    
+    public DriveStraightTime(double seconds, double speed) {
+        this.speed = speed;
+        this.seconds = seconds;
+        requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -18,15 +23,20 @@ public class DriveStraightTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        setTimeout(seconds);
+    	//Drive seven feet to baseline
+    	Robot.driveBase.drive(speed, speed, 0);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
@@ -34,3 +44,4 @@ public class DriveStraightTime extends Command {
     protected void interrupted() {
     }
 }
+

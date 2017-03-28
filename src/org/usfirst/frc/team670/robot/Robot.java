@@ -60,9 +60,8 @@ public class Robot extends IterativeRobot {
 		new ChangeDriveType(DriveState.FOURWHEEL);
 		
 		//Seconds, then speed
-		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(1.2, 1));
 		chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
-
+		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(1.2, 1));
 		//Baseline is just going forward by 10 seconds, Center gear is the exact same thing
 		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(1, 1));
 		//'r' = red alliance, 'b' = blue alliance
