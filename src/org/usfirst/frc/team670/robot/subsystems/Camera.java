@@ -19,7 +19,7 @@ public class Camera extends Subsystem {
 	
 	public Camera()
 	{
-		
+	//
 	}
 	
 	public void init()
