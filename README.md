@@ -29,28 +29,11 @@ Code for Team 670's Steamworks Robot
 - [x] |---All gear sides w/ vision (x3)
 - [x]	|---All sides gear w/o vision (x1)
 
-1. Omni - DONE
-2 Shooter Intake - DONE
-3 Update Talons - DONE
-4 PID
-5 Vision -WIP
-6 Reticle -WIP
-7 Current on Climber motor - DONE
-
-
-
-- [ ] 2 Firmware on Talons
-- [ ] 4 VisionReticle on rope cam
-- [ ] 5 Offset camera stuff in vision so it works
-- [ ] 3 PID
-- [ ] 1 Shooter and intake
-- [ ] 6 Check current on climber motor- make it stop when it hits the limit
->>>>>>> origin/master
-
 --------------------------
-##Guides
 
-###Steps to flash a new RoboRIO
+**Guides**
+
+***Steps to flash a new RoboRIO***
 
 [HERE](docs/RoboRIO_Flash.md)
 
