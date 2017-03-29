@@ -1,9 +1,7 @@
 # The Vegan
 Code for Team 670's Steamworks Robot
 --------------------------
-# TODO list
-
-**Robot**
+**Robot Code**
 
 - [x] DriveBase
 - [x] |---Drive With Joystick
@@ -20,7 +18,7 @@ Code for Team 670's Steamworks Robot
 - [x]	|---Update Camera command
 - [x]	|---Switch input
 
-**Autonomous**
+**Autonomous Code**
 
 - [x] Do nothing (0pt.)
 - [x] Move to line (5pts.)
@@ -29,7 +27,6 @@ Code for Team 670's Steamworks Robot
 - [x]	|---All sides gear w/o vision (x1)
 
 --------------------------
-
 #Guides
 
 **Steps to flash a new RoboRIO**
