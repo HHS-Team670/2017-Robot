@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class flipControls extends Command {
+public class FlipControls extends Command {
 
 	public static boolean reversedState = false;
 	
-    public flipControls() {
+    public FlipControls() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,7 +21,7 @@ public class flipControls extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	OI.winchControls = !OI.winchControls;
+    	OI.isControlsStandard = !OI.isControlsStandard;
     }
 
     // Make this return true when this Command no longer needs to run execute()
