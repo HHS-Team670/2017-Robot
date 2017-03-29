@@ -31,11 +31,11 @@ Guides
 
 **Steps to flash a new RoboRIO**
 
-[HERE](docs/RoboRIO_Flash.md)
+[HERE](http://wpilib.screenstepslive.com/s/4485/m/24193/l/273817-updating-your-roborio-firmware)
 
 **Steps to flash a new Router**
 
-[HERE](docs/Router_Flash.md)
+[HERE](https://wpilib.screenstepslive.com/s/4485/m/13503/l/144986-programming-your-radio-for-home-use)
 
 --------------------------
 Updates
