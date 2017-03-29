@@ -7,11 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveOmniTime extends Command {
+public class Time_AutoOmni extends Command {
 
     private double speed = 0, seconds = 0;
     
-    public DriveOmniTime(double seconds, double speed) {
+    /*
+     * @param seconds The number of seconds the command should run
+     * @param speed The speed the omni wheel should run at
+     */
+    public Time_AutoOmni(double seconds, double speed) {
         this.speed = speed;
         this.seconds = seconds;
         requires(Robot.driveBase);

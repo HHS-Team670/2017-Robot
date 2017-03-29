@@ -1,14 +1,12 @@
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.SetOperatorCommand;
-import org.usfirst.frc.team670.robot.commands.ToggleReticle;
+import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
-import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
-import org.usfirst.frc.team670.robot.commands.AlignWithGear;
+import org.usfirst.frc.team670.robot.commands.SetDriveControl;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.flipControls;
+import org.usfirst.frc.team670.robot.commands.FlipControls;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -17,8 +15,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
-	public static boolean drawRopeReticle = false;
-	public static boolean winchControls = true;
+	public static boolean isControlsStandard = true;
 	
 	
 	//This is the width of driver's side of the field for auto calculations. Need to figure if this is right.
@@ -33,7 +30,6 @@ public class OI {
 	
 	//Operator Buttons
 	private Button intakeShooter = new JoystickButton(operatorStick, 1);
-	private Button toggleReticle = new JoystickButton(operatorStick, 2);
 	private Button toggleShooter = new JoystickButton(operatorStick, 3);
 	private Button toggleIntake = new JoystickButton(operatorStick, 4);
 	private Button toggleClimber = new JoystickButton(operatorStick, 5);
@@ -43,7 +39,6 @@ public class OI {
 	
 	//Driver Controls
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);	
-	private Button placeGear = new JoystickButton(rightDriveStick, 2);
 	
 	private Button flipControls = new JoystickButton(leftDriveStick, 2);
 	private Button flipCamera = new JoystickButton(leftDriveStick, 3);
@@ -52,29 +47,26 @@ public class OI {
 	
 	public OI(){
 		
-		runOmniDrive.whenPressed(new ChangeDriveType(DriveState.OMNIWHEEL));
-		runOmniDrive.whenReleased(new ChangeDriveType(DriveState.FOURWHEEL));
-		
-		placeGear.whenPressed(new AlignWithGear());
-		placeGear.whenReleased(new CancelCommand());
+		runOmniDrive.whenPressed(new SetDriveControl(DriveState.OMNIWHEEL));
+		runOmniDrive.whenReleased(new SetDriveControl(DriveState.FOURWHEEL));
 		
 		flipCamera.whenPressed(new FlipCamera());
 				
 		//Operator Button Commands
-		toggleClimber.whenPressed(new SetOperatorCommand(OperatorState.CLIMBER));
-		toggleClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
+		toggleClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
-		toggleReverseClimber.whenPressed(new SetOperatorCommand(OperatorState.REVERSECLIMBER));
-		toggleReverseClimber.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		toggleReverseClimber.whenPressed(new SetOperatorControl(OperatorState.REVERSECLIMBER));
+		toggleReverseClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
-		toggleIntake.whenPressed(new SetOperatorCommand(OperatorState.INTAKE));
-		toggleIntake.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
+		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
-		toggleShooter.whenPressed(new SetOperatorCommand(OperatorState.SHOOTER));
-		toggleShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		toggleShooter.whenPressed(new SetOperatorControl(OperatorState.SHOOTER));
+		toggleShooter.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
-		intakeShooter.whenPressed(new SetOperatorCommand(OperatorState.INTAKESHOOT));
-		intakeShooter.whenReleased(new SetOperatorCommand(OperatorState.NONE));
+		intakeShooter.whenPressed(new SetOperatorControl(OperatorState.INTAKESHOOT));
+		intakeShooter.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
 		//Precise Movement Buttons
 		//leftPivot.whenPressed(new PivotLeft(10));
@@ -83,9 +75,7 @@ public class OI {
 		//incrementF.whenPressed(new DriveDistance(1));
 		//incrementB.whenPressed(new DriveDistance(-1));
 		
-		toggleReticle.whenPressed(new ToggleReticle());
-
-		flipControls.whenPressed(new flipControls());
+		flipControls.whenPressed(new FlipControls());
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}

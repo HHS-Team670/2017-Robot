@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team670.robot.commands.Joystick_Drive;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
 import org.usfirst.frc.team670.robot.utilities.PreciseControl;
 
@@ -69,7 +69,7 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new DriveWithJoystick());
+		setDefaultCommand(new Joystick_Drive());
 	}
 
 	public void drive(double left, double right, double omni) {
@@ -93,41 +93,42 @@ public class DriveBase extends Subsystem {
 	public void resetOmniEncoder() {
 		omniTalon.setEncPosition(0);
 	}
-
-	public void driveDistance(double inches) 
+/*
+	public void driveDistance(double numTicks) 
 	{
 		//		encLeft.reset();
 		//		encRight.reset();
-		double numTicks = ((inches / inchesPerTick) / 360) * talonConversion;
+		//double numTicks = ((inches / inchesPerTick) / 360) * talonConversion;
 
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		rightTalon1.setControlMode(CANTalon.TalonControlMode.Position.value);
+		//This should be setting the set point to move encoder ticks
+		rightTalon1.set(0);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.configEncoderCodesPerRev(1440);
+
+		rightTalon1.configNominalOutputVoltage(+0.0f, -0.0f);
+		rightTalon1.configPeakOutputVoltage(+6.0f, -6.0f);
+		rightTalon1.setAllowableClosedLoopErr(0);
 		rightTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		rightTalon1.enableControl(); //Enable PID control on the talon
-		rightTalon1.setEncPosition(0);
+		rightTalon1.setPosition(0);
+		rightTalon1.enableControl();
 		
-		//LEFT IS BACKWARDS
-		
-		//rightTalon1.reverseSensor(true);	
-		//rightTalon1.enableControl(); //Enable PID control on the talon
-		
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder); //Set the feedback device that is hooked up to the talon
+		leftTalon1.setControlMode(CANTalon.TalonControlMode.Position.value);
+		//This should be setting the set point to move encoder ticks
+		leftTalon1.set(0);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.configEncoderCodesPerRev(1440);
+
+		leftTalon1.configNominalOutputVoltage(+0.0f, -0.0f);
+		leftTalon1.configPeakOutputVoltage(+6.0f, -6.0f);
+		leftTalon1.setAllowableClosedLoopErr(0);
 		leftTalon1.setPID(P,I,D); //Set the PID constants (p, i, d)
-		leftTalon1.enableControl(); //Enable PID control on the talon
-		leftTalon1.setEncPosition(0);
-		leftTalon1.reverseSensor(true);
-		//leftTalon1.enableControl(); //Enable PID control on the talon
-
-
+		leftTalon1.setPosition(0);
+		leftTalon1.enableControl();
+		
 		leftTalon1.set(-numTicks);
 		rightTalon1.set(numTicks);
-	}
-	
-	public void driveDistanceRight(double inches)
-	{
-		
-	}
+	}*/
 
 	public void pivotRight(double degrees) 
 	{

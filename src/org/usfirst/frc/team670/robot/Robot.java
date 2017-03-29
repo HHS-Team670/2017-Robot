@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team670.robot.commands.ChangeDriveType;
+import org.usfirst.frc.team670.robot.commands.SetDriveControl;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
@@ -31,7 +31,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	//private static NetworkTablesServer vision;
 	public static OI oi;
 	public final static DriveBase driveBase = new DriveBase();
 	public final static Camera camera = new Camera();
@@ -50,14 +49,10 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		//vision = new NetworkTablesServer("vision");
 		oi = new OI();
 		chooser = new SendableChooser<Command>();
 		
-		//Cameras
-		camera.init();
-
-		new ChangeDriveType(DriveState.FOURWHEEL);
+		new SetDriveControl(DriveState.FOURWHEEL);
 		
 		//Seconds, then speed
 		chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
@@ -143,7 +138,7 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putString("Drive type:", driveType);
 		SmartDashboard.putString("Operator Stick", os);
-		SmartDashboard.putString("Controls Flipped?", Boolean.toString(!OI.winchControls));
+		SmartDashboard.putString("Controls Flipped?", Boolean.toString(!OI.isControlsStandard));
 		//SmartDashboard.putString("Climber Working: ", ClimbWithJoystick.isWorking() + "");
 		// SmartDashboard.putString("Cam1:" , Camera.one + "");
 

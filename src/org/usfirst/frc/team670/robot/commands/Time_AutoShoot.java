@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoShoot extends Command {
+public class Time_AutoShoot extends Command {
 	
 	private double seconds = 0, speed = 0;
 
-    public AutoShoot(double seconds, double speed) {
+    public Time_AutoShoot(double seconds, double speed) {
     	this.seconds = seconds;
     	this.speed = speed;
         requires(Robot.shooter);

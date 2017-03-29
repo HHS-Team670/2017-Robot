@@ -2,7 +2,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.IntakeWithJoystick;
+import org.usfirst.frc.team670.robot.commands.Joystick_Intake;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -11,7 +11,7 @@ public class Intake extends Subsystem {
 	final Spark intake = new Spark(RobotMap.intakeMotor);
 	
     public void initDefaultCommand() {
-        setDefaultCommand(new IntakeWithJoystick());
+        setDefaultCommand(new Joystick_Intake());
     }
     
     public void intake(double value)

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.hal.PDPJNI;
 /**
  *
  */
-public class ClimbWithJoystick extends Command {
+public class Joystick_Climb extends Command {
 
 	//PowerDistributionPanel pdp = new PowerDistributionPanel();
 //	private double current = pdp.getCurrent(12);
@@ -21,7 +21,7 @@ public class ClimbWithJoystick extends Command {
 //	private boolean stopped = false;
 //	public static boolean working = true;
 
-	public ClimbWithJoystick() {
+	public Joystick_Climb() {
 		requires(Robot.climber);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

@@ -6,9 +6,9 @@ import org.usfirst.frc.team670.robot.utilities.DriveState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveWithJoystick extends Command {
+public class Joystick_Drive extends Command {
 
-	public DriveWithJoystick() {
+	public Joystick_Drive() {
 		requires(Robot.driveBase);
 	}
 
@@ -18,7 +18,7 @@ public class DriveWithJoystick extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(OI.winchControls)
+		if(OI.isControlsStandard)
 		{
 			if(Robot.driveBase.getDriveType().equals(DriveState.FOURWHEEL))
 				Robot.driveBase.drive(-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getY(), 0);

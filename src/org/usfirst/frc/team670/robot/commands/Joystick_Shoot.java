@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootWithJoystick extends Command {
+public class Joystick_Shoot extends Command {
 	
-    public ShootWithJoystick() {
+    public Joystick_Shoot() {
     	requires(Robot.shooter);
     }
 

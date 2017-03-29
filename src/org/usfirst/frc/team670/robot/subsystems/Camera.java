@@ -19,11 +19,6 @@ public class Camera extends Subsystem {
 	
 	public Camera()
 	{
-	//
-	}
-	
-	public void init()
-	{
 		server = CameraServer.getInstance();
 		
 		winchCam = server.startAutomaticCapture("Winch Cam", 1);
@@ -91,11 +86,6 @@ public class Camera extends Subsystem {
 	
 	public Camera()
 	{
-		
-	}
-	
-	public void init()
-	{		
 		winchCam = CameraServer.getInstance().startAutomaticCapture("winch", 1);
 		backCam = CameraServer.getInstance().startAutomaticCapture("back", 0);
 		frontCam = CameraServer.getInstance().startAutomaticCapture("front", 2);

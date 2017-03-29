@@ -1,19 +1,20 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SetOperatorCommand extends Command {
+public class Time_AutoTank extends Command {
 
-	private OperatorState os;
-	
-    public SetOperatorCommand(OperatorState os) {
-    	this.os = os;
+    private double speed = 0, seconds = 0;
+    
+    public Time_AutoTank(double seconds, double speed) {
+        this.speed = speed;
+        this.seconds = seconds;
+        requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -22,16 +23,20 @@ public class SetOperatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.oi.setOperatorCommand(os);
+        setTimeout(seconds);
+    	//Drive seven feet to baseline
+    	Robot.driveBase.drive(speed, speed, 0);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
@@ -39,3 +44,4 @@ public class SetOperatorCommand extends Command {
     protected void interrupted() {
     }
 }
+

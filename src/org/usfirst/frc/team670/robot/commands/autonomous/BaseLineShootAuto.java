@@ -1,8 +1,8 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
-import org.usfirst.frc.team670.robot.commands.AutoShoot;
-import org.usfirst.frc.team670.robot.commands.DriveOmniTime;
-import org.usfirst.frc.team670.robot.commands.DriveStraightTime;
+import org.usfirst.frc.team670.robot.commands.Time_AutoShoot;
+import org.usfirst.frc.team670.robot.commands.Time_AutoOmni;
+import org.usfirst.frc.team670.robot.commands.Time_AutoTank;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -14,15 +14,15 @@ public class BaseLineShootAuto extends CommandGroup {
     public BaseLineShootAuto(char alliance) {
     	if(alliance == 'b')
     	{
-    		addSequential(new DriveOmniTime(5, 1));
-    		addSequential(new AutoShoot(5, 1));
-    		addSequential(new DriveStraightTime(5, -1));
+    		addSequential(new Time_AutoOmni(5, 1));
+    		addSequential(new Time_AutoShoot(5, 1));
+    		addSequential(new Time_AutoTank(5, -1));
     	}
     	else if(alliance == 'r')
     	{
-    		addSequential(new DriveOmniTime(5, -1));
-    		addSequential(new AutoShoot(5, 1));
-    		addSequential(new DriveStraightTime(5, -1));
+    		addSequential(new Time_AutoOmni(5, -1));
+    		addSequential(new Time_AutoShoot(5, 1));
+    		addSequential(new Time_AutoTank(5, -1));
     	}
     	else{}
         // Add Commands here:

@@ -8,35 +8,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeWithJoystick extends Command {
+public class SetOperatorControl extends Command {
 
-    public IntakeWithJoystick() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.intake);
+	private OperatorState os;
+	
+    public SetOperatorControl(OperatorState os) {
+    	this.os = os;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	requires(Robot.intake);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getOS().equals(OperatorState.INTAKE))
-    		Robot.intake.intake(-Robot.oi.getOperatorStick().getY());
-    	else
-    		Robot.intake.intake(0);
+    	Robot.oi.setOperatorCommand(os);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.intake(0);
     }
 
     // Called when another command which requires one or more of the same
