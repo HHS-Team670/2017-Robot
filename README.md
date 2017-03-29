@@ -31,7 +31,7 @@ Code for Team 670's Steamworks Robot
 
 --------------------------
 
-##**Guides**
+##Guides
 
 **Steps to flash a new RoboRIO**
 
