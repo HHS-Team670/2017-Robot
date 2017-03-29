@@ -6,24 +6,15 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team670.robot.commands.SetDriveControl;
-import org.usfirst.frc.team670.robot.commands.DriveDistance;
-import org.usfirst.frc.team670.robot.commands.PivotLeft;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoDoNothing;
 import org.usfirst.frc.team670.robot.commands.autonomous.BaseLineShootAuto;
-import org.usfirst.frc.team670.robot.commands.autonomous.CenterGearLeft;
-import org.usfirst.frc.team670.robot.commands.autonomous.CenterGearRight;
-import org.usfirst.frc.team670.robot.commands.autonomous.LeftGear;
-import org.usfirst.frc.team670.robot.commands.autonomous.LeftGearCenter;
-import org.usfirst.frc.team670.robot.commands.autonomous.RightGear;
-import org.usfirst.frc.team670.robot.commands.autonomous.RightGearCenter;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
-import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -34,13 +25,10 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public final static DriveBase driveBase = new DriveBase();
 	public final static Camera camera = new Camera();
-	public final static DistanceSensor distanceSensor = new DistanceSensor();
 	public final static Intake intake = new Intake();
 	public final static Shooter shooter = new Shooter();
 	public final static Climber climber = new Climber();
-	
-	//Camera stuff
-	
+		
 	Command autonomousCommand;
 	SendableChooser<Command> chooser;
 

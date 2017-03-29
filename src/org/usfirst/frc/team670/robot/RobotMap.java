@@ -20,9 +20,6 @@ public class RobotMap
     public final static int intakeMotor = 0;
     public final static int dumperMotor = 1;
     public final static int climberMotor = 6;
-  
-    //Sensor ports
-    public final static int UltrasonicAI = 0;
 
     //Joysticks + Buttons
     public final static int operatorStick = 0;

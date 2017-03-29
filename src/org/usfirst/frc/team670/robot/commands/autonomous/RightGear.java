@@ -4,7 +4,6 @@ import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.PivotLeft;
-import org.usfirst.frc.team670.robot.subsystems.DistanceSensor;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

@@ -7,7 +7,7 @@ import org.usfirst.frc.team670.robot.commands.Time_AutoTank;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Start touching the boiler, move and shoot into the low goal, then back up to baseline
  */
 public class BaseLineShootAuto extends CommandGroup {
 
