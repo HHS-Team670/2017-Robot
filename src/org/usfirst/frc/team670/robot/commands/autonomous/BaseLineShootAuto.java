@@ -14,13 +14,15 @@ public class BaseLineShootAuto extends CommandGroup {
     public BaseLineShootAuto(char alliance) {
     	if(alliance == 'b')
     	{
-    		addSequential(new Time_AutoOmni(5, 1));
+    		//Move omni right by 2 seconds
+    		addSequential(new Time_AutoOmni(2.5, 1));
     		addSequential(new Time_AutoShoot(5, 1));
     		addSequential(new Time_AutoTank(5, -1));
     	}
     	else if(alliance == 'r')
     	{
-    		addSequential(new Time_AutoOmni(5, -1));
+    		//Move omni left by 2 seconds
+    		addSequential(new Time_AutoOmni(2.5, -1));
     		addSequential(new Time_AutoShoot(5, 1));
     		addSequential(new Time_AutoTank(5, -1));
     	}

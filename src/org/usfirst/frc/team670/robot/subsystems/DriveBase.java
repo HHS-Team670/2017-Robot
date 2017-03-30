@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveBase extends Subsystem {
 
 	//Ratio of left motor rotations / right motor rotations
-	private double motorRatio = 1;
+	private double motorRatio = 0.9;
 	
 	PreciseControl pc;
 	//Motor controllers
