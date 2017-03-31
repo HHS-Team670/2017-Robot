@@ -1,6 +1,10 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
+import org.usfirst.frc.team670.robot.commands.Time_AutoOmni;
+import org.usfirst.frc.team670.robot.commands.Time_AutoShoot;
+import org.usfirst.frc.team670.robot.commands.Time_AutoTank;
+import org.usfirst.frc.team670.robot.commands.autonomous.BaseLineShootAuto;
 import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
@@ -41,7 +45,6 @@ public class OI {
 	private Button runOmniDrive = new JoystickButton(rightDriveStick, 3);	
 	
 	private Button flipControls = new JoystickButton(leftDriveStick, 2);
-	private Button flipCamera = new JoystickButton(leftDriveStick, 3);
 
 	//Arcade buttons
 	
@@ -49,9 +52,7 @@ public class OI {
 		
 		runOmniDrive.whenPressed(new SetDriveControl(DriveState.OMNIWHEEL));
 		runOmniDrive.whenReleased(new SetDriveControl(DriveState.FOURWHEEL));
-		
-		flipCamera.whenPressed(new FlipCamera());
-				
+						
 		//Operator Button Commands
 		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
 		toggleClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
@@ -75,7 +76,7 @@ public class OI {
 		//incrementF.whenPressed(new DriveDistance(1));
 		//incrementB.whenPressed(new DriveDistance(-1));
 		
-		flipControls.whenPressed(new FlipControls());
+		flipControls.whenPressed(new Time_AutoTank(1,0.5));
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import org.usfirst.frc.team670.robot.commands.Time_AutoShoot;
+import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.Time_AutoOmni;
 import org.usfirst.frc.team670.robot.commands.Time_AutoTank;
 
@@ -11,20 +12,37 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class BaseLineShootAuto extends CommandGroup {
 
+	double speed = 0.50;
+	double Approachspeed = 0.35;
+	
     public BaseLineShootAuto(char alliance) {
     	if(alliance == 'b')
     	{
     		//Move omni right by 2 seconds
-    		addSequential(new Time_AutoOmni(2.5, 1));
-    		addSequential(new Time_AutoShoot(5, 1));
-    		addSequential(new Time_AutoTank(5, -1));
+    		addSequential(new Time_AutoOmni(0.75, -speed));
+    		
+    		addSequential(new Time_AutoShoot(2.5, 1));
+    		//HEre is the point where we are in front of the goal, and balls are shot in
+    		addSequential(new Time_AutoTank(0.5, -speed));
+
+    		addSequential(new Time_AutoOmni(0.85, -speed));
+
+    		addSequential(new Time_AutoTank(3, -Approachspeed));
+    		addSequential(new Time_AutoTank(5, -Approachspeed*0.5));
     	}
     	else if(alliance == 'r')
     	{
     		//Move omni left by 2 seconds
-    		addSequential(new Time_AutoOmni(2.5, -1));
-    		addSequential(new Time_AutoShoot(5, 1));
-    		addSequential(new Time_AutoTank(5, -1));
+    		addSequential(new Time_AutoOmni(0.75, speed));
+    		addSequential(new Time_AutoShoot(2.5, 1));
+    		//HEre is the point where we are in front of the goal, and balls are shot in
+    		
+    		addSequential(new Time_AutoTank(0.5, -speed));
+
+    		addSequential(new Time_AutoOmni(0.85, speed));
+
+    		addSequential(new Time_AutoTank(3, -Approachspeed));
+    		addSequential(new Time_AutoTank(5, -Approachspeed*0.5));
     	}
     	else{}
         // Add Commands here:

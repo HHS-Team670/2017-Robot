@@ -37,5 +37,10 @@ public class Intake extends Subsystem {
     	value = -(Math.abs(value));
     	intake.set(value);
     }
+    
+    public void stopIntake()
+    {
+    	intake.stopMotor();
+    }
 }
 

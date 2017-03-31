@@ -15,15 +15,17 @@ public class Time_AutoTank extends Command {
         this.speed = speed;
         this.seconds = seconds;
         requires(Robot.driveBase);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.shooter.shoot(0);
+        setTimeout(seconds);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        setTimeout(seconds);
     	//Drive seven feet to baseline
     	Robot.driveBase.drive(speed, speed, 0);
     	
@@ -42,6 +44,7 @@ public class Time_AutoTank extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 }
 

@@ -39,19 +39,21 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		chooser = new SendableChooser<Command>();
-		
 		new SetDriveControl(DriveState.FOURWHEEL);
 		
 		//Seconds, then speed
 		chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
 		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(1.2, 1));
 		//Baseline is just going forward by 10 seconds, Center gear is the exact same thing
-		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(1, 1));
+		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(1, -1));
 		//'r' = red alliance, 'b' = blue alliance
 		chooser.addObject("Shoot + Baseline ~ Red Alliance (8pts)", new BaseLineShootAuto('r'));
 		chooser.addObject("Shoot + Baseline ~ Blue Alliance (8pts)", new BaseLineShootAuto('b'));
 
 		SmartDashboard.putData("Auto mode", chooser);
+
+		camera.init();
+
 	}
 
 	public void disabledInit(){

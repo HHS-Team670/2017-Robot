@@ -37,5 +37,10 @@ public class Shooter extends Subsystem {
     	value = Math.abs(value);
     	shootMotor.set(value);
     }
+    
+    public void stopShooter()
+    {
+    	shootMotor.stopMotor();
+    }
 }
 
