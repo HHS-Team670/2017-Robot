@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
-
 	public static OI oi;
 	public final static DriveBase driveBase = new DriveBase();
 	public final static Camera camera = new Camera();
