@@ -20,8 +20,7 @@ public class RobotMap
     public final static int intakeMotor = 0;
     public final static int dumperMotor = 1;
     public final static int climberMotor = 6;
-
-    //Joysticks + Buttons
+    //Joysticks 
     public final static int operatorStick = 0;
     public final static int leftDriveStick = 1;
     public final static int rightDriveStick = 2;

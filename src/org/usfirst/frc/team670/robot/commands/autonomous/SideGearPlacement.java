@@ -10,39 +10,39 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Start touching the boiler, move and shoot into the low goal, then back up to baseline
  */
-public class BaseLineShootAuto extends CommandGroup {
+public class SideGearPlacement extends CommandGroup {
 
 	double speed = 0.50;
 	double Approachspeed = 0.35;
 	
-    public BaseLineShootAuto(char alliance) {
-    	if(alliance == 'b')
+    public SideGearPlacement(char alliance) {
+    	if(alliance == 'r')
     	{
     		//Move omni right by 2 seconds
     		addSequential(new Time_AutoOmni(0.75, -speed));
     		
-    		addSequential(new Time_AutoShoot(2.5, 1));
+    		//addSequential(new Time_AutoShoot(2.5, 1));
     		//HEre is the point where we are in front of the goal, and balls are shot in
     		addSequential(new Time_AutoTank(0.5, -speed));
 
-    		addSequential(new Time_AutoOmni(0.9, -speed));
+    		addSequential(new Time_AutoOmni(0.85, -speed));
 
     		addSequential(new Time_AutoTank(3, -Approachspeed));
-    		addSequential(new Time_AutoTank(5, -Approachspeed*0.5));
+    		addSequential(new Time_AutoTank(2, -Approachspeed*1.1));
     	}
-    	else if(alliance == 'r')
+    	else if(alliance == 'b')
     	{
     		//Move omni left by 2 seconds
     		addSequential(new Time_AutoOmni(0.75, speed));
-    		addSequential(new Time_AutoShoot(2.5, 1));
+    		//addSequential(new Time_AutoShoot(2.5, 1));
     		//HEre is the point where we are in front of the goal, and balls are shot in
     		
     		addSequential(new Time_AutoTank(0.5, -speed));
 
-    		addSequential(new Time_AutoOmni(0.9,speed));
+    		addSequential(new Time_AutoOmni(0.85, speed));
 
     		addSequential(new Time_AutoTank(3, -Approachspeed));
-    		addSequential(new Time_AutoTank(5, -Approachspeed*0.5));
+    		addSequential(new Time_AutoTank(2, -Approachspeed*1.1));
     	}
     	else{}
         // Add Commands here:

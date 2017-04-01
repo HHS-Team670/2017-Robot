@@ -29,7 +29,7 @@ public class Camera extends Subsystem {
 		
 		winchCam = server.startAutomaticCapture("Winch Cam", 0);
 		//backCam = server.startAutomaticCapture("Back Cam", 0);
-		frontCam = server.startAutomaticCapture("Front Cam", 2);
+		frontCam = server.startAutomaticCapture("Front Cam", 1);
 		//
 		winchCam.setResolution(resWidth, resHeight);
 		//backCam.setResolution(resWidthinval,resHeightinval);

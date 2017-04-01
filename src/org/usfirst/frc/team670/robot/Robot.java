@@ -9,6 +9,7 @@ import org.usfirst.frc.team670.robot.commands.SetDriveControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoBaseline;
 import org.usfirst.frc.team670.robot.commands.autonomous.AutoDoNothing;
 import org.usfirst.frc.team670.robot.commands.autonomous.BaseLineShootAuto;
+import org.usfirst.frc.team670.robot.commands.autonomous.SideGearPlacement;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
@@ -44,10 +45,13 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Do Nothing (0 pts)", new AutoDoNothing());
 		chooser.addDefault("Baseline Auto (5pts)", new AutoBaseline(1.2, 1));
 		//Baseline is just going forward by 10 seconds, Center gear is the exact same thing
-		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(1, -1));
+		chooser.addObject("Center Gear from Center (60pts)", new AutoBaseline(15, -0.5));
 		//'r' = red alliance, 'b' = blue alliance
 		chooser.addObject("Shoot + Baseline ~ Red Alliance (8pts)", new BaseLineShootAuto('r'));
 		chooser.addObject("Shoot + Baseline ~ Blue Alliance (8pts)", new BaseLineShootAuto('b'));
+		
+		chooser.addObject("Place gear on left ~ Red Alliance (60pts)", new SideGearPlacement('r'));
+		chooser.addObject("Place gear on right ~ Blue Alliance (60pts)", new SideGearPlacement('b'));
 
 		SmartDashboard.putData("Auto mode", chooser);
 
