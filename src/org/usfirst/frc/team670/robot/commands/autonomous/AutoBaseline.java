@@ -25,7 +25,7 @@ public class AutoBaseline extends Command {
     protected void execute() {
         setTimeout(seconds);
     	//Drive seven feet to baseline
-    	Robot.driveBase.drive(speed, speed, 0);
+    	Robot.driveBase.driveAuto(speed, speed, 0);
     	
     }
 

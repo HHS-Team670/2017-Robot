@@ -81,6 +81,16 @@ public class DriveBase extends Subsystem {
 		rightTalon1.set(pc.getFFTOutput(-right));
 		omniTalon.set(pc.getFFTOutput(omni));
 	}
+	
+	public void driveAuto(double left, double right, double omni) {
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		omniTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+
+		leftTalon1.set(((left)));
+		rightTalon1.set((-right));
+		omniTalon.set((omni));
+	}
 
 	public void resetRightEncoder() {
 		rightTalon1.setEncPosition(0);
