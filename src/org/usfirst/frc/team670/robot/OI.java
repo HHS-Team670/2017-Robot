@@ -1,16 +1,11 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
-import org.usfirst.frc.team670.robot.commands.Time_AutoOmni;
-import org.usfirst.frc.team670.robot.commands.Time_AutoShoot;
 import org.usfirst.frc.team670.robot.commands.Time_AutoTank;
-import org.usfirst.frc.team670.robot.commands.autonomous.BaseLineShootAuto;
-import org.usfirst.frc.team670.robot.commands.camera.FlipCamera;
 import org.usfirst.frc.team670.robot.utilities.DriveState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 import org.usfirst.frc.team670.robot.commands.SetDriveControl;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.FlipControls;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
