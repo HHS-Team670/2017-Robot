@@ -71,7 +71,7 @@ public class OI {
 		//incrementF.whenPressed(new DriveDistance(1));
 		//incrementB.whenPressed(new DriveDistance(-1));
 		
-		flipControls.whenPressed(new Time_AutoTank(1,0.5));
+		flipControls.whenPressed(new FlipControls());
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		}

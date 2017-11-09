@@ -18,7 +18,7 @@ public class Joystick_Drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(OI.isControlsStandard)
+		if(!OI.isControlsStandard)
 		{
 			if(Robot.driveBase.getDriveType().equals(DriveState.FOURWHEEL))
 				Robot.driveBase.drive(-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getY(), 0);

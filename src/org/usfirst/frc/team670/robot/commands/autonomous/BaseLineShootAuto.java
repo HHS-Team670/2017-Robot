@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.commands.autonomous;
 import org.usfirst.frc.team670.robot.commands.Time_AutoShoot;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.Time_AutoOmni;
+import org.usfirst.frc.team670.robot.commands.Time_AutoPivot;
 import org.usfirst.frc.team670.robot.commands.Time_AutoTank;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -38,7 +39,9 @@ public class BaseLineShootAuto extends CommandGroup {
     		//HEre is the point where we are in front of the goal, and balls are shot in
     		
     		addSequential(new Time_AutoTank(0.5, -speed));
-
+    		
+    		addSequential(new Time_AutoPivot(3, speed));
+    		
     		addSequential(new Time_AutoOmni(0.9,speed));
 
     		addSequential(new Time_AutoTank(3, -Approachspeed));

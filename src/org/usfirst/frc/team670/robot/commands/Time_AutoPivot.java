@@ -7,13 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PivotRight extends Command {
+public class Time_AutoPivot extends Command {
 
-	private double angle;
-	
-    public PivotRight(double angle) {
+    private double speed = 0, seconds = 0;
+    
+    /*
+     * @param seconds The number of seconds the command should run
+     * @param speed The speed the omni wheel should run at
+     */
+    public Time_AutoPivot(double seconds, double speed) {
+        this.speed = speed;
+        this.seconds = seconds;
         requires(Robot.driveBase);
-        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
@@ -22,11 +27,15 @@ public class PivotRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.pivotRight(angle);}
+        setTimeout(seconds);
+    	//Drive seven feet to baseline
+    	Robot.driveBase.drive(-speed, speed, 0);
+    	
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
@@ -37,5 +46,6 @@ public class PivotRight extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.driveBase.drive(0, 0, 0);
     }
 }
